@@ -1,0 +1,61 @@
+@media(max-width:991px){
+
+    .navbar{
+
+        padding:12px 0;
+
+    }
+
+    .nav-link{
+
+        margin-left:0;
+
+        padding:12px 0;
+
+    }
+
+    .navbar-brand{
+
+        font-size:26px;
+
+    }
+
+}
+@media (max-width:991px){
+
+    .hero{
+
+        text-align:center;
+
+        padding-top:120px;
+
+    }
+
+    .hero h1{
+
+        font-size:40px;
+
+    }
+
+    .hero-image{
+
+        margin-top:40px;
+
+    }
+
+}
+@media(max-width:768px){
+
+    .section-title{
+
+        font-size:32px;
+
+    }
+
+    .product-card{
+
+        margin-bottom:20px;
+
+    }
+
+}
