@@ -22,7 +22,14 @@
 body{
 
     font-family:'Poppins',sans-serif;
+
+    margin:0;
+
+    padding:0;
+
     overflow-x:hidden;
+
+    background:#ffffff;
 
 }
 
@@ -37,7 +44,7 @@ body{
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
-    padding:18px 0;
+    padding:12px 0;
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 
@@ -45,42 +52,67 @@ body{
 
 .navbar-brand{
 
-    font-size:30px;
+font-size:34px;
 
-    font-weight:700;
+font-weight:700;
 
-    color:var(--primary)!important;
+color:#2E7D32 !important;
+
+letter-spacing:.5px;
 
 }
 
 .nav-link{
 
-    color:var(--dark)!important;
+font-size:17px;
 
-    margin-left:25px;
+font-weight:500;
 
-    font-weight:500;
+margin-left:30px;
 
-    transition:.3s;
+color:#333 !important;
+
+transition:.3s;
+
+position:relative;
 
 }
 
 .nav-link:hover{
 
-    color:var(--primary)!important;
+color:#2E7D32 !important;
+
+}
+.nav-link::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-6px;
+
+width:0;
+
+height:2px;
+
+background:#2E7D32;
+
+transition:.3s;
+
+}
+
+.nav-link:hover::after{
+
+width:100%;
 
 }
 /* ==========================
    Hero Section
 ========================== */
 
-.hero{
 
-    padding:140px 0 80px;
-
-    background:#F8FFF8;
-
-}
 
 .hero h1{
 
@@ -115,17 +147,7 @@ body{
 
 }
 
-.hero-image{
 
-    width:100%;
-
-    max-width:600px;
-
-    border-radius:20px;
-
-    box-shadow:0 20px 60px rgba(0,0,0,.15);
-
-}
 /* Statistics Section */
 
 .stats{
@@ -415,5 +437,575 @@ box-shadow:0 20px 50px rgba(0,0,0,.15);
     font-weight:bold;
 
     margin:0 auto 20px;
+
+}
+/* ===========================
+   Premium Hero
+=========================== */
+
+.hero{
+
+    padding:100px 0;
+
+    background:#F8FFF8;
+
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    background:#E8F5E9;
+
+    color:#2E7D32;
+
+    padding:10px 20px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+.hero h1{
+
+    font-size:64px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:#1E1E1E;
+
+    margin-bottom:25px;
+
+}
+
+.hero p{
+
+    font-size:19px;
+
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+.hero-buttons{
+
+    margin-bottom:50px;
+
+}
+
+.hero .btn{
+
+    padding:15px 35px;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+}
+
+.hero-image{
+
+width:100%;
+
+max-width:650px;
+
+border-radius:25px;
+
+box-shadow:0 25px 60px rgba(0,0,0,.15);
+
+}
+
+.hero-trust{
+
+    display:flex;
+
+    gap:40px;
+
+}
+
+.hero-trust h4{
+
+    color:#2E7D32;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.hero-trust p{
+
+    margin:0;
+
+    font-size:15px;
+
+}
+/* ===========================
+   Logo
+=========================== */
+
+.logo-green{
+
+color:#2E7D32;
+
+font-weight:800;
+
+}
+
+.logo-dark{
+
+color:#222;
+
+font-weight:800;
+
+}
+/* ===========================
+   Footer
+=========================== */
+
+.footer{
+
+    background:#1E1E1E;
+
+    color:white;
+
+    padding:70px 0 20px;
+
+}
+
+.footer h3,
+.footer h5{
+
+    margin-bottom:20px;
+
+}
+
+.footer p{
+
+    color:#cccccc;
+
+    line-height:1.8;
+
+}
+
+.footer-links{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.footer-links li{
+
+    margin-bottom:12px;
+
+}
+
+.footer-links a{
+
+    color:#cccccc;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:#66BB6A;
+
+}
+
+.footer hr{
+
+    border-color:#444;
+
+    margin:40px 0 20px;
+
+}
+/* ===========================
+   Trusted Section
+=========================== */
+
+.trusted{
+
+    background:#ffffff;
+
+}
+
+.trust-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:35px 25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.trust-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+
+}
+
+.trust-card i{
+
+    font-size:48px;
+
+    color:#2E7D32;
+
+    margin-bottom:20px;
+
+}
+
+.trust-card h4{
+
+    margin-bottom:15px;
+
+    color:#222;
+
+}
+
+.trust-card p{
+
+    color:#666;
+
+    margin:0;
+
+}
+/* ===========================
+   Why Choose FreshFlow
+=========================== */
+
+.why-choose{
+
+    background:#F8FFF8;
+
+}
+
+.choose-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.choose-card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.icon-box{
+
+    width:80px;
+
+    height:80px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:#E8F5E9;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.icon-box i{
+
+    font-size:38px;
+
+    color:#2E7D32;
+
+}
+
+.choose-card h4{
+
+    margin-bottom:15px;
+
+    color:#222;
+
+}
+
+.choose-card p{
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+/* ===========================
+   Export Destinations
+=========================== */
+
+.export-destination{
+
+    background:#ffffff;
+
+}
+
+.country-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+    border:1px solid #f2f2f2;
+
+}
+
+.country-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+
+}
+
+.country-card h4{
+
+    margin-bottom:15px;
+
+    color:#2E7D32;
+
+}
+
+.country-card p{
+
+    color:#666;
+
+    margin:0;
+
+}
+/* ===========================
+   Testimonials
+=========================== */
+
+.testimonials{
+
+    background:#F8FFF8;
+
+}
+
+.testimonial-card{
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.testimonial-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+
+}
+
+.stars{
+
+    color:#FFC107;
+
+    font-size:22px;
+
+    margin-bottom:20px;
+
+}
+
+.testimonial-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+    font-style:italic;
+
+}
+
+.testimonial-card h5{
+
+    margin-top:20px;
+
+    margin-bottom:5px;
+
+    color:#2E7D32;
+
+}
+
+.testimonial-card span{
+
+    color:#888;
+
+    font-size:14px;
+
+}
+/* ===========================
+   Floating WhatsApp
+=========================== */
+
+.whatsapp-float{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:65px;
+
+    height:65px;
+
+    background:#25D366;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    text-decoration:none;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+    z-index:999;
+
+    transition:.3s;
+
+}
+
+.whatsapp-float:hover{
+
+    transform:scale(1.1);
+
+    color:white;
+
+}
+/* ===========================
+   Call To Action
+=========================== */
+
+.cta-section{
+
+    background:#ffffff;
+
+}
+
+.cta-box{
+
+    background:linear-gradient(135deg,#2E7D32,#43A047);
+
+    color:white;
+
+    border-radius:25px;
+
+    padding:70px 40px;
+
+}
+
+.cta-box h2{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.cta-box p{
+
+    font-size:19px;
+
+    margin-bottom:35px;
+
+    color:#f5f5f5;
+
+}
+
+.cta-box .btn{
+
+    padding:16px 45px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    background:white;
+
+    color:#2E7D32;
+
+    border:none;
+
+}
+
+.cta-box .btn:hover{
+
+    background:#f3f3f3;
+
+    color:#2E7D32;
 
 }

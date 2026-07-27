@@ -59,3 +59,32 @@
     }
 
 }
+@media(max-width:991px){
+
+.hero{
+
+    text-align:center;
+
+}
+
+.hero h1{
+
+    font-size:40px;
+
+}
+
+.hero-trust{
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+}
+
+.hero-image{
+
+    margin-top:50px;
+
+}
+
+}
