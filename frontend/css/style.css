@@ -44,7 +44,7 @@ body{
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
-    padding:12px 0;
+    padding:12px 0px;
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 
@@ -141,7 +141,7 @@ width:100%;
 
 .hero .btn{
 
-    padding:14px 28px;
+    padding:14px 0px;
 
     border-radius:8px;
 
@@ -152,7 +152,7 @@ width:100%;
 
 .stats{
 
-    padding:80px 0;
+    padding:50px 0;
 
     background:#ffffff;
 
@@ -203,7 +203,7 @@ width:100%;
 
 .why-us{
 
-    padding:90px 0;
+    padding:50px 0;
 
     background:#F8FFF8;
 
@@ -345,7 +345,7 @@ width:100%;
 
     border-radius:50px;
 
-    padding:14px 35px;
+    padding:14px 0px;
 
     font-weight:600;
 
@@ -365,7 +365,7 @@ box-shadow:0 20px 50px rgba(0,0,0,.15);
 }
 .hero .btn{
 
-    padding:15px 35px;
+    padding:15px 0px;
 
     border-radius:50px;
 
@@ -445,9 +445,9 @@ box-shadow:0 20px 50px rgba(0,0,0,.15);
 
 .hero{
 
-    padding:100px 0;
+    padding:85px 0 70px;
 
-    background:#F8FFF8;
+    background:#F4FBF5;
 
 }
 
@@ -459,7 +459,7 @@ box-shadow:0 20px 50px rgba(0,0,0,.15);
 
     color:#2E7D32;
 
-    padding:10px 20px;
+    padding:10px 0px;
 
     border-radius:30px;
 
@@ -503,7 +503,7 @@ box-shadow:0 20px 50px rgba(0,0,0,.15);
 
 .hero .btn{
 
-    padding:15px 35px;
+    padding:15px 0px;
 
     border-radius:50px;
 
@@ -577,7 +577,7 @@ font-weight:800;
 
     color:white;
 
-    padding:70px 0 20px;
+    padding:50px 0 20px;
 
 }
 
@@ -649,7 +649,7 @@ font-weight:800;
 
     border-radius:18px;
 
-    padding:35px 25px;
+    padding:35px 0px;
 
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 
@@ -698,7 +698,7 @@ font-weight:800;
 
 .why-choose{
 
-    background:#F8FFF8;
+    background:#EEF8EF;
 
 }
 
@@ -708,7 +708,7 @@ font-weight:800;
 
     border-radius:18px;
 
-    padding:40px 30px;
+    padding:40px 0px;
 
     text-align:center;
 
@@ -948,7 +948,7 @@ font-weight:800;
 
 .cta-section{
 
-    background:#ffffff;
+    background:linear-gradient
 
 }
 
@@ -960,7 +960,7 @@ font-weight:800;
 
     border-radius:25px;
 
-    padding:70px 40px;
+    padding:50px 0px;
 
 }
 
@@ -986,7 +986,7 @@ font-weight:800;
 
 .cta-box .btn{
 
-    padding:16px 45px;
+    padding:16px 0px;
 
     border-radius:50px;
 
@@ -1007,5 +1007,529 @@ font-weight:800;
     background:#f3f3f3;
 
     color:#2E7D32;
+
+}
+/*==========================
+Page Hero
+==========================*/
+
+.page-hero{
+
+padding:120px 0 70px;
+
+background:#F4FBF5;
+
+}
+
+.page-hero h1{
+
+font-size:58px;
+
+font-weight:700;
+
+color:#2E7D32;
+
+margin-bottom:20px;
+
+}
+
+.page-hero p{
+
+font-size:19px;
+
+line-height:1.8;
+
+color:#666;
+
+margin-bottom:30px;
+
+}
+/*==========================
+Company Story
+==========================*/
+
+.company-story{
+
+    background:#ffffff;
+
+    padding:80px 0;
+
+}
+
+.story-tag{
+
+    display:inline-block;
+
+    background:#E8F5E9;
+
+    color:#2E7D32;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+}
+
+.company-story p{
+
+    color:#666;
+
+    line-height:1.9;
+
+    font-size:17px;
+
+}
+
+.company-story h3{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+/*==========================
+Mission Vision Values
+==========================*/
+
+.mission-section{
+
+    background:#F8FFF8;
+
+    padding:80px 0;
+
+}
+
+.mission-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+.mission-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.mission-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:#E8F5E9;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.mission-icon i{
+
+    font-size:42px;
+
+    color:#2E7D32;
+
+}
+
+.mission-card h4{
+
+    margin-bottom:18px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.mission-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+/*==========================
+Company Journey
+==========================*/
+
+.journey-section{
+
+    background:#ffffff;
+
+    padding:80px 0;
+
+}
+
+.timeline{
+
+    position:relative;
+
+    margin-top:50px;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
+    background:#2E7D32;
+
+    transform:translateX(-50%);
+
+}
+
+.timeline-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:60px;
+
+}
+
+.timeline-year{
+
+    width:130px;
+
+    height:130px;
+
+    background:#2E7D32;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.timeline-content{
+
+    width:70%;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+}
+
+.timeline-content h4{
+
+    color:#2E7D32;
+
+    margin-bottom:15px;
+
+}
+
+.timeline-content p{
+
+    color:#666;
+
+    margin:0;
+
+    line-height:1.8;
+
+}
+/*==========================
+Our Strengths
+==========================*/
+
+.strength-section{
+
+    background:#F8FFF8;
+
+    padding:80px 0;
+
+}
+
+.strength-card{
+
+    background:#fff;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+.strength-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.strength-card i{
+
+    font-size:55px;
+
+    color:#2E7D32;
+
+    margin-bottom:20px;
+
+}
+
+.strength-card h2{
+
+    color:#2E7D32;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.strength-card h5{
+
+    margin-bottom:15px;
+
+    font-weight:600;
+
+}
+
+.strength-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+/*==========================
+Quality & Certifications
+==========================*/
+
+.quality-section{
+
+    background:#ffffff;
+
+    padding:80px 0;
+
+}
+
+.quality-card{
+
+    background:#fff;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+.quality-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.quality-card i{
+
+    font-size:55px;
+
+    color:#2E7D32;
+
+    margin-bottom:20px;
+
+}
+
+.quality-card h5{
+
+    margin-bottom:15px;
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.quality-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+/*==========================
+Meet Our Team
+==========================*/
+
+.team-section{
+
+    background:#F8FFF8;
+
+    padding:80px 0;
+
+}
+
+.team-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+.team-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.team-img{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    margin-bottom:20px;
+
+    border:5px solid #E8F5E9;
+
+}
+
+.team-card h5{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.team-card span{
+
+    color:#2E7D32;
+
+    font-weight:600;
+
+    display:block;
+
+    margin-bottom:15px;
+
+}
+
+.team-card p{
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+/* ==========================
+   About Hero
+========================== */
+
+.about-hero{
+
+    padding:120px 0 80px;
+
+    background:linear-gradient(to right,#F8FFF8,#ffffff);
+
+}
+
+.about-hero h1{
+
+    font-size:58px;
+
+    font-weight:700;
+
+    margin:20px 0;
+
+    color:#1E1E1E;
+
+}
+
+.about-hero p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
 
 }
