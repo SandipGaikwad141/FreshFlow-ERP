@@ -1,90 +1,137 @@
-@media(max-width:991px){
+/*==================================================
+   RESPONSIVE STYLES (responsive.css)
+==================================================*/
 
-    .navbar{
-
-        padding:12px 0;
-
+/*--------------------------------------------------
+   TABLETS & SMALL DESKTOPS (Under 992px)
+--------------------------------------------------*/
+@media (max-width: 991px) {
+    /* Navbar */
+    .navbar {
+        padding: 10px 0;
+    }
+    .navbar-brand h4 {
+        font-size: 1.5rem;
+    }
+    .navbar-collapse {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-top: 15px;
+        border: 1px solid var(--border-color);
+    }
+    .nav-link {
+        margin-left: 0;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--bg-light-green);
+    }
+    .nav-link::after {
+        display: none; /* Hides the hover line on mobile menu for a cleaner look */
+    }
+    
+    /* Hero Section */
+    .hero {
+        text-align: center;
+        padding: 120px 0 60px;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .hero-trust {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .hero-image {
+        margin-top: 40px;
+        max-width: 80%;
     }
 
-    .nav-link{
-
-        margin-left:0;
-
-        padding:12px 0;
-
+    /* General Sections */
+    section {
+        padding: 60px 0;
     }
-
-    .navbar-brand{
-
-        font-size:26px;
-
+    .section-title {
+        font-size: 2.2rem;
     }
-
-}
-@media (max-width:991px){
-
-    .hero{
-
-        text-align:center;
-
-        padding-top:120px;
-
-    }
-
-    .hero h1{
-
-        font-size:40px;
-
-    }
-
-    .hero-image{
-
-        margin-top:40px;
-
-    }
-
-}
-@media(max-width:768px){
-
-    .section-title{
-
-        font-size:32px;
-
-    }
-
-    .product-card{
-
-        margin-bottom:20px;
-
-    }
-
-}
-@media(max-width:991px){
-
-.hero{
-
-    text-align:center;
-
 }
 
-.hero h1{
+/*--------------------------------------------------
+   LARGE MOBILE DEVICES (Under 768px)
+--------------------------------------------------*/
+@media (max-width: 767px) {
+    /* Hero Section */
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .hero-buttons .btn {
+        width: 100%; /* Makes buttons full-width on mobile */
+    }
+    .hero-image {
+        max-width: 100%;
+    }
 
-    font-size:40px;
+    /* Cards & Grids */
+    .process-card, 
+    .feature-card, 
+    .product-card {
+        margin-bottom: 20px;
+    }
 
+    /* Call To Action */
+    .cta-box {
+        padding: 40px 20px;
+    }
+    .cta-box h2 {
+        font-size: 1.8rem;
+    }
+    .cta-box .btn {
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+    }
+    .footer-links {
+        margin-bottom: 30px;
+    }
+    .social-links {
+        justify-content: center;
+    }
 }
 
-.hero-trust{
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-}
-
-.hero-image{
-
-    margin-top:50px;
-
-}
-
+/*--------------------------------------------------
+   SMALL MOBILE DEVICES (Under 576px)
+--------------------------------------------------*/
+@media (max-width: 575px) {
+    /* Typography */
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    /* Hero Trust Stats */
+    .hero-trust div {
+        width: 45%; /* Creates a neat 2-column grid for the numbers */
+    }
+    
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        right: 15px;
+        bottom: 15px;
+    }
 }
