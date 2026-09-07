@@ -1,594 +1,2267 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FreshFlow Export</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- =========================================================
+         BASIC META
+    ========================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="DPD Agro Fresh - Fresh vegetables, exotic vegetables, fruits and pulses supplied with care.">
+
+    <meta name="keywords"
+          content="DPD Agro Fresh, vegetables, fruits, pulses, fresh vegetables, exotic vegetables, agro products">
+
+    <meta name="author"
+          content="DPD Agro Fresh">
+
+    <title>DPD Agro Fresh | Fresh Produce Delivered With Care</title>
+
+
+    <!-- =========================================================
+         BOOTSTRAP
+    ========================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         BOOTSTRAP ICONS
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================================
+         GOOGLE FONT
+    ========================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         MAIN CSS
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../frontend/css/style.css">
+
+
+    <!-- =========================================================
+         HOMEPAGE CSS
+    ========================================================== -->
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f7faf7;
+            color: #222;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .main-navbar {
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.06);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+
+            z-index: 1030;
+        }
+
+
+        /* Hide navbar while scrolling down */
+
+        .main-navbar.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+
+        /* Stronger shadow after scrolling */
+
+        .main-navbar.nav-scrolled {
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.10);
+        }
+
+
+        .navbar-brand {
+
+            font-weight: 700;
+
+            color: #2e7d32 !important;
+
+            letter-spacing: -0.3px;
+        }
+
+
+        .navbar-brand img {
+
+            max-height: 48px;
+
+            width: auto;
+        }
+
+
+        .nav-link {
+
+            font-weight: 500;
+
+            color: #333 !important;
+
+            margin-left: 8px;
+
+            transition:
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        .nav-link:hover,
+        .nav-link.active {
+
+            color: #2e7d32 !important;
+        }
+
+
+        .nav-link:hover {
+
+            transform: translateY(-1px);
+        }
+
+
+        .admin-nav-link {
+
+            color: #555 !important;
+        }
+
+
+        .admin-nav-link:hover {
+
+            color: #2e7d32 !important;
+        }
+
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .home-hero {
+
+            min-height: 720px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding:
+                140px 20px 80px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(10, 55, 20, 0.92),
+                    rgba(10, 55, 20, 0.62),
+                    rgba(10, 55, 20, 0.20)
+                ),
+
+                url("../frontend/images/hero/hero.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            color: #fff;
+
+            position: relative;
+        }
+
+
+        .home-hero-content {
+
+            max-width: 700px;
+        }
+
+
+        .home-hero h1 {
+
+            font-size: clamp(
+                2.5rem,
+                5vw,
+                4.7rem
+            );
+
+            font-weight: 700;
+
+            line-height: 1.08;
+
+            margin-bottom: 22px;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .home-hero h1 span {
+
+            color: #b7e4bc;
+        }
+
+
+        .home-hero p {
+
+            max-width: 650px;
+
+            font-size: 1.05rem;
+
+            line-height: 1.8;
+
+            color:
+                rgba(255, 255, 255, 0.90);
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           HERO BUTTONS
+        ====================================================== */
+
+        .hero-buttons {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 13px;
+
+            margin-bottom: 42px;
+        }
+
+
+        .btn-main {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 13px 23px;
+
+            border-radius: 50px;
+
+            background: #2e7d32;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            border:
+                1px solid #2e7d32;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .btn-main:hover {
+
+            color: #fff;
+
+            background: #256b2a;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.18);
+        }
+
+
+        .btn-light-outline {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 13px 23px;
+
+            border-radius: 50px;
+
+            background: transparent;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.65);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .btn-light-outline:hover {
+
+            color: #fff;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           QUICK STATS
+        ====================================================== */
+
+        .quick-stats {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 35px;
+        }
+
+
+        .quick-stat {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .quick-stat strong {
+
+            font-size: 1.4rem;
+
+            font-weight: 700;
+
+            color: #fff;
+        }
+
+
+        .quick-stat span {
+
+            font-size: 0.8rem;
+
+            color:
+                rgba(255, 255, 255, 0.70);
+        }
+
+
+
+        /* =====================================================
+           PREMIUM OFFER SECTION
+           IMPORTANT:
+           OFFER IS AFTER HERO
+        ====================================================== */
+
+        .offers-section {
+
+            padding:
+                28px 0 24px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f7faf7 0%,
+                    #ffffff 100%
+                );
+
+            position: relative;
+        }
+
+
+        /*
+         * Small visual separator.
+         * Prevents the old large empty gap.
+         */
+
+        .offers-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 50%;
+
+            width: 70px;
+
+            height: 3px;
+
+            transform:
+                translateX(-50%);
+
+            background: #2e7d32;
+
+            border-radius: 20px;
+
+            opacity: 0.25;
+        }
+
+
+        .offer-carousel-wrapper {
+
+            position: relative;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            background: #183d20;
+
+            box-shadow:
+                0 15px 45px rgba(
+                    20,
+                    60,
+                    30,
+                    0.16
+                );
+        }
+
+
+        .offer-banner-img {
+
+            width: 100%;
+
+            height: 270px;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.8s ease;
+        }
+
+
+        .carousel-item.active
+        .offer-banner-img {
+
+            transform: scale(1.015);
+        }
+
+
+        /* =====================================================
+           OFFER OVERLAY
+        ====================================================== */
+
+        .offer-slide-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            padding:
+                30px 55px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(0, 35, 12, 0.84) 0%,
+                    rgba(0, 35, 12, 0.58) 42%,
+                    rgba(0, 35, 12, 0.12) 80%,
+                    rgba(0, 35, 12, 0.04) 100%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .offer-slide-content {
+
+            max-width: 520px;
+
+            color: #fff;
+
+            pointer-events: auto;
+        }
+
+
+        .offer-slide-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                7px 13px;
+
+            margin-bottom: 12px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(255, 255, 255, 0.15);
+
+            border:
+                1px solid rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            backdrop-filter: blur(8px);
+
+            -webkit-backdrop-filter: blur(8px);
+
+            font-size: 0.75rem;
+
+            font-weight: 600;
+
+            letter-spacing: 0.7px;
+
+            text-transform: uppercase;
+        }
+
+
+        .offer-slide-badge i {
+
+            color: #b7e4bc;
+        }
+
+
+        .offer-slide-content h2 {
+
+            margin:
+                0 0 8px;
+
+            font-size:
+                clamp(
+                    1.6rem,
+                    3vw,
+                    2.5rem
+                );
+
+            font-weight: 700;
+
+            line-height: 1.15;
+
+            color: #fff;
+        }
+
+
+        .offer-slide-content p {
+
+            margin:
+                0 0 18px;
+
+            max-width: 480px;
+
+            color:
+                rgba(255, 255, 255, 0.90);
+
+            font-size: 0.95rem;
+
+            line-height: 1.6;
+        }
+
+
+        .offer-order-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                10px 19px;
+
+            border-radius: 50px;
+
+            background: #fff;
+
+            color: #2e7d32;
+
+            text-decoration: none;
+
+            font-size: 0.88rem;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 8px 22px rgba(
+                    0,
+                    0,
+                    0,
+                    0.16
+                );
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .offer-order-btn:hover {
+
+            background: #eaf7eb;
+
+            color: #246629;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 28px rgba(
+                    0,
+                    0,
+                    0,
+                    0.20
+                );
+        }
+
+
+        /* =====================================================
+           OFFER CAROUSEL CONTROLS
+        ====================================================== */
+
+        .offer-carousel-wrapper
+        .carousel-control-prev,
+
+        .offer-carousel-wrapper
+        .carousel-control-next {
+
+            width: 46px;
+
+            height: 46px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            margin:
+                0 15px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            border:
+                1px solid rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            backdrop-filter: blur(8px);
+
+            -webkit-backdrop-filter: blur(8px);
+
+            opacity: 0.9;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        .offer-carousel-wrapper
+        .carousel-control-prev:hover,
+
+        .offer-carousel-wrapper
+        .carousel-control-next:hover {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                );
+
+            opacity: 1;
+        }
+
+
+        .offer-carousel-wrapper
+        .carousel-control-prev:hover {
+
+            transform:
+                translateY(-50%)
+                translateX(-2px);
+        }
+
+
+        .offer-carousel-wrapper
+        .carousel-control-next:hover {
+
+            transform:
+                translateY(-50%)
+                translateX(2px);
+        }
+
+
+        /* =====================================================
+           OFFER INDICATORS
+        ====================================================== */
+
+        .offer-carousel-wrapper
+        .carousel-indicators {
+
+            margin-bottom: 13px;
+        }
+
+
+        .offer-carousel-wrapper
+        .carousel-indicators button {
+
+            width: 7px;
+
+            height: 7px;
+
+            margin:
+                0 4px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.6
+                );
+        }
+
+
+        .offer-carousel-wrapper
+        .carousel-indicators
+        .active {
+
+            width: 22px;
+
+            border-radius: 10px;
+
+            background: #fff;
+        }
+
+
+
+        /* =====================================================
+           GENERAL SECTIONS
+        ====================================================== */
+
+        section {
+            position: relative;
+        }
+
+
+        .section-title {
+
+            font-size: 2.6rem;
+
+            font-weight: 700;
+
+            color: #183d20;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-subtitle {
+
+            max-width: 700px;
+
+            margin:
+                0 auto 40px;
+
+            color: #6b756d;
+
+            line-height: 1.7;
+        }
+
+
+
+        /* =====================================================
+           CATEGORIES
+        ====================================================== */
+
+        .categories-section {
+
+            padding:
+                90px 0;
+
+            background: #fff;
+        }
+
+
+        .category-slider-wrapper {
+
+            position: relative;
+        }
+
+
+        .category-slider {
+
+            display: flex;
+
+            gap: 20px;
+
+            overflow-x: auto;
+
+            scroll-behavior: smooth;
+
+            scrollbar-width: none;
+
+            padding:
+                10px 5px 20px;
+        }
+
+
+        .category-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .category-card {
+
+            min-width: 230px;
+
+            flex:
+                0 0 230px;
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            border:
+                1px solid #edf1ed;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .category-card:hover {
+
+            color: inherit;
+
+            transform:
+                translateY(-7px);
+
+            box-shadow:
+                0 15px 35px rgba(
+                    0,
+                    0,
+                    0,
+                    0.10
+                );
+        }
+
+
+        .category-card img {
+
+            width: 100%;
+
+            height: 190px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .category-card-body {
+
+            padding: 18px;
+        }
+
+
+        .category-card-body h5 {
+
+            margin:
+                0 0 6px;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            color: #183d20;
+        }
+
+
+        .category-card-body p {
+
+            margin: 0;
+
+            color: #788078;
+
+            font-size: 0.82rem;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           CATEGORY CONTROLS
+        ====================================================== */
+
+        .category-controls {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+
+        .category-control-btn {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #dce7dc;
+
+            background: #fff;
+
+            color: #2e7d32;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        .category-control-btn:hover {
+
+            background: #2e7d32;
+
+            color: #fff;
+        }
+
+
+
+        /* =====================================================
+           WHY DPD
+        ====================================================== */
+
+        .why-section {
+
+            padding:
+                90px 0;
+
+            background: #f7faf7;
+        }
+
+
+        .why-card {
+
+            height: 100%;
+
+            padding:
+                30px 25px;
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            border:
+                1px solid #e9efe9;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.04
+                );
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .why-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 14px 30px rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+        }
+
+
+        .why-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 15px;
+
+            background: #eaf7eb;
+
+            color: #2e7d32;
+
+            font-size: 1.4rem;
+        }
+
+
+        .why-card h5 {
+
+            color: #183d20;
+
+            font-weight: 600;
+
+            margin-bottom: 10px;
+        }
+
+
+        .why-card p {
+
+            margin: 0;
+
+            color: #6d766f;
+
+            font-size: 0.9rem;
+
+            line-height: 1.7;
+        }
+
+
+
+        /* =====================================================
+           SUPPLY NETWORK
+        ====================================================== */
+
+        .supply-section {
+
+            padding:
+                90px 0;
+
+            background: #fff;
+        }
+
+
+        .supply-image {
+
+            width: 100%;
+
+            height: 450px;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 15px 40px rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+        }
+
+
+        .supply-content {
+
+            padding-left: 30px;
+        }
+
+
+        .supply-content h2 {
+
+            color: #183d20;
+
+            font-weight: 700;
+
+            font-size: 2.4rem;
+
+            margin-bottom: 18px;
+        }
+
+
+        .supply-content p {
+
+            color: #6d766f;
+
+            line-height: 1.8;
+        }
+
+
+        .supply-list {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin:
+                25px 0 0;
+        }
+
+
+        .supply-list li {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+
+            color: #475047;
+
+            font-size: 0.92rem;
+        }
+
+
+        .supply-list i {
+
+            color: #2e7d32;
+
+            margin-top: 3px;
+        }
+
+
+
+        /* =====================================================
+           FINAL CTA
+        ====================================================== */
+
+        .home-cta {
+
+            padding:
+                85px 0;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #173d20,
+                    #2e7d32
+                );
+
+            color: #fff;
+        }
+
+
+        .home-cta h2 {
+
+            font-size:
+                clamp(
+                    2rem,
+                    4vw,
+                    3rem
+                );
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .home-cta p {
+
+            max-width: 700px;
+
+            margin:
+                0 auto 28px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.82
+                );
+
+            line-height: 1.7;
+        }
+
+
+        .cta-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                13px 25px;
+
+            border-radius: 50px;
+
+            background: #fff;
+
+            color: #2e7d32;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .cta-btn:hover {
+
+            color: #256b2a;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+        }
+
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+
+            background: #102a16;
+
+            color: #fff;
+
+            padding:
+                65px 0 25px;
+        }
+
+
+        .footer-brand {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            color: #b7e4bc;
+
+            margin-bottom: 15px;
+        }
+
+
+        .footer-text {
+
+            max-width: 400px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.68
+                );
+
+            line-height: 1.7;
+
+            font-size: 0.9rem;
+        }
+
+
+        .footer-title {
+
+            color: #fff;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            margin-bottom: 18px;
+        }
+
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+
+        .footer-links li {
+
+            margin-bottom: 10px;
+        }
+
+
+        .footer-links a {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                );
+
+            text-decoration: none;
+
+            font-size: 0.88rem;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .footer-links a:hover {
+
+            color: #b7e4bc;
+        }
+
+
+        .footer-bottom {
+
+            margin-top: 45px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            font-size: 0.8rem;
+        }
+
+
+
+        /* =====================================================
+           WHATSAPP
+        ====================================================== */
+
+        .whatsapp-float {
+
+            position: fixed;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            width: 55px;
+
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #25d366;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 1.55rem;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+
+            z-index: 1020;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .whatsapp-float:hover {
+
+            color: #fff;
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 12px 30px rgba(
+                    0,
+                    0,
+                    0,
+                    0.22
+                );
+        }
+
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 991px) {
+
+            .navbar {
+
+                padding:
+                    10px 0;
+            }
+
+
+            .navbar-brand h4 {
+
+                font-size:
+                    1.35rem;
+            }
+
+
+            .navbar-collapse {
+
+                background: #fff;
+
+                padding:
+                    20px;
+
+                border-radius:
+                    14px;
+
+                box-shadow:
+                    0 12px 30px rgba(
+                        0,
+                        0,
+                        0,
+                        0.08
+                    );
+
+                margin-top:
+                    12px;
+
+                border:
+                    1px solid #edf1ed;
+            }
+
+
+            .nav-link {
+
+                margin-left: 0;
+
+                padding:
+                    12px 0;
+
+                border-bottom:
+                    1px solid #eef3ee;
+            }
+
+
+            .nav-link:last-child {
+
+                border-bottom: 0;
+            }
+
+
+            .home-hero {
+
+                min-height:
+                    650px;
+
+                padding:
+                    130px 20px 70px;
+            }
+
+
+            .supply-content {
+
+                padding-left: 0;
+
+                margin-top:
+                    30px;
+            }
+
+        }
+
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .offers-section {
+
+                padding:
+                    18px 0 16px;
+            }
+
+
+            .offer-carousel-wrapper {
+
+                border-radius:
+                    16px;
+            }
+
+
+            .offer-banner-img {
+
+                height:
+                    220px;
+            }
+
+
+            .offer-slide-overlay {
+
+                padding:
+                    22px 25px;
+
+                background:
+
+                    linear-gradient(
+                        90deg,
+                        rgba(
+                            0,
+                            35,
+                            12,
+                            0.88
+                        ),
+                        rgba(
+                            0,
+                            35,
+                            12,
+                            0.45
+                        ),
+                        rgba(
+                            0,
+                            35,
+                            12,
+                            0.08
+                        )
+                    );
+            }
+
+
+            .offer-slide-content {
+
+                max-width:
+                    75%;
+            }
+
+
+            .offer-slide-content h2 {
+
+                font-size:
+                    1.45rem;
+            }
+
+
+            .offer-slide-content p {
+
+                font-size:
+                    0.78rem;
+
+                line-height:
+                    1.5;
+
+                margin-bottom:
+                    12px;
+            }
+
+
+            .offer-order-btn {
+
+                padding:
+                    8px 15px;
+
+                font-size:
+                    0.78rem;
+            }
+
+
+            .offer-carousel-wrapper
+            .carousel-control-prev,
+
+            .offer-carousel-wrapper
+            .carousel-control-next {
+
+                width:
+                    38px;
+
+                height:
+                    38px;
+
+                margin:
+                    0 8px;
+            }
+
+
+            .home-hero {
+
+                min-height:
+                    620px;
+
+                background-position:
+                    62% center;
+            }
+
+
+            .home-hero h1 {
+
+                font-size:
+                    2.65rem;
+
+                letter-spacing:
+                    -0.8px;
+            }
+
+
+            .home-hero p {
+
+                font-size:
+                    0.92rem;
+
+                line-height:
+                    1.7;
+            }
+
+
+            .quick-stats {
+
+                gap:
+                    20px;
+            }
+
+
+            .quick-stat strong {
+
+                font-size:
+                    1.1rem;
+            }
+
+
+            .section-title {
+
+                font-size:
+                    2rem;
+            }
+
+
+            .category-card {
+
+                min-width:
+                    205px;
+
+                flex-basis:
+                    205px;
+            }
+
+
+            .category-card img {
+
+                height:
+                    165px;
+            }
+
+
+            .supply-image {
+
+                height:
+                    330px;
+            }
+
+
+            .supply-content h2 {
+
+                font-size:
+                    2rem;
+            }
+
+        }
+
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 575px) {
+
+            .offer-banner-img {
+
+                height:
+                    200px;
+            }
+
+
+            .offer-slide-overlay {
+
+                padding:
+                    18px;
+            }
+
+
+            .offer-slide-content {
+
+                max-width:
+                    82%;
+            }
+
+
+            .offer-slide-badge {
+
+                padding:
+                    5px 9px;
+
+                font-size:
+                    0.63rem;
+
+                margin-bottom:
+                    8px;
+            }
+
+
+            .offer-slide-content h2 {
+
+                font-size:
+                    1.22rem;
+
+                margin-bottom:
+                    6px;
+            }
+
+
+            .offer-slide-content p {
+
+                font-size:
+                    0.7rem;
+
+                margin-bottom:
+                    10px;
+            }
+
+
+            .offer-order-btn {
+
+                padding:
+                    7px 12px;
+
+                font-size:
+                    0.7rem;
+            }
+
+
+            .home-hero {
+
+                min-height:
+                    610px;
+
+                padding:
+                    120px 18px 55px;
+            }
+
+
+            .home-hero h1 {
+
+                font-size:
+                    2.2rem;
+            }
+
+
+            .hero-buttons {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+                max-width:
+                    250px;
+            }
+
+
+            .btn-main,
+            .btn-light-outline {
+
+                width:
+                    100%;
+            }
+
+
+            .quick-stats {
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+                gap:
+                    12px;
+            }
+
+
+            .quick-stat strong {
+
+                font-size:
+                    0.95rem;
+            }
+
+
+            .quick-stat span {
+
+                font-size:
+                    0.65rem;
+            }
+
+
+            .whatsapp-float {
+
+                width:
+                    50px;
+
+                height:
+                    50px;
+
+                right:
+                    16px;
+
+                bottom:
+                    16px;
+
+                font-size:
+                    1.35rem;
+            }
+
+        }
+/* =========================================
+   GOOGLE TRANSLATE FIX
+========================================= */
+
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+iframe.skiptranslate {
+    visibility: hidden !important;
+}
+
+.main-navbar {
+    top: 0 !important;
+    z-index: 9999 !important;
+}
+    </style>
+
 </head>
+
+
 <body>
 
-<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-<div class="container">
-<a class="navbar-brand fw-bold text-success" href="index.html">FreshFlow Export</a>
-<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
-<div class="collapse navbar-collapse" id="nav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-<li class="nav-item"><a class="nav-link" href="export.html">Export</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-</ul>
-</div>
-</div>
-</nav>
-
-<section class="py-5 bg-light">
-<div class="container">
-<div class="row align-items-center">
-<div class="col-lg-6">
-<span class="badge bg-success mb-3">Trusted Export Partner</span>
-<h1 class="display-4 fw-bold">Fresh Produce.<br>Global Markets.</h1>
-<p class="lead">We connect Indian farmers with international buyers through reliable export services and premium quality fruits & vegetables.</p>
-<a href="products.html" class="btn btn-success btn-lg me-2">Explore Products</a>
-<a href="contact.html" class="btn btn-outline-success btn-lg">Get Quote</a>
-<div class="row mt-5 text-center">
-<div class="col"><h3 class="text-success">100+</h3><p>Products</p></div>
-<div class="col"><h3 class="text-success">25+</h3><p>Countries</p></div>
-<div class="col"><h3 class="text-success">24/7</h3><p>Support</p></div>
-</div>
-</div>
-<div class="col-lg-6">
-<img src="images/hero/hero.jpg" class="img-fluid rounded-4 shadow" alt="Hero">
-</div>
-</div>
-</div>
-</section>
+<div id="google_translate_element" style="display:none;"></div>
+    <!-- =========================================================
+         NAVBAR
+    ========================================================== -->
 
-<section class="py-5">
-<div class="container">
-<h2 class="text-center mb-5">Why Choose FreshFlow?</h2>
-<div class="row g-4">
-<div class="col-md-4"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center"><i class="fa-solid fa-seedling fa-3x text-success mb-3"></i><h4>Farm Fresh</h4><p>Direct sourcing from trusted farmers.</p></div></div></div>
-<div class="col-md-4"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center"><i class="fa-solid fa-truck-fast fa-3x text-success mb-3"></i><h4>Fast Logistics</h4><p>Reliable cold-chain transportation.</p></div></div></div>
-<div class="col-md-4"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center"><i class="fa-solid fa-globe fa-3x text-success mb-3"></i><h4>Global Reach</h4><p>Serving international buyers efficiently.</p></div></div></div>
-</div>
-</div>
-</section>
+    <nav
+        id="mainNavbar"
+        class="navbar navbar-expand-lg main-navbar fixed-top">
 
-<section class="py-5 bg-light">
-<div class="container">
-<h2 class="text-center mb-5">Featured Products</h2>
-<div class="row g-4">
-<div class="col-md-3"><div class="card border-0 shadow-sm"><img src="images/products/mango.jpg" class="card-img-top" alt="Mango"><div class="card-body text-center"><h5>Mango</h5></div></div></div>
-<div class="col-md-3"><div class="card border-0 shadow-sm"><img src="images/products/onion.jpg" class="card-img-top" alt="Onion"><div class="card-body text-center"><h5>Onion</h5></div></div></div>
-<div class="col-md-3"><div class="card border-0 shadow-sm"><img src="images/products/potato.jpg" class="card-img-top" alt="Potato"><div class="card-body text-center"><h5>Potato</h5></div></div></div>
-<div class="col-md-3"><div class="card border-0 shadow-sm"><img src="images/products/tomato.jpg" class="card-img-top" alt="Tomato"><div class="card-body text-center"><h5>Tomato</h5></div></div></div>
-</div>
-</div>
-</section>
-<!-- =====================================
-            EXPORT JOURNEY
-====================================== -->
+        <div class="container">
 
-<!-- ===========================
-     EXPORT PROCESS
-=========================== -->
 
-<section class="export-process">
+            <!-- BRAND -->
 
-<div class="container">
+            <a
+                class="navbar-brand"
+                href="../frontend/index.html">
 
-<div class="text-center mb-5">
+                DPD Agro Fresh
 
-<span class="section-badge">
-Export Journey
-</span>
+            </a>
 
-<h2 class="section-title">
-From Indian Farms to Global Markets
-</h2>
 
-<p class="section-subtitle">
+            <!-- MOBILE TOGGLE -->
 
-A seamless export process ensuring freshness,
-quality and on-time delivery.
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbarMenu"
+                aria-controls="mainNavbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-</p>
+                <span
+                    class="navbar-toggler-icon">
+                </span>
 
-</div>
+            </button>
 
-<div class="process-wrapper">
 
-<div class="process-line"></div>
+            <!-- NAVIGATION -->
 
-<div class="row justify-content-center g-4">
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbarMenu">
 
-<div class="col-lg-2 col-md-4 col-6">
+                <ul
+                    class="navbar-nav ms-auto align-items-lg-center">
 
-<div class="process-item">
 
-<div class="process-icon">
+                    <li class="nav-item">
 
-🌱
+                        <a
+                            class="nav-link active"
+                            href="../frontend/index.html">
 
-</div>
+                            Home
 
-<h5>Farm</h5>
+                        </a>
 
-<p>Fresh Harvest</p>
+                    </li>
 
-</div>
 
-</div>
+                    <li class="nav-item">
 
-<div class="col-lg-2 col-md-4 col-6">
+                        <a
+                            class="nav-link"
+                            href="../frontend/about.html">
 
-<div class="process-item">
+                            About
 
-<div class="process-icon">
+                        </a>
 
-🔍
+                    </li>
 
-</div>
 
-<h5>Inspection</h5>
+                    <li class="nav-item">
 
-<p>Quality Check</p>
+                        <a
+                            class="nav-link"
+                            href="../frontend/products.html">
 
-</div>
+                            Products
 
-</div>
+                        </a>
 
-<div class="col-lg-2 col-md-4 col-6">
+                    </li>
 
-<div class="process-item">
 
-<div class="process-icon">
+                    <li class="nav-item">
 
-📦
+                        <a
+                            class="nav-link"
+                            href="../frontend/supply.html">
 
-</div>
+                            Supply
 
-<h5>Packing</h5>
+                        </a>
 
-<p>Export Packaging</p>
+                    </li>
 
-</div>
 
-</div>
+                    <li class="nav-item">
 
-<div class="col-lg-2 col-md-4 col-6">
+                        <a
+                            class="nav-link"
+                            href="../frontend/contact.html">
 
-<div class="process-item">
+                            Contact
 
-<div class="process-icon">
+                        </a>
 
-🚢
+                    </li>
 
-</div>
+ <li class="nav-item ms-lg-2">
 
-<h5>Shipping</h5>
+                        <a
+                            class="nav-link admin-login-link"
+                            href="admin-login.html">
 
-<p>Worldwide Logistics</p>
+                            <i class="bi bi-shield-lock"></i>
 
-</div>
+                            Admin
 
-</div>
+                        </a>
 
-<div class="col-lg-2 col-md-4 col-6">
+                    </li>
+                    <li class="nav-item ms-lg-2">
+    <select
+        id="languageSelect"
+        class="language-select"
+        aria-label="Select language">
 
-<div class="process-item">
+        <option value="">🌐 Language</option>
+        <option value="en">English</option>
+        <option value="mr">मराठी</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
 
-<div class="process-icon">
+    </select>
+</li>
 
-🌍
-
-</div>
-
-<h5>Delivery</h5>
-
-<p>Happy Customers</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<!--==========================================
-            GLOBAL PRESENCE
-===========================================-->
-
-<section class="global-network">
-
-<div class="container">
-
-<div class="row align-items-center">
-
-<!-- Left Content -->
-
-<div class="col-lg-5">
-
-<span class="network-tag">
-
-GLOBAL NETWORK
-
-</span>
-
-<h2 class="network-title">
-
-Connecting Indian Farms To The World
-
-</h2>
-
-<p class="network-text">
-
-FreshFlow Export delivers premium fruits and vegetables from trusted Indian farms to international buyers through efficient logistics, quality assurance and modern cold-chain transportation.
-
-</p>
-
-<div class="network-features">
-
-<div class="feature">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>25+ Export Destinations</span>
-
-</div>
-
-<div class="feature">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>ISO Quality Standards</span>
-
-</div>
-
-<div class="feature">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>Fast Global Logistics</span>
-
-</div>
-
-<div class="feature">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>Fresh Farm Produce</span>
-
-</div>
-
-</div>
-
-<a href="contact.html" class="btn btn-success btn-lg mt-4">
-
-Request Catalogue
-
-</a>
-
-</div>
-
-<!-- Right Side -->
-
-<div class="col-lg-7">
-
-<div class="world-map-container">
-
-    <img src="images/world-map.jpg"
-         class="world-map"
-         alt="World Map">
-
-    <!-- Pins -->
-
-    ...
-
-</div>
-
-<!-- Statistics OUTSIDE -->
-
-<div class="network-stats">
-
-    <div class="stat-box">
-        <h2>25+</h2>
-        <p>Countries</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>150+</h2>
-        <p>Products</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>1000+</h2>
-        <p>Shipments</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>98%</h2>
-        <p>Satisfaction</p>
-    </div>
-
-</div>
-
-</div>
-
-</section>
-<!-- ===========================
-        TESTIMONIALS
-=========================== -->
-
-<section class="testimonials py-5">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">Client Feedback</span>
-
-            <h2 class="section-title">What Our Global Clients Say</h2>
-
-            <p class="section-subtitle">
-                Trusted by importers and distributors across multiple countries.
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <!-- Card 1 -->
-
-            <div class="col-lg-4">
-
-                <div class="testimonial-card">
-
-                    <div class="stars">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p>
-
-                        "FreshFlow consistently delivers excellent quality mangoes.
-                        Packaging and delivery exceeded our expectations."
-
-                    </p>
-
-                    <div class="client">
-
-                        <img src="https://i.pravatar.cc/100?img=12" alt="Client">
-
-                        <div>
-
-                            <h5>David Johnson</h5>
-
-                            <small>Importer • UAE</small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Card 2 -->
-
-            <div class="col-lg-4">
-
-                <div class="testimonial-card">
-
-                    <div class="stars">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p>
-
-                        "Professional communication, premium quality vegetables
-                        and always delivered on time."
-
-                    </p>
-
-                    <div class="client">
-
-                        <img src="https://i.pravatar.cc/100?img=32" alt="Client">
-
-                        <div>
-
-                            <h5>Michael Brown</h5>
-
-                            <small>Wholesaler • Singapore</small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Card 3 -->
-
-            <div class="col-lg-4">
-
-                <div class="testimonial-card">
-
-                    <div class="stars">
-
-                        ★★★★★
-
-                    </div>
-
-                    <p>
-
-                        "Reliable export partner with exceptional customer service
-                        and fresh produce every shipment."
-
-                    </p>
-
-                    <div class="client">
-
-                        <img src="https://i.pravatar.cc/100?img=18" alt="Client">
-
-                        <div>
-
-                            <h5>Sarah Wilson</h5>
-
-                            <small>Retail Buyer • Germany</small>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                </ul>
 
             </div>
 
         </div>
 
-    </div>
+    </nav>
 
-</section>
 
-<!-- ======================================
-                FOOTER
-======================================= -->
 
-<footer class="footer">
+    <!-- =========================================================
+         HERO
+         FIRST MAJOR SECTION
+    ========================================================== -->
 
-    <div class="container">
+    <section class="home-hero">
 
-        <div class="row gy-5">
+        <div class="container">
 
-            <!-- Company -->
+            <div class="home-hero-content">
 
-            <div class="col-lg-4">
 
-                <h2 class="footer-logo">
+                <h1>
 
-                    <i class="fa-solid fa-leaf"></i>
+                    Fresh Produce
 
-                    FreshFlow Export
+                    <br>
 
-                </h2>
+                    <span>
+                        Delivered With Care.
+                    </span>
 
-                <p class="footer-text">
+                </h1>
 
-                    Delivering premium quality fruits and vegetables from trusted Indian farms to global markets with reliability, freshness and excellence.
+
+                <p>
+
+                    DPD Agro Fresh supplies fresh vegetables,
+                    exotic vegetables, pulses and fruits with
+                    reliable quality and professional handling.
 
                 </p>
 
-                <div class="social-icons">
 
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <div class="hero-buttons">
 
-                    <a href="#"><i class="fab fa-instagram"></i></a>
 
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a
+                        href="../frontend/products.html"
+                        class="btn-main">
 
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        Explore Products
+
+                        <i
+                            class="bi bi-arrow-right">
+                        </i>
+
+                    </a>
+
+
+                    <a
+                        href="../frontend/contact.html"
+                        class="btn-light-outline">
+
+                        Contact Us
+
+                        <i
+                            class="bi bi-arrow-up-right">
+                        </i>
+
+                    </a>
 
                 </div>
 
-            </div>
 
-            <!-- Quick Links -->
+                <!-- QUICK STATS -->
 
-            <div class="col-lg-2 col-md-6">
+                <div class="quick-stats">
 
-                <h5>Quick Links</h5>
 
-                <ul class="footer-links">
+                    <div class="quick-stat">
 
-                    <li><a href="index.html">Home</a></li>
+                        <strong>
+                            15,000+
+                        </strong>
 
-                    <li><a href="about.html">About</a></li>
+                        <span>
+                            Customers
+                        </span>
 
-                    <li><a href="products.html">Products</a></li>
+                    </div>
 
-                    <li><a href="export.html">Export</a></li>
 
-                    <li><a href="contact.html">Contact</a></li>
+                    <div class="quick-stat">
 
-                </ul>
+                        <strong>
+                            Fresh
+                        </strong>
 
-            </div>
+                        <span>
+                            Produce
+                        </span>
 
-            <!-- Products -->
+                    </div>
 
-            <div class="col-lg-3 col-md-6">
 
-                <h5>Products</h5>
+                    <div class="quick-stat">
 
-                <ul class="footer-links">
+                        <strong>
+                            Multiple
+                        </strong>
 
-                    <li><a href="#">Fresh Mango</a></li>
+                        <span>
+                            Markets
+                        </span>
 
-                    <li><a href="#">Onion</a></li>
-
-                    <li><a href="#">Potato</a></li>
-
-                    <li><a href="#">Tomato</a></li>
-
-                    <li><a href="#">Seasonal Vegetables</a></li>
-
-                </ul>
-
-            </div>
-
-            <!-- Contact -->
-
-            <div class="col-lg-3">
-
-                <h5>Contact Us</h5>
-
-                <div class="footer-contact">
-
-                    <p>
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Sangamner, Maharashtra, India
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        +91 7057402592
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-envelope"></i>
-
-                        info@freshflowexport.com
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-globe"></i>
-
-                        www.freshflowexport.com
-
-                    </p>
+                    </div>
 
                 </div>
 
@@ -596,35 +2269,1985 @@ Request Catalogue
 
         </div>
 
-        <hr>
+    </section>
 
-        <div class="footer-bottom">
 
-            <p>
 
-                © 2026 FreshFlow Export. All Rights Reserved.
+    <!-- =========================================================
+         OFFERS
+         NOW AFTER HERO
+    ========================================================== -->
 
+    <section
+        id="offersSection"
+        class="offers-section"
+        style="display: none;">
+
+        <div class="container">
+
+
+            <div
+                id="offerCarousel"
+                class="carousel slide offer-carousel-wrapper"
+                data-bs-ride="carousel"
+                data-bs-interval="3500"
+                data-bs-pause="false">
+
+
+                <!-- INDICATORS -->
+
+                <div
+                    class="carousel-indicators"
+                    id="offerCarouselIndicators">
+                </div>
+
+
+                <!-- OFFER SLIDES -->
+
+                <div
+                    class="carousel-inner"
+                    id="offerCarouselInner">
+                </div>
+
+
+                <!-- PREVIOUS -->
+
+                <button
+                    id="carouselPrevBtn"
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#offerCarousel"
+                    data-bs-slide="prev">
+
+                    <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true">
+                    </span>
+
+                    <span class="visually-hidden">
+                        Previous
+                    </span>
+
+                </button>
+
+
+                <!-- NEXT -->
+
+                <button
+                    id="carouselNextBtn"
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#offerCarousel"
+                    data-bs-slide="next">
+
+                    <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true">
+                    </span>
+
+                    <span class="visually-hidden">
+                        Next
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+        <!-<!-- =========================================================
+     PRODUCT CATEGORIES
+========================================================== -->
+
+<section class="categories-section" id="categories">
+
+    <div class="container">
+
+        <!-- SECTION HEADER -->
+        <div class="categories-heading text-center">
+
+            <span class="categories-eyebrow">
+                EXPLORE OUR RANGE
+            </span>
+
+            <h2 class="section-title">
+                Fresh Categories
+            </h2>
+
+            <p class="section-subtitle">
+                Explore our carefully selected range of fresh vegetables,
+                fruits and pulses.
             </p>
+
+        </div>
+
+
+        <!-- CATEGORY SLIDER -->
+        <div class="category-slider-wrapper">
+
+            <div id="categorySlider" class="category-slider">
+
+
+                <!-- CATEGORY 1 -->
+                <a href="../frontend/products.html"
+                   class="category-card">
+
+                    <div class="category-image">
+
+                        <img
+                            src="../frontend/images/products/vegetables/ExoticsCombo.webp"
+                            alt="Exotic Vegetables"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');">
+
+                        <div class="category-image-overlay"></div>
+
+                        <span class="category-number">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-card-body">
+
+                        <span class="category-label">
+                            PREMIUM RANGE
+                        </span>
+
+                        <h3>
+                            Exotic Vegetables
+                        </h3>
+
+                        <p>
+                            Premium and imported vegetable
+                            varieties selected for quality.
+                        </p>
+
+                        <span class="category-link">
+                            Explore Products
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- CATEGORY 2 -->
+                <a href="../frontend/products.html"
+                   class="category-card">
+
+                    <div class="category-image">
+
+                        <img
+                            src="../frontend/images/products/vegetables/indian-Vegetables.jpg"
+                            alt="Indian Vegetables"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');">
+
+                        <div class="category-image-overlay"></div>
+
+                        <span class="category-number">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-card-body">
+
+                        <span class="category-label">
+                            FARM FRESH
+                        </span>
+
+                        <h3>
+                            Indian Vegetables
+                        </h3>
+
+                        <p>
+                            Fresh everyday vegetables sourced
+                            with care from trusted suppliers.
+                        </p>
+
+                        <span class="category-link">
+                            Explore Products
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- CATEGORY 3 -->
+                <a href="../frontend/products.html"
+                   class="category-card">
+
+                    <div class="category-image">
+
+                        <img
+                            src="../frontend/images/products/vegetables/pulses.avif"
+                            alt="Pulses"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');">
+
+                        <div class="category-image-overlay"></div>
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-card-body">
+
+                        <span class="category-label">
+                            QUALITY SELECTED
+                        </span>
+
+                        <h3>
+                            Pulses
+                        </h3>
+
+                        <p>
+                            Quality pulses suitable for
+                            different markets and requirements.
+                        </p>
+
+                        <span class="category-link">
+                            Explore Products
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- CATEGORY 4 -->
+                <a href="../frontend/products.html"
+                   class="category-card">
+
+                    <div class="category-image">
+
+                        <img
+                            src="../frontend/images/products/vegetables/domestic-fruits.jpg"
+                            alt="Domestic Fruits"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');">
+
+                        <div class="category-image-overlay"></div>
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-card-body">
+
+                        <span class="category-label">
+                            NATURAL FRESHNESS
+                        </span>
+
+                        <h3>
+                            Domestic Fruits
+                        </h3>
+
+                        <p>
+                            Fresh fruits selected carefully
+                            for quality and freshness.
+                        </p>
+
+                        <span class="category-link">
+                            Explore Products
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- CATEGORY 5 -->
+                <a href="../frontend/products.html"
+                   class="category-card">
+
+                    <div class="category-image">
+
+                        <img
+                            src="../frontend/images/products/vegetables/exotic-fruits.jpg"
+                            alt="Exotic Fruits"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');">
+
+                        <div class="category-image-overlay"></div>
+
+                        <span class="category-number">
+                            05
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-card-body">
+
+                        <span class="category-label">
+                            PREMIUM FRUITS
+                        </span>
+
+                        <h3>
+                            Exotic Fruits
+                        </h3>
+
+                        <p>
+                            Premium exotic fruits for
+                            quality-focused buyers.
+                        </p>
+
+                        <span class="category-link">
+                            Explore Products
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+
+            <!-- CONTROLS -->
+            <div class="category-controls">
+
+                <button
+                    id="categoryPrev"
+                    class="category-control-btn"
+                    type="button"
+                    aria-label="Previous categories">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                </button>
+
+
+                <div class="category-scroll-info">
+
+                    <span class="scroll-line"></span>
+
+                    <span>
+                        SWIPE TO EXPLORE
+                    </span>
+
+                </div>
+
+
+                <button
+                    id="categoryNext"
+                    class="category-control-btn"
+                    type="button"
+                    aria-label="Next categories">
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</footer>
+</section>
+    <!-- =========================================================
+         WHY DPD AGRO FRESH
+    ========================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- ======================================
-        FLOATING WHATSAPP BUTTON
-======================================= -->
+    <section
+        class="why-section"
+        id="why-dpd">
 
-<a href="https://wa.me/91705740592"
-   class="whatsapp-float"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Chat on WhatsApp">
+        <div class="container">
 
-    <i class="fab fa-whatsapp"></i>
 
-</a>
+            <div class="text-center">
+
+
+                <span
+                    class="text-success fw-semibold">
+
+                    WHY DPD AGRO FRESH
+
+                </span>
+
+
+                <h2 class="section-title">
+
+                    Freshness You Can Trust
+
+                </h2>
+
+
+                <p class="section-subtitle">
+
+                    We focus on quality, consistency and
+                    dependable supply so our customers can
+                    source fresh produce with confidence.
+
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <!-- CARD 1 -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="why-card">
+
+
+                        <div class="why-icon">
+
+                            <i
+                                class="bi bi-stars">
+                            </i>
+
+                        </div>
+
+
+                        <h5>
+                            Quality First
+                        </h5>
+
+
+                        <p>
+
+                            We focus on selecting and
+                            supplying quality produce
+                            for every order.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CARD 2 -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="why-card">
+
+
+                        <div class="why-icon">
+
+                            <i
+                                class="bi bi-box-seam">
+                            </i>
+
+                        </div>
+
+
+                        <h5>
+                            Careful Handling
+                        </h5>
+
+
+                        <p>
+
+                            Produce is handled carefully
+                            throughout the supply process.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CARD 3 -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="why-card">
+
+
+                        <div class="why-icon">
+
+                            <i
+                                class="bi bi-truck">
+                            </i>
+
+                        </div>
+
+
+                        <h5>
+                            Reliable Supply
+                        </h5>
+
+
+                        <p>
+
+                            We work to provide dependable
+                            supply for regular business
+                            requirements.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CARD 4 -->
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="why-card">
+
+
+                        <div class="why-icon">
+
+                            <i
+                                class="bi bi-people">
+                            </i>
+
+                        </div>
+
+
+                        <h5>
+                            Customer Focus
+                        </h5>
+
+
+                        <p>
+
+                            Our approach is built around
+                            long-term customer relationships.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         SUPPLY NETWORK
+    ========================================================== -->
+
+    <section
+        class="supply-section"
+        id="supply">
+
+        <div class="container">
+
+
+            <div
+                class="row align-items-center g-5">
+
+
+                <!-- IMAGE -->
+
+                <div class="col-lg-6">
+
+                    <img
+                        src="../frontend/images/team/supply.png"
+                        alt="DPD Agro Fresh Supply Network"
+                        class="supply-image"
+                        loading="lazy">
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="col-lg-6">
+
+
+                    <div
+                        class="supply-content">
+
+
+                        <span
+                            class="text-success fw-semibold">
+
+                            OUR SUPPLY NETWORK
+
+                        </span>
+
+
+                        <h2>
+
+                            From Source
+                            <br>
+                            To Your Market.
+
+                        </h2>
+
+
+                        <p>
+
+                            DPD Agro Fresh works with a
+                            reliable supply network to
+                            deliver fresh produce while
+                            maintaining quality and
+                            consistency.
+
+                        </p>
+
+
+                        <ul class="supply-list">
+
+
+                            <li>
+
+                                <i
+                                    class="bi bi-check-circle-fill">
+                                </i>
+
+                                Fresh produce sourcing
+
+                            </li>
+
+
+                            <li>
+
+                                <i
+                                    class="bi bi-check-circle-fill">
+                                </i>
+
+                                Quality-focused handling
+
+                            </li>
+
+
+                            <li>
+
+                                <i
+                                    class="bi bi-check-circle-fill">
+                                </i>
+
+                                Reliable supply coordination
+
+                            </li>
+
+
+                            <li>
+
+                                <i
+                                    class="bi bi-check-circle-fill">
+                                </i>
+
+                                Business-focused distribution
+
+                            </li>
+
+                        </ul>
+
+
+                        <span class="nav-link nav-link-disabled"
+      aria-disabled="true"
+      title="Supply Network coming soon">
+    Supply Network
+</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FINAL CTA
+    ========================================================== -->
+
+    <section class="home-cta">
+
+        <div
+            class="container text-center">
+
+
+            <h2>
+
+                Looking For Fresh Produce?
+
+            </h2>
+
+
+            <p>
+
+                Explore our products and send your
+                requirement directly to DPD Agro Fresh.
+
+            </p>
+
+
+            <a
+                href="../frontend/products.html"
+                class="cta-btn">
+
+                Browse Products
+
+                <i
+                    class="bi bi-arrow-right">
+                </i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+
+            <div class="row g-5">
+
+
+                <!-- COMPANY -->
+
+                <div class="col-lg-5 col-md-6">
+
+
+                    <div class="footer-brand">
+
+                        DPD Agro Fresh
+
+                    </div>
+
+
+                    <p class="footer-text">
+
+                        Fresh vegetables, fruits and pulses
+                        supplied with care, consistency and
+                        a focus on quality.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="col-lg-3 col-md-3">
+
+
+                    <h5 class="footer-title">
+
+                        Quick Links
+
+                    </h5>
+
+
+                    <ul class="footer-links">
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/index.html">
+
+                                Home
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/about.html">
+
+                                About
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Products
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/supply.html">
+
+                                Supply
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/contact.html">
+
+                                Contact
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- PRODUCT CATEGORIES -->
+
+                <div class="col-lg-4 col-md-3">
+
+
+                    <h5 class="footer-title">
+
+                        Product Categories
+
+                    </h5>
+
+
+                    <ul class="footer-links">
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Exotic Vegetables
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Indian Vegetables
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Pulses
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Domestic Fruits
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="../frontend/products.html">
+
+                                Exotic Fruits
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER BOTTOM -->
+
+            <div
+                class="footer-bottom text-center">
+
+                © 2026 DPD Agro Fresh.
+                All Rights Reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         WHATSAPP
+    ========================================================== -->
+
+    <a
+        href="https://wa.me/917721082828"
+        class="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact DPD Agro Fresh on WhatsApp">
+
+        <i
+            class="fa-brands fa-whatsapp">
+        </i>
+
+    </a>
+
+
+
+    <!-- =========================================================
+         BOOTSTRAP JS
+    ========================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- =========================================================
+         OFFER JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const offersSection =
+                    document.getElementById(
+                        "offersSection"
+                    );
+
+                const carouselInner =
+                    document.getElementById(
+                        "offerCarouselInner"
+                    );
+
+                const carouselIndicators =
+                    document.getElementById(
+                        "offerCarouselIndicators"
+                    );
+
+                const prevBtn =
+                    document.getElementById(
+                        "carouselPrevBtn"
+                    );
+
+                const nextBtn =
+                    document.getElementById(
+                        "carouselNextBtn"
+                    );
+
+                const carouselElement =
+                    document.getElementById(
+                        "offerCarousel"
+                    );
+
+
+                /* =================================================
+                   SAFETY CHECK
+                ================================================== */
+
+                if (
+                    !offersSection ||
+                    !carouselInner
+                ) {
+
+                    console.error(
+                        "Offer section elements not found."
+                    );
+
+                    return;
+                }
+
+
+                /* =================================================
+                   GET ACTIVE OFFERS
+                ================================================== */
+
+                fetch(
+                    "http://localhost:8080/api/offers/active"
+                )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to load active offers."
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+
+                .then(
+                    function (offers) {
+
+
+                        /* =========================================
+                           NO OFFERS
+                        ========================================== */
+
+                        if (
+                            !offers ||
+                            offers.length === 0
+                        ) {
+
+                            offersSection.style.display =
+                                "none";
+
+                            return;
+
+                        }
+
+
+                        /* =========================================
+                           SHOW OFFER SECTION
+                        ========================================== */
+
+                        offersSection.style.display =
+                            "block";
+
+
+                        carouselInner.innerHTML =
+                            "";
+
+
+                        if (
+                            carouselIndicators
+                        ) {
+
+                            carouselIndicators.innerHTML =
+                                "";
+
+                        }
+
+
+                        /* =========================================
+                           CREATE OFFERS
+                        ========================================== */
+
+                        offers.forEach(
+                            function (
+                                offer,
+                                index
+                            ) {
+
+
+                                /* ================================
+                                   SLIDE
+                                ================================= */
+
+                                const item =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                item.className =
+                                    "carousel-item" +
+                                    (
+                                        index === 0
+                                            ? " active"
+                                            : ""
+                                    );
+
+
+                                /* ================================
+                                   IMAGE
+                                ================================= */
+
+                                const image =
+                                    document.createElement(
+                                        "img"
+                                    );
+
+
+                                let imageUrl =
+                                    offer.imageUrl;
+
+
+                                if (
+                                    imageUrl &&
+                                    !imageUrl.startsWith(
+                                        "http"
+                                    )
+                                ) {
+
+                                    imageUrl =
+                                        "./" +
+                                        imageUrl;
+
+                                }
+
+
+                                image.src =
+                                    imageUrl;
+
+
+                                image.alt =
+                                    offer.title ||
+                                    "DPD Agro Fresh Offer";
+
+
+                                image.className =
+                                    "d-block w-100 offer-banner-img";
+
+
+                                image.loading =
+                                    index === 0
+                                        ? "eager"
+                                        : "lazy";
+
+
+                                image.onerror =
+                                    function () {
+
+                                        console.error(
+                                            "Offer image could not load:",
+                                            image.src
+                                        );
+
+                                    };
+
+
+                                /* ================================
+                                   OVERLAY
+                                ================================= */
+
+                                const overlay =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                overlay.className =
+                                    "offer-slide-overlay";
+
+
+                                /* ================================
+                                   CONTENT
+                                ================================= */
+
+                                const content =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                content.className =
+                                    "offer-slide-content";
+
+
+                                /* ================================
+                                   BADGE
+                                ================================= */
+
+                                const badge =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                badge.className =
+                                    "offer-slide-badge";
+
+
+                                badge.innerHTML = `
+                                    <i class="bi bi-lightning-fill"></i>
+                                    Special Offer
+                                `;
+
+
+                                /* ================================
+                                   TITLE
+                                ================================= */
+
+                                const title =
+                                    document.createElement(
+                                        "h2"
+                                    );
+
+
+                                title.textContent =
+                                    offer.title ||
+                                    "Fresh Produce Special Offer";
+
+
+                                /* ================================
+                                   DESCRIPTION
+                                ================================= */
+
+                                const description =
+                                    document.createElement(
+                                        "p"
+                                    );
+
+
+                                description.textContent =
+                                    offer.description ||
+                                    "Quality fresh produce available at a special offer price.";
+
+
+                                /* ================================
+                                   ORDER BUTTON
+                                ================================= */
+
+                                const orderButton =
+                                    document.createElement(
+                                        "a"
+                                    );
+
+
+                                orderButton.href =
+                                    "../frontend/products.html";
+
+
+                                orderButton.className =
+                                    "offer-order-btn";
+
+
+                                orderButton.innerHTML = `
+                                    Order Now
+                                    <i class="bi bi-arrow-right"></i>
+                                `;
+
+
+                                /* ================================
+                                   BUILD CONTENT
+                                ================================= */
+
+                                content.appendChild(
+                                    badge
+                                );
+
+
+                                content.appendChild(
+                                    title
+                                );
+
+
+                                content.appendChild(
+                                    description
+                                );
+
+
+                                content.appendChild(
+                                    orderButton
+                                );
+
+
+                                overlay.appendChild(
+                                    content
+                                );
+
+
+                                /* ================================
+                                   BUILD SLIDE
+                                ================================= */
+
+                                item.appendChild(
+                                    image
+                                );
+
+
+                                item.appendChild(
+                                    overlay
+                                );
+
+
+                                carouselInner.appendChild(
+                                    item
+                                );
+
+
+                                /* ================================
+                                   INDICATOR
+                                ================================= */
+
+                                if (
+                                    carouselIndicators
+                                ) {
+
+                                    const indicator =
+                                        document.createElement(
+                                            "button"
+                                        );
+
+
+                                    indicator.type =
+                                        "button";
+
+
+                                    indicator.dataset.bsTarget =
+                                        "#offerCarousel";
+
+
+                                    indicator.dataset.bsSlideTo =
+                                        index;
+
+
+                                    indicator.setAttribute(
+                                        "aria-label",
+                                        "Offer " +
+                                        (
+                                            index + 1
+                                        )
+                                    );
+
+
+                                    if (
+                                        index === 0
+                                    ) {
+
+                                        indicator.classList
+                                            .add(
+                                                "active"
+                                            );
+
+
+                                        indicator.setAttribute(
+                                            "aria-current",
+                                            "true"
+                                        );
+
+                                    }
+
+
+                                    carouselIndicators.appendChild(
+                                        indicator
+                                    );
+
+                                }
+
+                            }
+                        );
+
+
+                        /* =========================================
+                           ONLY ONE OFFER
+                        ========================================== */
+
+                        if (
+                            offers.length === 1
+                        ) {
+
+                            if (prevBtn) {
+
+                                prevBtn.style.display =
+                                    "none";
+
+                            }
+
+
+                            if (nextBtn) {
+
+                                nextBtn.style.display =
+                                    "none";
+
+                            }
+
+
+                            if (
+                                carouselIndicators
+                            ) {
+
+                                carouselIndicators.style.display =
+                                    "none";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        /* =========================================
+                           MULTIPLE OFFERS
+                        ========================================== */
+
+                        if (prevBtn) {
+
+                            prevBtn.style.display =
+                                "flex";
+
+                        }
+
+
+                        if (nextBtn) {
+
+                            nextBtn.style.display =
+                                "flex";
+
+                        }
+
+
+                        /* =========================================
+                           BOOTSTRAP CAROUSEL
+                        ========================================== */
+
+                        if (
+                            carouselElement &&
+                            typeof bootstrap !==
+                                "undefined"
+                        ) {
+
+                            new bootstrap.Carousel(
+                                carouselElement,
+                                {
+
+                                    interval:
+                                        3500,
+
+                                    ride:
+                                        "carousel",
+
+                                    pause:
+                                        false,
+
+                                    wrap:
+                                        true
+
+                                }
+                            );
+
+                        }
+
+                    }
+                )
+
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Failed to load offers:",
+                            error
+                        );
+
+
+                        /*
+                         * Never leave an empty offer area.
+                         */
+
+                        offersSection.style.display =
+                            "none";
+
+                    }
+                );
+
+            }
+
+        );
+
+    </script>
+
+
+
+    <!-- =========================================================
+         CATEGORY SLIDER
+    ========================================================== -->
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slider = document.getElementById("categorySlider");
+    const prevBtn = document.getElementById("categoryPrev");
+    const nextBtn = document.getElementById("categoryNext");
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+
+    function getScrollAmount() {
+
+        const card = slider.querySelector(".category-card");
+
+        if (!card) {
+            return 350;
+        }
+
+        const gap = 26;
+
+        return card.getBoundingClientRect().width + gap;
+    }
+
+
+    nextBtn.addEventListener("click", function () {
+
+        slider.scrollBy({
+            left: getScrollAmount(),
+            behavior: "smooth"
+        });
+
+    });
+
+
+    prevBtn.addEventListener("click", function () {
+
+        slider.scrollBy({
+            left: -getScrollAmount(),
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* -------------------------------------------------------
+       Mouse wheel horizontal scrolling
+    ------------------------------------------------------- */
+
+    slider.addEventListener(
+        "wheel",
+        function (event) {
+
+            if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+
+                event.preventDefault();
+
+                slider.scrollLeft += event.deltaY;
+
+            }
+
+        },
+        { passive: false }
+    );
+
+
+});
+</script>
+
+    <!-- =========================================================
+         SMART NAVBAR
+         HIDE ON SCROLL DOWN
+         SHOW ON SCROLL UP
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const navbar =
+                    document.getElementById(
+                        "mainNavbar"
+                    );
+
+
+                const navbarMenu =
+                    document.getElementById(
+                        "mainNavbarMenu"
+                    );
+
+
+                if (!navbar) {
+
+                    return;
+
+                }
+
+
+                let lastScrollY =
+                    window.scrollY;
+
+
+                let ticking =
+                    false;
+
+
+                const scrollThreshold =
+                    8;
+
+
+                function handleNavbarScroll() {
+
+
+                    const currentScrollY =
+                        window.scrollY;
+
+
+                    /* ==========================================
+                       TOP OF PAGE
+                    =========================================== */
+
+                    if (
+                        currentScrollY <= 20
+                    ) {
+
+                        navbar.classList.remove(
+                            "nav-hidden"
+                        );
+
+
+                        navbar.classList.remove(
+                            "nav-scrolled"
+                        );
+
+
+                        lastScrollY =
+                            currentScrollY;
+
+
+                        ticking =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==========================================
+                       SCROLLED
+                    =========================================== */
+
+                    navbar.classList.add(
+                        "nav-scrolled"
+                    );
+
+
+                    /* ==========================================
+                       MOBILE MENU CHECK
+                    =========================================== */
+
+                    const menuIsOpen =
+                        navbarMenu &&
+                        navbarMenu.classList.contains(
+                            "show"
+                        );
+
+
+                    /*
+                     * Never hide navbar while
+                     * mobile menu is open.
+                     */
+
+                    if (menuIsOpen) {
+
+                        navbar.classList.remove(
+                            "nav-hidden"
+                        );
+
+
+                        lastScrollY =
+                            currentScrollY;
+
+
+                        ticking =
+                            false;
+
+
+                        return;
+
+                    }
+
+
+                    /* ==========================================
+                       SCROLLING DOWN
+                    =========================================== */
+
+                    if (
+                        currentScrollY >
+                        lastScrollY +
+                        scrollThreshold
+                    ) {
+
+                        navbar.classList.add(
+                            "nav-hidden"
+                        );
+
+                    }
+
+
+                    /* ==========================================
+                       SCROLLING UP
+                    =========================================== */
+
+                    else if (
+                        currentScrollY <
+                        lastScrollY -
+                        scrollThreshold
+                    ) {
+
+                        navbar.classList.remove(
+                            "nav-hidden"
+                        );
+
+                    }
+
+
+                    lastScrollY =
+                        currentScrollY;
+
+
+                    ticking =
+                        false;
+
+                }
+
+
+                /* ==============================================
+                   OPTIMIZED SCROLL
+                =============================================== */
+
+                window.addEventListener(
+                    "scroll",
+                    function () {
+
+
+                        if (!ticking) {
+
+                            window.requestAnimationFrame(
+                                handleNavbarScroll
+                            );
+
+
+                            ticking =
+                                true;
+
+                        }
+
+                    },
+                    {
+                        passive:
+                            true
+                    }
+                );
+
+
+                /* ==============================================
+                   MOBILE MENU OPEN
+                =============================================== */
+
+                if (navbarMenu) {
+
+                    navbarMenu.addEventListener(
+                        "shown.bs.collapse",
+                        function () {
+
+                            navbar.classList.remove(
+                                "nav-hidden"
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+
+    <!-- =========================================================
+         MOBILE NAVBAR CLOSE AFTER LINK CLICK
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const navbarMenu =
+                    document.getElementById(
+                        "mainNavbarMenu"
+                    );
+
+
+                if (!navbarMenu) {
+
+                    return;
+
+                }
+
+
+                const navLinks =
+                    navbarMenu.querySelectorAll(
+                        ".nav-link"
+                    );
+
+
+                navLinks.forEach(
+                    function (link) {
+
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+
+                                if (
+                                    window.innerWidth <
+                                    992
+                                ) {
+
+
+                                    const collapse =
+                                        bootstrap
+                                            .Collapse
+                                            .getInstance(
+                                                navbarMenu
+                                            );
+
+
+                                    if (
+                                        collapse
+                                    ) {
+
+                                        collapse.hide();
+
+                                    }
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+        );
+
+    </script>
+<script>
+
+    function googleTranslateElementInit() {
+
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,mr,hi,kn,gu,ta,te',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+    }
+
+</script>
+
+<script
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    if (!languageSelect) return;
+
+    languageSelect.addEventListener("change", function () {
+
+        const language = this.value;
+
+        if (!language) return;
+
+        const googleSelect =
+            document.querySelector(".goog-te-combo");
+
+        if (!googleSelect) {
+            console.log("Google Translate is still loading...");
+            return;
+        }
+
+        googleSelect.value = language;
+
+        googleSelect.dispatchEvent(
+            new Event("change")
+        );
+
+    });
+
+});
+
+</script>
+
 </body>
+
 </html>

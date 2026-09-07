@@ -1,1117 +1,3858 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <!-- Character Encoding -->
-    <meta charset="UTF-8">
+<!-- Leaflet Map -->
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<meta charset="UTF-8">
 
-    <!-- Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-    <title>Export | FreshFlow Export</title>
+<title>Supply Network | DPD Agro Fresh</title>
 
-    <meta name="description"
-        content="FreshFlow Export delivers premium fruits, vegetables, spices and grains to international markets through reliable export logistics and quality assurance.">
+<meta
+    name="description"
+    content="Explore the DPD Agro Fresh supply network and markets served across India."
+>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+<!-- =====================================================
+     BOOTSTRAP
+====================================================== -->
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
+<!-- =====================================================
+     BOOTSTRAP ICONS
+====================================================== -->
 
-    <!-- Main CSS -->
-    <link rel="stylesheet"
-          href="css/style.css">
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+<!-- =====================================================
+     FONT AWESOME
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<!-- =====================================================
+     GOOGLE FONT
+====================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<!-- =====================================================
+     MAIN CSS
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="../frontend/css/style.css"
+>
+
+
+<style>
+
+    /* =====================================================
+       GLOBAL
+    ====================================================== */
+
+    :root {
+
+        --primary: #2e7d32;
+        --primary-dark: #1f5c25;
+        --primary-light: #e8f5e9;
+
+        --accent: #8bc34a;
+        --accent-light: #dff3c8;
+
+        --dark: #102b17;
+        --dark-soft: #193c20;
+
+        --text: #222;
+        --muted: #707070;
+
+        --border: #e5ece5;
+
+        --white: #ffffff;
+
+        --shadow-sm:
+            0 8px 25px rgba(20, 55, 25, 0.06);
+
+        --shadow-md:
+            0 18px 45px rgba(20, 55, 25, 0.10);
+
+        --shadow-lg:
+            0 30px 70px rgba(20, 55, 25, 0.14);
+
+        --radius: 22px;
+    }
+
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+
+    body {
+
+        font-family: 'Poppins', sans-serif;
+
+        background: #f7faf7;
+
+        color: var(--text);
+
+        overflow-x: hidden;
+    }
+
+
+    a {
+        transition: all .3s ease;
+    }
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    .reveal {
+
+        opacity: 0;
+
+        transform: translateY(45px);
+
+        transition:
+            opacity .8s ease,
+            transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+
+    .reveal.active {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+
+    .reveal-left {
+
+        opacity: 0;
+
+        transform: translateX(-50px);
+
+        transition:
+            opacity .8s ease,
+            transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+
+    .reveal-left.active {
+
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+
+    .reveal-right {
+
+        opacity: 0;
+
+        transform: translateX(50px);
+
+        transition:
+            opacity .8s ease,
+            transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+
+    .reveal-right.active {
+
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    .main-navbar {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        z-index: 1000;
+
+        padding: 18px 0;
+
+        background: rgba(255,255,255,.88);
+
+        backdrop-filter: blur(18px);
+
+        -webkit-backdrop-filter: blur(18px);
+
+        border-bottom:
+            1px solid rgba(46,125,50,.08);
+
+        box-shadow:
+            0 8px 30px rgba(0,0,0,.04);
+
+        transition:
+            transform .45s cubic-bezier(.4,0,.2,1),
+            background .3s ease,
+            padding .3s ease,
+            box-shadow .3s ease;
+    }
+
+
+    /* Navbar hidden while scrolling down */
+
+    .main-navbar.navbar-hidden {
+
+        transform: translateY(-110%);
+    }
+
+
+    .main-navbar.navbar-scrolled {
+
+        padding: 11px 0;
+
+        background: rgba(255,255,255,.96);
+
+        box-shadow:
+            0 12px 35px rgba(0,0,0,.08);
+    }
+
+
+    .navbar-brand {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        color: var(--primary) !important;
+
+        letter-spacing: -.3px;
+    }
+
+
+    .navbar-brand::before {
+
+        content: "";
+
+        width: 10px;
+
+        height: 10px;
+
+        border-radius: 50%;
+
+        background: var(--accent);
+
+        box-shadow:
+            0 0 0 5px rgba(139,195,74,.15);
+    }
+
+
+    .navbar-nav {
+
+        align-items: center;
+
+        gap: 5px;
+    }
+
+
+    .nav-link {
+
+        position: relative;
+
+        color: #333 !important;
+
+        font-size: 14px;
+
+        font-weight: 500;
+
+        padding: 9px 13px !important;
+
+        border-radius: 10px;
+    }
+
+
+    .nav-link::after {
+
+        content: "";
+
+        position: absolute;
+
+        left: 13px;
+        right: 13px;
+
+        bottom: 3px;
+
+        height: 2px;
+
+        border-radius: 10px;
+
+        background: var(--primary);
+
+        transform: scaleX(0);
+
+        transform-origin: center;
+
+        transition: transform .3s ease;
+    }
+
+
+    .nav-link:hover {
+
+        color: var(--primary) !important;
+
+        background: rgba(46,125,50,.05);
+    }
+
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+
+        transform: scaleX(1);
+    }
+
+
+    .nav-link.active {
+
+        color: var(--primary) !important;
+
+        font-weight: 600;
+    }
+
+
+    .admin-login-link {
+
+        color: var(--primary) !important;
+
+        border: 1px solid rgba(46,125,50,.2);
+
+        padding-left: 15px !important;
+
+        padding-right: 15px !important;
+    }
+
+
+    .admin-login-link:hover {
+
+        background: var(--primary);
+
+        color: white !important;
+    }
+
+
+    .admin-login-link::after {
+
+        display: none;
+    }
+
+
+    .navbar-toggler {
+
+        border: 0;
+
+        padding: 7px;
+
+        box-shadow: none !important;
+    }
+
+
+    .navbar-toggler:focus {
+
+        box-shadow: none;
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .network-hero {
+
+        position: relative;
+
+        min-height: 680px;
+
+        display: flex;
+
+        align-items: center;
+
+        color: white;
+
+        padding:
+            150px 20px 100px;
+
+        overflow: hidden;
+
+        background:
+
+            linear-gradient(
+                90deg,
+                rgba(7,45,17,.94) 0%,
+                rgba(7,45,17,.78) 38%,
+                rgba(7,45,17,.35) 72%,
+                rgba(7,45,17,.18) 100%
+            ),
+
+            url("../frontend/images/hero/hero.jpg");
+
+        background-size: cover;
+
+        background-position: center;
+
+        isolation: isolate;
+    }
+
+
+    .network-hero::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            radial-gradient(
+                circle at 80% 25%,
+                rgba(165,214,106,.22),
+                transparent 30%
+            );
+
+        z-index: -1;
+    }
+
+
+    .network-hero::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 500px;
+
+        height: 500px;
+
+        right: -200px;
+
+        bottom: -280px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid rgba(255,255,255,.12);
+
+        box-shadow:
+            0 0 0 70px rgba(255,255,255,.025),
+            0 0 0 140px rgba(255,255,255,.02);
+
+        animation:
+            heroPulse 8s ease-in-out infinite;
+    }
+
+
+    @keyframes heroPulse {
+
+        0%,100% {
+            transform: scale(1);
+            opacity: .6;
+        }
+
+        50% {
+            transform: scale(1.08);
+            opacity: 1;
+        }
+    }
+
+
+    .hero-content {
+
+        max-width: 780px;
+
+        animation:
+            heroContent .9s ease forwards;
+    }
+
+
+    @keyframes heroContent {
+
+        from {
+
+            opacity: 0;
+
+            transform: translateY(30px);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+    }
+
+
+    .hero-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 9px 16px;
+
+        border-radius: 50px;
+
+        background:
+            rgba(255,255,255,.10);
+
+        border:
+            1px solid rgba(255,255,255,.20);
+
+        backdrop-filter: blur(10px);
+
+        font-size: 12px;
+
+        font-weight: 500;
+
+        letter-spacing: .3px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .hero-badge i {
+
+        color: #b5df78;
+
+        font-size: 15px;
+    }
+
+
+    .network-hero h1 {
+
+        font-size:
+            clamp(42px, 6vw, 72px);
+
+        font-weight: 700;
+
+        line-height: 1.08;
+
+        letter-spacing: -2px;
+
+        margin: 0;
+    }
+
+
+    .network-hero h1 span {
+
+        color: #a5d66a;
+    }
+
+
+    .network-hero p {
+
+        max-width: 650px;
+
+        font-size: 17px;
+
+        line-height: 1.85;
+
+        color:
+            rgba(255,255,255,.88);
+
+        margin-top: 25px;
+
+        margin-bottom: 0;
+    }
+
+
+    /* =====================================================
+       COMMON SECTIONS
+    ====================================================== */
+
+    .section {
+
+        padding: 105px 0;
+
+        position: relative;
+    }
+
+
+    .section-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        padding: 7px 14px;
+
+        border-radius: 50px;
+
+        background: var(--primary-light);
+
+        color: var(--primary);
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        letter-spacing: .7px;
+
+        text-transform: uppercase;
+
+        margin-bottom: 14px;
+    }
+
+
+    .section-title {
+
+        font-size:
+            clamp(30px, 4vw, 42px);
+
+        font-weight: 700;
+
+        line-height: 1.2;
+
+        letter-spacing: -1px;
+
+        color: var(--dark-soft);
+
+        margin-bottom: 20px;
+    }
+
+
+    .section-text {
+
+        color: var(--muted);
+
+        line-height: 1.9;
+
+        font-size: 15px;
+    }
+
+
+    /* =====================================================
+       BUTTON
+    ====================================================== */
+
+    .btn-main {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                #3f9145
+            );
+
+        color: white;
+
+        padding: 13px 23px;
+
+        border-radius: 50px;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        border: 0;
+
+        box-shadow:
+            0 10px 25px rgba(46,125,50,.20);
+
+        transition:
+            transform .3s ease,
+            box-shadow .3s ease,
+            background .3s ease;
+    }
+
+
+    .btn-main:hover {
+
+        color: white;
+
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 15px 35px rgba(46,125,50,.30);
+    }
+
+
+    .btn-main i {
+
+        transition:
+            transform .3s ease;
+    }
+
+
+    .btn-main:hover i {
+
+        transform: translateX(4px);
+    }
+
+
+    /* =====================================================
+       MAP
+    ====================================================== */
+
+    .map-container {
+
+        position: relative;
+
+        min-height: 440px;
+
+        border-radius: 30px;
+
+        background:
+
+            radial-gradient(
+                circle at 30% 20%,
+                rgba(139,195,74,.16),
+                transparent 28%
+            ),
+
+            linear-gradient(
+                135deg,
+                #eaf5ea,
+                #f9fcf9
+            );
+
+        border:
+            1px solid #dcebdd;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 40px;
+
+        overflow: hidden;
+
+        box-shadow:
+            var(--shadow-md);
+    }
+
+
+    .map-container::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 300px;
+
+        height: 300px;
+
+        border-radius: 50%;
+
+        border:
+            1px dashed rgba(46,125,50,.18);
+
+        animation:
+            rotateMap 18s linear infinite;
+    }
+
+
+    .map-container::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 200px;
+
+        height: 200px;
+
+        border-radius: 50%;
+
+        border:
+            1px dashed rgba(46,125,50,.14);
+
+        animation:
+            rotateMapReverse 13s linear infinite;
+    }
+
+
+    @keyframes rotateMap {
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    @keyframes rotateMapReverse {
+
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+
+
+    .map-content {
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .map-container i {
+
+        display: block;
+
+        font-size: 56px;
+
+        color: var(--primary);
+
+        margin-bottom: 18px;
+
+        animation:
+            mapFloat 3s ease-in-out infinite;
+    }
+
+
+    @keyframes mapFloat {
+
+        0%,100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-7px);
+        }
+    }
+
+
+    .map-container h4 {
+
+        color: var(--dark-soft);
+
+        font-weight: 700;
+
+        margin-bottom: 12px;
+    }
+
+
+    .map-container p {
+
+        color: #777;
+
+        max-width: 500px;
+
+        margin: auto;
+
+        line-height: 1.8;
+
+        font-size: 14px;
+    }
+
+
+    /* =====================================================
+       LOCATION FILTER
+    ====================================================== */
+
+    .filter-buttons {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+        margin-bottom: 45px;
+    }
+
+
+    .filter-btn {
+
+        border:
+            1px solid #d4e2d5;
+
+        background: white;
+
+        color: #356b3a;
+
+        border-radius: 50px;
+
+        padding: 9px 19px;
+
+        font-family: inherit;
+
+        font-size: 13px;
+
+        font-weight: 500;
+
+        cursor: pointer;
+
+        transition:
+            all .3s ease;
+
+        box-shadow:
+            0 3px 12px rgba(0,0,0,.03);
+    }
+
+
+    .filter-btn:hover {
+
+        transform: translateY(-2px);
+
+        border-color: var(--primary);
+
+        color: var(--primary);
+
+        box-shadow:
+            0 7px 18px rgba(46,125,50,.10);
+    }
+
+
+    .filter-btn.active {
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                #3f9145
+            );
+
+        color: white;
+
+        border-color: var(--primary);
+
+        box-shadow:
+            0 8px 20px rgba(46,125,50,.20);
+    }
+
+
+    /* =====================================================
+       LOCATION CARDS
+    ====================================================== */
+
+    .location-item {
+
+        transition:
+            opacity .4s ease,
+            transform .4s ease;
+    }
+
+
+    .location-item.filter-hidden {
+
+        opacity: 0;
+
+        transform: scale(.94);
+
+        pointer-events: none;
+    }
+
+
+    .location-card {
+
+        position: relative;
+
+        background: white;
+
+        border-radius: var(--radius);
+
+        padding: 29px;
+
+        height: 100%;
+
+        border:
+            1px solid var(--border);
+
+        box-shadow:
+            var(--shadow-sm);
+
+        transition:
+            transform .35s ease,
+            box-shadow .35s ease,
+            border-color .35s ease;
+
+        overflow: hidden;
+    }
+
+
+    .location-card::before {
+
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+
+        top: 0;
+
+        width: 100%;
+
+        height: 3px;
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--primary),
+                var(--accent)
+            );
+
+        transform:
+            scaleX(0);
+
+        transform-origin: left;
+
+        transition:
+            transform .4s ease;
+    }
+
+
+    .location-card:hover {
+
+        transform:
+            translateY(-8px);
+
+        box-shadow:
+            var(--shadow-md);
+
+        border-color:
+            rgba(46,125,50,.18);
+    }
+
+
+    .location-card:hover::before {
+
+        transform:
+            scaleX(1);
+    }
+
+
+    .location-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 17px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #e8f5e9,
+                #f2fae9
+            );
+
+        color: var(--primary);
+
+        font-size: 23px;
+
+        margin-bottom: 20px;
+
+        transition:
+            transform .35s ease;
+    }
+
+
+    .location-card:hover .location-icon {
+
+        transform:
+            rotate(-5deg)
+            scale(1.08);
+    }
+
+
+    .location-card h5 {
+
+        font-size: 18px;
+
+        font-weight: 600;
+
+        color: var(--dark-soft);
+
+        margin-bottom: 9px;
+    }
+
+
+    .location-card p {
+
+        color: #777;
+
+        font-size: 13px;
+
+        line-height: 1.75;
+
+        margin: 0;
+    }
+
+
+    /* =====================================================
+       PROCESS
+    ====================================================== */
+
+    .process-section {
+
+        background:
+            linear-gradient(
+                180deg,
+                #f7faf7,
+                #eef7ef
+            );
+    }
+
+
+    .process-card {
+
+        position: relative;
+
+        background: white;
+
+        border-radius: 24px;
+
+        padding: 36px 28px 31px;
+
+        height: 100%;
+
+        text-align: center;
+
+        border:
+            1px solid rgba(46,125,50,.08);
+
+        box-shadow:
+            var(--shadow-sm);
+
+        transition:
+            all .35s ease;
+
+        overflow: hidden;
+    }
+
+
+    .process-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 100px;
+
+        height: 100px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(139,195,74,.06);
+
+        right: -45px;
+
+        top: -45px;
+
+        transition:
+            transform .5s ease;
+    }
+
+
+    .process-card:hover {
+
+        transform:
+            translateY(-9px);
+
+        box-shadow:
+            var(--shadow-md);
+
+        border-color:
+            rgba(46,125,50,.15);
+    }
+
+
+    .process-card:hover::after {
+
+        transform:
+            scale(2);
+    }
+
+
+    .process-number {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 60px;
+
+        height: 60px;
+
+        margin: 0 auto 23px;
+
+        border-radius: 50%;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                #7ed957
+            );
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 9px 22px rgba(46,125,50,.22);
+    }
+
+
+    .process-card h5 {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin:
+            0 0 12px;
+
+        font-size: 18px;
+
+        font-weight: 700;
+
+        color: #222;
+    }
+
+
+    .process-card p {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin: 0;
+
+        font-size: 13px;
+
+        line-height: 1.75;
+
+        color: #666;
+    }
+
+
+    /* =====================================================
+       CTA
+    ====================================================== */
+
+    .cta-section {
+
+        position: relative;
+
+        padding: 100px 20px;
+
+        background:
+
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(139,195,74,.18),
+                transparent 25%
+            ),
+
+            radial-gradient(
+                circle at 85% 80%,
+                rgba(46,125,50,.12),
+                transparent 25%
+            ),
+
+            #edf7ed;
+
+        text-align: center;
+
+        overflow: hidden;
+    }
+
+
+    .cta-section::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+
+        height: 350px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid rgba(46,125,50,.08);
+
+        left: -170px;
+
+        bottom: -200px;
+    }
+
+
+    .cta-section h2 {
+
+        position: relative;
+
+        color: var(--dark-soft);
+
+        font-size:
+            clamp(30px, 4vw, 43px);
+
+        font-weight: 700;
+
+        letter-spacing: -1px;
+
+        margin: 5px 0 0;
+    }
+
+
+    .cta-section .section-text {
+
+        max-width: 650px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .footer {
+
+        position: relative;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0c2413,
+                #102b17 60%,
+                #153b1e
+            );
+
+        color: white;
+
+        padding: 75px 0 25px;
+
+        overflow: hidden;
+    }
+
+
+    .footer::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 450px;
+
+        height: 450px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid rgba(255,255,255,.035);
+
+        right: -230px;
+
+        top: -260px;
+    }
+
+
+    .footer-logo {
+
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        font-size: 22px;
+
+        font-weight: 700;
+
+        margin: 0;
+    }
+
+
+    .footer-logo i {
+
+        color: #8bc34a;
+    }
+
+
+    .footer-text {
+
+        color:
+            rgba(255,255,255,.65);
+
+        line-height: 1.85;
+
+        max-width: 400px;
+
+        font-size: 14px;
+    }
+
+
+    .footer h5 {
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        margin-bottom: 22px;
+    }
+
+
+    .footer-links {
+
+        list-style: none;
+
+        padding: 0;
+
+        margin: 0;
+    }
+
+
+    .footer-links li {
+
+        margin-bottom: 11px;
+    }
+
+
+    .footer-links a {
+
+        display: inline-block;
+
+        color:
+            rgba(255,255,255,.62);
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        transition:
+            color .25s ease,
+            transform .25s ease;
+    }
+
+
+    .footer-links a:hover {
+
+        color: white;
+
+        transform: translateX(4px);
+    }
+
+
+    .footer-contact p {
+
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        color:
+            rgba(255,255,255,.62);
+
+        font-size: 13px;
+
+        line-height: 1.7;
+
+        margin-bottom: 12px;
+    }
+
+
+    .footer-contact i {
+
+        width: 20px;
+
+        color: #8bc34a;
+
+        margin-top: 3px;
+    }
+
+
+    /* =====================================================
+       SOCIAL ICONS
+    ====================================================== */
+
+    .social-icons {
+
+        display: flex;
+
+        gap: 10px;
+    }
+
+
+    .social-icons a {
+
+        width: 40px;
+
+        height: 40px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background:
+            rgba(255,255,255,.07);
+
+        border:
+            1px solid rgba(255,255,255,.07);
+
+        color: white;
+
+        text-decoration: none;
+
+        transition:
+            all .3s ease;
+    }
+
+
+    .social-icons a:hover {
+
+        background:
+            var(--primary);
+
+        border-color:
+            var(--primary);
+
+        transform:
+            translateY(-4px);
+
+        box-shadow:
+            0 10px 22px rgba(0,0,0,.2);
+    }
+
+
+    /* =====================================================
+       FOOTER BOTTOM
+    ====================================================== */
+
+    .footer-bottom {
+
+        border-top:
+            1px solid rgba(255,255,255,.08);
+
+        margin-top: 45px;
+
+        padding-top: 22px;
+
+        text-align: center;
+
+        color:
+            rgba(255,255,255,.42);
+
+        font-size: 12px;
+    }
+
+
+    /* =====================================================
+       WHATSAPP FLOAT
+    ====================================================== */
+
+    .whatsapp-float {
+
+        position: fixed;
+
+        right: 25px;
+
+        bottom: 25px;
+
+        width: 58px;
+
+        height: 58px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background:
+            #25d366;
+
+        color: white;
+
+        font-size: 28px;
+
+        text-decoration: none;
+
+        box-shadow:
+            0 12px 30px rgba(0,0,0,.20);
+
+        z-index: 999;
+
+        transition:
+            transform .3s ease,
+            box-shadow .3s ease;
+    }
+
+
+    .whatsapp-float::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: -5px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid rgba(37,211,102,.35);
+
+        animation:
+            whatsappPulse 2.2s ease-out infinite;
+    }
+
+
+    @keyframes whatsappPulse {
+
+        0% {
+            transform: scale(.85);
+            opacity: .8;
+        }
+
+        100% {
+            transform: scale(1.35);
+            opacity: 0;
+        }
+    }
+
+
+    .whatsapp-float:hover {
+
+        color: white;
+
+        transform:
+            translateY(-5px)
+            scale(1.05);
+
+        box-shadow:
+            0 17px 38px rgba(0,0,0,.25);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 991px) {
+
+        .main-navbar {
+
+            padding: 13px 0;
+        }
+
+
+        .navbar-collapse {
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            background: rgba(255,255,255,.98);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.08);
+        }
+
+
+        .navbar-nav {
+
+            align-items: stretch;
+
+            gap: 2px;
+        }
+
+
+        .nav-link {
+
+            padding:
+                11px 14px !important;
+        }
+
+
+        .admin-login-link {
+
+            margin-top: 5px;
+        }
+
+
+        .network-hero {
+
+            min-height: 590px;
+
+            padding-top: 140px;
+        }
+    }
+
+
+    @media (max-width: 768px) {
+
+        .section {
+
+            padding: 80px 0;
+        }
+
+
+        .network-hero {
+
+            min-height: 560px;
+
+            padding:
+                135px 20px 80px;
+
+            background-position:
+                60% center;
+        }
+
+
+        .network-hero h1 {
+
+            letter-spacing:
+                -1.2px;
+        }
+
+
+        .network-hero p {
+
+            font-size: 15px;
+        }
+
+
+        .map-container {
+
+            min-height: 350px;
+        }
+
+
+        .cta-section {
+
+            padding:
+                80px 20px;
+        }
+
+
+        .whatsapp-float {
+
+            right: 18px;
+
+            bottom: 18px;
+
+            width: 54px;
+
+            height: 54px;
+
+            font-size: 25px;
+        }
+    }
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ====================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+
+            animation-duration: .01ms !important;
+
+            animation-iteration-count: 1 !important;
+
+            transition-duration: .01ms !important;
+        }
+    }
+/* =========================================
+   GOOGLE TRANSLATE - HIDE TOP BANNER
+========================================= */
+
+/* Hide Google Translate top notification bar */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+iframe.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Prevent Google from pushing the website down */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* Hide Google Translate injected iframe */
+iframe.skiptranslate {
+    visibility: hidden !important;
+}
+
+/* Keep our own language selector visible */
+#google_translate_element {
+    display: none !important;
+}
+</style>
+
 
 </head>
 
 <body>
+<div id="google_translate_element" style="display:none;"></div>
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
 
-<!-- ==========================================
-                NAVBAR
-=========================================== -->
+<nav
+    class="navbar navbar-expand-lg fixed-top main-navbar"
+    id="mainNavbar"
+>
 
-<nav class="navbar navbar-expand-lg fixed-top">
 
-    <div class="container">
+<div class="container">
 
-        <a class="navbar-brand" href="index.html">
+    <a
+        class="navbar-brand"
+        href="../frontend/index.html"
+    >
+        DPD Agro Fresh
+    </a>
 
-            <i class="fa-solid fa-leaf"></i>
 
-            FreshFlow Export
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNavbarMenu"
+        aria-controls="mainNavbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+
+    <div
+        class="collapse navbar-collapse"
+        id="mainNavbarMenu"
+    >
+
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link"
+                    href="../frontend/index.html"
+                >
+                    Home
+                </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link"
+                    href="about.html"
+                >
+                    About
+                </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link"
+                    href="products.html"
+                >
+                    Products
+                </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link active"
+                    href="export.html"
+                    aria-current="page"
+                >
+                    Supply & Export
+                </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link"
+                    href="contact.html"
+                >
+                    Contact
+                </a>
+
+            </li>
+
+<li class="nav-item ms-lg-2">
+    <select
+        id="languageSelect"
+        class="language-select"
+        aria-label="Select language">
+
+        <option value="">🌐 Language</option>
+        <option value="en">English</option>
+        <option value="mr">मराठी</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+
+    </select>
+</li>
+            
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+</nav>
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="network-hero">
+
+
+<div class="container">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+
+            <i class="bi bi-geo-alt-fill"></i>
+
+            DPD Agro Fresh Network
+
+        </span>
+
+
+        <h1>
+
+            Connecting Fresh Produce
+
+            <br>
+
+            <span>Across Markets</span>
+
+        </h1>
+
+
+        <p>
+
+            Discover the cities and markets where
+            DPD Agro Fresh supplies fresh vegetables,
+            exotic vegetables, pulses and fruits.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     INTRO
+====================================================== -->
+
+<section class="section">
+
+
+<div class="container">
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-6 reveal-left">
+
+            <span class="section-badge">
+
+                Our Network
+
+            </span>
+
+
+            <h2 class="section-title">
+
+                Supplying Fresh Produce
+                Where It Is Needed
+
+            </h2>
+
+
+            <p class="section-text">
+
+                DPD Agro Fresh serves customers across
+                multiple cities and markets in India.
+
+            </p>
+
+
+            <p class="section-text">
+
+                Our supply network covers major markets
+                across Maharashtra and extends to other
+                locations including Karnataka,
+                Telangana and southern India.
+
+            </p>
+
+
+            <a
+                href="contact.html"
+                class="btn-main mt-3"
+            >
+
+                Make An Enquiry
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="col-lg-6 reveal-right">
+
+            <div class="supply-map-card">
+
+    <!-- MAP HEADER -->
+    <div class="map-header">
+        <div>
+            <span class="map-eyebrow">
+                DPD AGRO FRESH
+            </span>
+
+            <h3>
+                Our Supply Network
+            </h3>
+
+            <p>
+                From source to markets across India
+            </p>
+        </div>
+
+        <div class="map-status">
+            <span class="status-dot"></span>
+            Active Network
+        </div>
+    </div>
+
+
+    <!-- ACTUAL MAP -->
+    <div id="supplyMap" class="supply-map"></div>
+
+
+    <!-- MAP LEGEND -->
+    <div class="map-legend">
+
+        <div class="legend-item">
+            <span class="legend-dot source-dot"></span>
+            Source
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-dot market-dot"></span>
+            Market
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-line"></span>
+            Supply Network
+        </div>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LOCATIONS
+====================================================== -->
+
+<section class="section bg-white">
+
+
+<div class="container">
+
+    <div class="text-center mb-5 reveal">
+
+        <span class="section-badge">
+
+            Markets Served
+
+        </span>
+
+
+        <h2 class="section-title">
+
+            Our Supply Locations
+
+        </h2>
+
+
+        <p
+            class="section-text mx-auto"
+            style="max-width:700px;"
+        >
+
+            Select a region to explore the current
+            locations covered by the business.
+
+        </p>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filter-buttons reveal">
+
+        <button
+            class="filter-btn active"
+            data-region="all"
+        >
+            All
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-region="maharashtra"
+        >
+            Maharashtra
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-region="karnataka"
+        >
+            Karnataka
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-region="other"
+        >
+            Other Markets
+        </button>
+
+    </div>
+
+
+    <div
+        class="row g-4"
+        id="locationGrid"
+    >
+
+
+        <!-- Mumbai -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-buildings"></i>
+
+                </div>
+
+                <h5>Mumbai</h5>
+
+                <p>
+                    Supply across Mumbai markets
+                    and surrounding areas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Kalyan -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Kalyan</h5>
+
+                <p>
+                    Fresh produce supply location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Vashi -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-shop"></i>
+
+                </div>
+
+                <h5>Vashi</h5>
+
+                <p>
+                    Vashi market supply network.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Thane -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-pin-map"></i>
+
+                </div>
+
+                <h5>Thane</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Pune -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-buildings"></i>
+
+                </div>
+
+                <h5>Pune</h5>
+
+                <p>
+                    Major supply market in Pune.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Moshi -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Moshi</h5>
+
+                <p>
+                    Fresh produce supply location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Manchar -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Manchar</h5>
+
+                <p>
+                    Fresh produce supply location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Pune Market Yard -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-shop-window"></i>
+
+                </div>
+
+                <h5>Pune Market Yard</h5>
+
+                <p>
+                    Major agricultural market.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Kolhapur -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Kolhapur</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sangli -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Sangli</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Satara -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Satara</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Kharadi -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-pin-map"></i>
+
+                </div>
+
+                <h5>Kharadi</h5>
+
+                <p>
+                    Pune region supply location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Karnataka -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="karnataka"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-map"></i>
+
+                </div>
+
+                <h5>Karnataka</h5>
+
+                <p>
+                    Supply network across Karnataka.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Belgaum -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="karnataka"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Belgaum</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hyderabad -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="other"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-buildings"></i>
+
+                </div>
+
+                <h5>Hyderabad</h5>
+
+                <p>
+                    Supply location in Telangana.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Kanyakumari -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="other"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                </div>
+
+                <h5>Kanyakumari</h5>
+
+                <p>
+                    Southern India supply location.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Nagpur -->
+
+        <div
+            class="col-lg-3 col-md-6 location-item reveal"
+            data-region="maharashtra"
+        >
+
+            <div class="location-card">
+
+                <div class="location-icon">
+
+                    <i class="bi bi-buildings"></i>
+
+                </div>
+
+                <h5>Nagpur</h5>
+
+                <p>
+                    Fresh produce supply area.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     SUPPLY PROCESS
+====================================================== -->
+
+<section class="section process-section">
+
+
+<div class="container">
+
+    <div class="text-center mb-5 reveal">
+
+        <span class="section-badge">
+
+            How It Works
+
+        </span>
+
+
+        <h2 class="section-title">
+
+            From Requirement To Delivery
+
+        </h2>
+
+
+        <p
+            class="section-text mx-auto"
+            style="max-width:700px;"
+        >
+
+            A simple flow for customers to enquire
+            about products and arrange supply.
+
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <!-- 01 -->
+
+        <div class="col-lg-3 col-md-6 reveal">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <h5>
+                    Choose Products
+                </h5>
+
+                <p>
+                    Explore available fruits,
+                    vegetables and pulses.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 02 -->
+
+        <div class="col-lg-3 col-md-6 reveal">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <h5>
+                    Send Enquiry
+                </h5>
+
+                <p>
+                    Contact the company through
+                    WhatsApp or the website.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 03 -->
+
+        <div class="col-lg-3 col-md-6 reveal">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <h5>
+                    Confirm Requirement
+                </h5>
+
+                <p>
+                    Share quantity, location and
+                    other required order details.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 04 -->
+
+        <div class="col-lg-3 col-md-6 reveal">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <h5>
+                    Arrange Supply
+                </h5>
+
+                <p>
+                    The final delivery process is
+                    coordinated with the customer.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     CTA
+====================================================== -->
+
+<section class="cta-section">
+
+
+<div class="container reveal">
+
+    <span class="section-badge">
+
+        Need Fresh Produce?
+
+    </span>
+
+
+    <h2>
+
+        Tell Us What You Need
+
+    </h2>
+
+
+    <p class="section-text mt-3 mb-4">
+
+        Browse the products and contact DPD Agro Fresh
+        for your requirement.
+
+    </p>
+
+
+    <div
+        class="d-flex flex-wrap justify-content-center gap-3"
+    >
+
+        <a
+            href="products.html"
+            class="btn-main"
+        >
+
+            Explore Products
+
+            <i class="bi bi-arrow-right"></i>
 
         </a>
 
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
 
-            <span class="navbar-toggler-icon"></span>
+        <a
+            href="contact.html"
+            class="btn-main"
+        >
 
-        </button>
+            Contact Us
 
-        <div class="collapse navbar-collapse justify-content-end"
-             id="navbarNav">
+            <i class="bi bi-arrow-right"></i>
 
-            <ul class="navbar-nav">
+        </a>
 
-                <li class="nav-item">
+    </div>
 
-                    <a class="nav-link"
-                       href="index.html">
+</div>
 
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+
+<div class="container">
+
+    <div class="row gy-5">
+
+
+        <!-- BRAND -->
+
+        <div class="col-lg-4 reveal">
+
+            <h3 class="footer-logo">
+
+                <i class="fa-solid fa-leaf"></i>
+
+                DPD Agro Fresh
+
+            </h3>
+
+
+            <p class="footer-text mt-3">
+
+                Fresh vegetables, exotic vegetables,
+                pulses and fruits supplied across
+                multiple markets.
+
+            </p>
+
+
+            <div class="social-icons mt-4">
+
+                <a
+                    href="#"
+                    aria-label="Facebook"
+                >
+
+                    <i class="fab fa-facebook-f"></i>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    aria-label="Instagram"
+                >
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/917721082828"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                >
+
+                    <i class="fab fa-whatsapp"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="col-lg-2 col-md-6 reveal">
+
+            <h5>
+                Quick Links
+            </h5>
+
+
+            <ul class="footer-links">
+
+                <li>
+                    <a href="../frontend/index.html">
                         Home
-
                     </a>
-
                 </li>
 
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="about.html">
-
+                <li>
+                    <a href="about.html">
                         About
-
                     </a>
-
                 </li>
 
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="products.html">
-
+                <li>
+                    <a href="products.html">
                         Products
-
                     </a>
-
                 </li>
 
-                <li class="nav-item">
-
-                    <a class="nav-link active"
-                       href="export.html">
-
-                        Export
-
+                <li>
+                    <a href="export.html">
+                        Supply & Export
                     </a>
-
                 </li>
 
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="contact.html">
-
+                <li>
+                    <a href="contact.html">
                         Contact
-
                     </a>
+                </li>
 
+                <li>
+                    <a href="admin-login.html">
+                        <i class="bi bi-shield-lock me-1"></i>
+                        Admin
+                    </a>
                 </li>
 
             </ul>
 
         </div>
 
-    </div>
 
-</nav>
+        <!-- PRODUCTS -->
 
-<!-- ==========================================
-                HERO
-=========================================== -->
+        <div class="col-lg-3 col-md-6 reveal">
 
-<section class="export-hero">
+            <h5>
+                Product Categories
+            </h5>
 
-    <div class="container">
 
-        <div class="row align-items-center">
+            <ul class="footer-links">
 
-            <div class="col-lg-6">
+                <li>
+                    <a href="products.html">
+                        Exotic Vegetables
+                    </a>
+                </li>
 
-                <span class="hero-badge">
+                <li>
+                    <a href="products.html">
+                        Indian Vegetables
+                    </a>
+                </li>
 
-                    GLOBAL EXPORT SERVICES
+                <li>
+                    <a href="products.html">
+                        Pulses
+                    </a>
+                </li>
 
-                </span>
+                <li>
+                    <a href="products.html">
+                        Domestic Fruits
+                    </a>
+                </li>
 
-                <h1>
+                <li>
+                    <a href="products.html">
+                        Exotic Fruits
+                    </a>
+                </li>
 
-                    Connecting Indian Agriculture With The World
+            </ul>
 
-                </h1>
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="col-lg-3 reveal">
+
+            <h5>
+                Contact
+            </h5>
+
+
+            <div class="footer-contact">
 
                 <p>
 
-                    FreshFlow Export provides end-to-end export solutions,
-                    ensuring premium agricultural products reach international
-                    markets safely, efficiently and on time.
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        Nashik, Maharashtra, India
+                    </span>
 
                 </p>
 
-                <div class="hero-buttons">
 
-                    <a href="contact.html"
-                       class="btn btn-success btn-lg">
+                <p>
 
-                        Start Export Inquiry
+                    <i class="fa-solid fa-phone"></i>
 
-                    </a>
-
-                    <a href="#process"
-                       class="btn btn-outline-light btn-lg ms-3">
-
-                        Our Process
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-6 text-center">
-
-                <img src="images/export/exporthero.jpg"
-                    class="img-fluid export-hero-image"
-                    alt="Export">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-            EXPORT PROCESS
-=========================================== -->
-
-<section id="process"
-         class="export-process">
-
-    <div class="container">
-
-        <div class="text-center mb-4">
-
-            <span class="section-badge">
-
-                EXPORT PROCESS
-
-            </span>
-
-            <h2 class="section-title">
-
-                How We Deliver Worldwide
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Every shipment follows a carefully managed process to
-                ensure freshness, quality and timely international delivery.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <!-- Step 1 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        01
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-seedling"></i>
-
-                    </div>
-
-                    <h4>
-
-                        Farm Collection
-
-                    </h4>
-
-                    <p>
-
-                        Fresh produce is sourced directly from trusted farms.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Step 2 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        02
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                    </div>
-
-                    <h4>
-
-                        Quality Inspection
-
-                    </h4>
-
-                    <p>
-
-                        Every product undergoes strict quality checks before packing.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Step 3 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        03
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                    </div>
-
-                    <h4>
-
-                        Premium Packaging
-
-                    </h4>
-
-                    <p>
-
-                        Products are packed using export-grade materials.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Step 4 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        04
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-file-contract"></i>
-
-                    </div>
-
-                    <h4>
-
-                        Documentation
-
-                    </h4>
-
-                    <p>
-
-                        Complete export documentation prepared accurately.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Step 5 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        05
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-ship"></i>
-
-                    </div>
-
-                    <h4>
-
-                        International Shipping
-
-                    </h4>
-
-                    <p>
-
-                        Safe transport through trusted logistics partners.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Step 6 -->
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="process-card">
-
-                    <div class="process-number">
-
-                        06
-
-                    </div>
-
-                    <div class="process-icon">
-
-                        <i class="fa-solid fa-handshake"></i>
-
-                    </div>
-
-                    <h4>
-
-                        Global Delivery
-
-                    </h4>
-
-                    <p>
-
-                        Products reach customers worldwide in excellent condition.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-        PACKAGING EXCELLENCE
-=========================================== -->
-
-<section class="packaging-section">
-
-    <div class="container">
-
-        <div class="row align-items-center g-5">
-
-            <div class="col-lg-6">
-
-                <img src="images/export/packaging.jpg"
-                     class="img-fluid packaging-image"
-                     alt="Packaging">
-
-            </div>
-
-            <div class="col-lg-6">
-
-                <span class="section-badge">
-
-                    PREMIUM PACKAGING
-
-                </span>
-
-                <h2 class="section-title">
-
-                    Secure Packaging For Safe International Delivery
-
-                </h2>
-
-                <p class="section-subtitle">
-
-                    Our packaging solutions are designed to maintain freshness,
-                    protect products during long-distance transportation,
-                    and comply with international food export standards.
+                    <span>
+                        +91 7721082828
+                    </span>
 
                 </p>
 
-                <div class="packaging-features">
 
-                    <div class="package-item">
+                <p>
 
-                        <i class="fa-solid fa-box"></i>
+                    <i class="fa-solid fa-envelope"></i>
 
-                        <span>Export Grade Packaging Materials</span>
-
-                    </div>
-
-                    <div class="package-item">
-
-                        <i class="fa-solid fa-snowflake"></i>
-
-                        <span>Cold Chain Storage</span>
-
-                    </div>
-
-                    <div class="package-item">
-
-                        <i class="fa-solid fa-shield-halved"></i>
-
-                        <span>Maximum Product Protection</span>
-
-                    </div>
-
-                    <div class="package-item">
-
-                        <i class="fa-solid fa-globe"></i>
-
-                        <span>International Packaging Standards</span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-        GLOBAL DESTINATIONS
-=========================================== -->
-
-<section class="global-destinations">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                GLOBAL REACH
-
-            </span>
-
-            <h2 class="section-title">
-
-                Exporting Across The Globe
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                We proudly supply premium agricultural products
-                to customers across multiple international markets.
-
-            </p>
-
-        </div>
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-7">
-
-                <img src="images/world-map.jpg"
-                     class="img-fluid world-map"
-                     alt="World Map">
-
-            </div>
-
-            <div class="col-lg-5">
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    Middle East
-
-                </div>
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    Europe
-
-                </div>
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    North America
-
-                </div>
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    South East Asia
-
-                </div>
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    Africa
-
-                </div>
-
-                <div class="country-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    Australia
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-            EXPORT LOGISTICS
-=========================================== -->
-
-<section class="logistics-section">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                LOGISTICS
-
-            </span>
-
-            <h2 class="section-title">
-
-                Reliable Shipping Solutions
-
-            </h2>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="logistics-card">
-
-                    <img src="images/export/shipping.jpg"
-                         alt="Sea Freight">
-
-                    <h4>
-
-                        Sea Freight
-
-                    </h4>
-
-                    <p>
-
-                        Cost-effective international container shipping.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="logistics-card">
-
-                    <img src="images/export/logistics.jpg"
-                         alt="Air Freight">
-
-                    <h4>
-
-                        Air Freight
-
-                    </h4>
-
-                    <p>
-
-                        Fast worldwide delivery for urgent consignments.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="logistics-card">
-
-                    <img src="images/export/warehouse.jpg"
-                         alt="Warehouse">
-
-                    <h4>
-
-                        Warehousing
-
-                    </h4>
-
-                    <p>
-
-                        Hygienic storage with quality monitoring.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="logistics-card">
-
-                    <img src="images/export/documentation.jpg"
-                         alt="Documentation">
-
-                    <h4>
-
-                        Customs Clearance
-
-                    </h4>
-
-                    <p>
-
-                        Complete export documentation and customs support.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-        WHY INTERNATIONAL BUYERS CHOOSE US
-=========================================== -->
-
-<section class="buyers-section">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                WHY CHOOSE US
-
-            </span>
-
-            <h2 class="section-title">
-
-                Trusted By International Buyers
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                We focus on quality, transparency, reliability and long-term partnerships.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-award"></i>
-
-                    <h4>Premium Quality</h4>
-
-                    <p>
-
-                        Every shipment follows strict international quality standards.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-clock"></i>
-
-                    <h4>On-Time Delivery</h4>
-
-                    <p>
-
-                        Reliable logistics partners ensure timely global delivery.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-user-shield"></i>
-
-                    <h4>Trusted Exporter</h4>
-
-                    <p>
-
-                        Transparent documentation and ethical business practices.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-temperature-low"></i>
-
-                    <h4>Cold Chain</h4>
-
-                    <p>
-
-                        Temperature-controlled storage preserves freshness.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-file-circle-check"></i>
-
-                    <h4>Complete Documentation</h4>
-
-                    <p>
-
-                        Export paperwork handled professionally and accurately.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="buyer-card">
-
-                    <i class="fa-solid fa-headset"></i>
-
-                    <h4>24×7 Support</h4>
-
-                    <p>
-
-                        Dedicated assistance throughout the export process.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-            CALL TO ACTION
-=========================================== -->
-
-<section class="export-cta">
-
-    <div class="container">
-
-        <div class="export-cta-box">
-
-            <div class="row align-items-center">
-
-                <div class="col-lg-8">
-
-                    <h2>
-
-                        Ready To Import Premium Indian Agricultural Products?
-
-                    </h2>
-
-                    <p>
-
-                        Contact FreshFlow Export today for quotations, product availability,
-                        customized packaging and international shipping solutions.
-
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4 text-lg-end">
-
-                    <a href="contact.html"
-                       class="btn btn-light btn-lg">
-
-                        Contact Us
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-                FOOTER
-=========================================== -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="row gy-5">
-
-            <!-- Company -->
-
-            <div class="col-lg-4">
-
-                <h2 class="footer-logo">
-
-                    <i class="fa-solid fa-leaf"></i>
-
-                    FreshFlow Export
-
-                </h2>
-
-                <p class="footer-text">
-
-                    Delivering premium quality fruits and vegetables from trusted Indian farms to global markets with reliability, freshness and excellence.
+                    <span>
+                        dpdagrofresh@gmail.com
+                    </span>
 
                 </p>
 
-                <div class="social-icons">
-
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-
-                </div>
-
             </div>
-
-            <!-- Quick Links -->
-
-            <div class="col-lg-2 col-md-6">
-
-                <h5>Quick Links</h5>
-
-                <ul class="footer-links">
-
-                    <li><a href="index.html">Home</a></li>
-
-                    <li><a href="about.html">About</a></li>
-
-                    <li><a href="products.html">Products</a></li>
-
-                    <li><a href="export.html">Export</a></li>
-
-                    <li><a href="contact.html">Contact</a></li>
-
-                </ul>
-
-            </div>
-
-            <!-- Products -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <h5>Products</h5>
-
-                <ul class="footer-links">
-
-                    <li><a href="#">Fresh Mango</a></li>
-
-                    <li><a href="#">Onion</a></li>
-
-                    <li><a href="#">Potato</a></li>
-
-                    <li><a href="#">Tomato</a></li>
-
-                    <li><a href="#">Seasonal Vegetables</a></li>
-
-                </ul>
-
-            </div>
-
-            <!-- Contact -->
-
-            <div class="col-lg-3">
-
-                <h5>Contact Us</h5>
-
-                <div class="footer-contact">
-
-                    <p>
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Sangamner, Maharashtra, India
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        +91 7057402592
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-envelope"></i>
-
-                        info@freshflowexport.com
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-globe"></i>
-
-                        www.freshflowexport.com
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <hr>
-
-        <div class="footer-bottom">
-
-            <p>
-
-                © 2026 FreshFlow Export. All Rights Reserved.
-
-            </p>
 
         </div>
 
     </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 DPD Agro Fresh.
+        All Rights Reserved.
+
+    </div>
+
+</div>
+
 
 </footer>
 
+<!-- =====================================================
+     WHATSAPP FLOAT
+====================================================== -->
 
-<!-- ==========================================
-            WHATSAPP BUTTON
-=========================================== -->
+<a
+href="https://wa.me/917721082828"
+class="whatsapp-float"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Chat on WhatsApp"
 
-<a href="https://wa.me/919999999999"
-   class="whatsapp-float"
-   target="_blank"
-   rel="noopener"
-   title="Chat on WhatsApp">
+>
 
-    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+
+<i class="fab fa-whatsapp"></i>
+
 
 </a>
 
-<!-- Bootstrap JS -->
+<!-- =====================================================
+     BOOTSTRAP JS
+====================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
 
-</body>
+<script>
 
-</html>
+    /* =====================================================
+       NAVBAR SCROLL BEHAVIOR
+       - Hide when scrolling down
+       - Show when scrolling up
+       - Compact navbar after scrolling
+    ====================================================== */
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    const navbar =
+        document.getElementById("mainNavbar");
 
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            const currentScrollY =
+                window.scrollY;
+
+
+            /* Compact navbar */
+
+            if (currentScrollY > 40) {
+
+                navbar.classList.add(
+                    "navbar-scrolled"
+                );
+
+            } else {
+
+                navbar.classList.remove(
+                    "navbar-scrolled"
+                );
+
+            }
+
+
+            /* Hide navbar when scrolling down */
+
+            if (
+                currentScrollY > lastScrollY &&
+                currentScrollY > 120
+            ) {
+
+                navbar.classList.add(
+                    "navbar-hidden"
+                );
+
+            }
+
+            /* Show navbar when scrolling up */
+
+            else if (
+                currentScrollY < lastScrollY
+            ) {
+
+                navbar.classList.remove(
+                    "navbar-hidden"
+                );
+
+            }
+
+
+            /* Always show at very top */
+
+            if (currentScrollY <= 20) {
+
+                navbar.classList.remove(
+                    "navbar-hidden"
+                );
+
+            }
+
+
+            lastScrollY =
+                Math.max(
+                    currentScrollY,
+                    0
+                );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       SCROLL REVEAL ANIMATION
+    ====================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal, .reveal-left, .reveal-right"
+        );
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "active"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12,
+
+                rootMargin:
+                    "0px 0px -50px 0px"
+            }
+        );
+
+
+    revealElements.forEach(
+        (element) => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       LOCATION FILTER
+    ====================================================== */
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
+
+
+    const locationItems =
+        document.querySelectorAll(
+            ".location-item"
+        );
+
+
+    filterButtons.forEach(
+        (button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const selectedRegion =
+                        button.dataset.region;
+
+
+                    /* Active button */
+
+                    filterButtons.forEach(
+                        (btn) => {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    /* Filter cards */
+
+                    locationItems.forEach(
+                        (item) => {
+
+                            const itemRegion =
+                                item.dataset.region;
+
+
+                            if (
+                                selectedRegion === "all" ||
+                                itemRegion === selectedRegion
+                            ) {
+
+                                item.classList.remove(
+                                    "filter-hidden"
+                                );
+
+                                item.style.display =
+                                    "";
+
+                            }
+
+                            else {
+
+                                item.classList.add(
+                                    "filter-hidden"
+                                );
+
+
+                                setTimeout(
+                                    () => {
+
+                                        if (
+                                            item.classList.contains(
+                                                "filter-hidden"
+                                            )
+                                        ) {
+
+                                            item.style.display =
+                                                "none";
+
+                                        }
+
+                                    },
+                                    400
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       MOBILE NAVBAR
+       Close menu after clicking a link
+    ====================================================== */
+
+    const navbarMenu =
+        document.getElementById(
+            "mainNavbarMenu"
+        );
+
+
+    const navbarLinks =
+        navbarMenu.querySelectorAll(
+            ".nav-link"
+        );
+
+
+    navbarLinks.forEach(
+        (link) => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        window.innerWidth < 992
+                    ) {
+
+                        const collapse =
+                            bootstrap.Collapse
+                                .getInstance(
+                                    navbarMenu
+                                );
+
+
+                        if (collapse) {
+
+                            collapse.hide();
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const mapElement = document.getElementById("supplyMap");
+
+    if (!mapElement) return;
+
+
+    /* =====================================================
+       CREATE MAP
+    ===================================================== */
+
+    const map = L.map("supplyMap", {
+
+        scrollWheelZoom: false,
+
+        zoomControl: true,
+
+        attributionControl: true
+
+    });
+
+
+    /* =====================================================
+       OPEN STREET MAP
+    ===================================================== */
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 18,
+
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+        }
+    ).addTo(map);
+
+
+    /* =====================================================
+       DPD AGRO FRESH SOURCE
+    ===================================================== */
+
+    const source = {
+        name: "DPD Agro Fresh",
+        city: "Sangamner, Maharashtra",
+        lat: 19.5687,
+        lng: 74.2115,
+        type: "Main Supply Hub"
+    };
+
+
+    /* =====================================================
+       SUPPLY / MARKET LOCATIONS
+       
+       NOTE:
+       These are network locations for visualization.
+       Replace/add locations after confirming actual
+       DPD Agro Fresh delivery markets.
+    ===================================================== */
+
+    const markets = [
+
+        {
+            name: "Nashik",
+            state: "Maharashtra",
+            lat: 20.0059,
+            lng: 73.7910
+        },
+
+        {
+            name: "Pune",
+            state: "Maharashtra",
+            lat: 18.5204,
+            lng: 73.8567
+        },
+
+        {
+            name: "Mumbai",
+            state: "Maharashtra",
+            lat: 19.0760,
+            lng: 72.8777
+        },
+
+        {
+            name: "Kalyan",
+            state: "Maharashtra",
+            lat: 19.2437,
+            lng: 73.1355
+        },
+
+        {
+            name: "Thane",
+            state: "Maharashtra",
+            lat: 19.2183,
+            lng: 72.9781
+        },
+
+        {
+            name: "Kolhapur",
+            state: "Maharashtra",
+            lat: 16.7050,
+            lng: 74.2433
+        },
+
+        {
+            name: "Sangli",
+            state: "Maharashtra",
+            lat: 16.8524,
+            lng: 74.5815
+        },
+
+        {
+            name: "Satara",
+            state: "Maharashtra",
+            lat: 17.6805,
+            lng: 74.0183
+        },
+
+        {
+            name: "Nagpur",
+            state: "Maharashtra",
+            lat: 21.1458,
+            lng: 79.0882
+        },
+
+        {
+            name: "Belagavi",
+            state: "Karnataka",
+            lat: 15.8497,
+            lng: 74.4977
+        },
+
+        {
+            name: "Hyderabad",
+            state: "Telangana",
+            lat: 17.3850,
+            lng: 78.4867
+        },
+
+        {
+            name: "Kanyakumari",
+            state: "Tamil Nadu",
+            lat: 8.0883,
+            lng: 77.5385
+        }
+
+    ];
+
+
+    /* =====================================================
+       SOURCE ICON
+    ===================================================== */
+
+    const sourceIcon = L.divIcon({
+
+        className: "",
+
+        html: `
+            <div class="dpd-marker dpd-source-marker"></div>
+        `,
+
+        iconSize: [27, 27],
+
+        iconAnchor: [13, 13],
+
+        popupAnchor: [0, -15]
+
+    });
+
+
+    /* =====================================================
+       MARKET ICON
+    ===================================================== */
+
+    const marketIcon = L.divIcon({
+
+        className: "",
+
+        html: `
+            <div class="dpd-marker"></div>
+        `,
+
+        iconSize: [20, 20],
+
+        iconAnchor: [10, 10],
+
+        popupAnchor: [0, -12]
+
+    });
+
+
+    /* =====================================================
+       SOURCE MARKER
+    ===================================================== */
+
+    L.marker(
+        [source.lat, source.lng],
+        {
+            icon: sourceIcon
+        }
+    )
+    .addTo(map)
+    .bindPopup(`
+        <div class="map-popup-title">
+            ${source.name}
+        </div>
+
+        <div class="map-popup-type">
+            Main Supply Hub
+        </div>
+
+        <div class="map-popup-text">
+            ${source.city}
+        </div>
+    `);
+
+
+    /* =====================================================
+       BOUNDS
+    ===================================================== */
+
+    const bounds = [
+        [source.lat, source.lng]
+    ];
+
+
+    /* =====================================================
+       ADD MARKETS
+    ===================================================== */
+
+    markets.forEach(function (market) {
+
+        L.marker(
+            [market.lat, market.lng],
+            {
+                icon: marketIcon
+            }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <div class="map-popup-title">
+                ${market.name}
+            </div>
+
+            <div class="map-popup-type">
+                Delivery Market
+            </div>
+
+            <div class="map-popup-text">
+                ${market.state}
+            </div>
+        `);
+
+
+        bounds.push([
+            market.lat,
+            market.lng
+        ]);
+
+
+        /* =================================================
+           SUPPLY NETWORK LINE
+        ================================================= */
+
+        L.polyline(
+            [
+                [source.lat, source.lng],
+                [market.lat, market.lng]
+            ],
+            {
+                color: "#4f9658",
+
+                weight: 1.8,
+
+                opacity: 0.38,
+
+                dashArray: "5, 7",
+
+                smoothFactor: 1
+            }
+        ).addTo(map);
+
+    });
+
+
+    /* =====================================================
+       FIT INDIA NETWORK
+    ===================================================== */
+
+    map.fitBounds(bounds, {
+
+        padding: [35, 35],
+
+        maxZoom: 6
+
+    });
+
+
+    /* =====================================================
+       DISABLE SCROLL ZOOM UNTIL MAP IS CLICKED
+    ===================================================== */
+
+    map.on("click", function () {
+
+        map.scrollWheelZoom.enable();
+
+    });
+
+
+    map.on("mouseout", function () {
+
+        map.scrollWheelZoom.disable();
+
+    });
+
+
+});
+
+</script>
+<script>
+
+    function googleTranslateElementInit() {
+
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,mr,hi,kn,gu,ta,te',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+    }
+
+</script>
+
+<script
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    if (!languageSelect) return;
+
+    languageSelect.addEventListener("change", function () {
+
+        const language = this.value;
+
+        if (!language) return;
+
+        const googleSelect =
+            document.querySelector(".goog-te-combo");
+
+        if (!googleSelect) {
+            console.log("Google Translate is still loading...");
+            return;
+        }
+
+        googleSelect.value = language;
+
+        googleSelect.dispatchEvent(
+            new Event("change")
+        );
+
+    });
+
+});
+
+</script>
 </body>
 
 </html>

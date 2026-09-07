@@ -1,0 +1,4660 @@
+                <!DOCTYPE html>
+                <html lang="en">
+
+                <head>
+
+                    <meta charset="UTF-8">
+
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0">
+
+                    <title>Admin Panel | DPD Agro Fresh</title>
+
+                    <meta
+                        name="description"
+                        content="DPD Agro Fresh Admin Panel">
+
+                    <!-- Bootstrap -->
+                    <link
+                        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+                        rel="stylesheet">
+
+                    <!-- Bootstrap Icons -->
+                    <link
+                        rel="stylesheet"
+                        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+                    <!-- Google Font -->
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+                        rel="stylesheet">
+
+
+                    <style>
+
+                        /* =========================================================
+                        GLOBAL
+                        ========================================================= */
+
+                        * {
+                            box-sizing: border-box;
+                        }
+
+                        body {
+                            margin: 0;
+                            background: #f5f7f5;
+                            font-family: 'Poppins', sans-serif;
+                            color: #222;
+                        }
+
+
+                        /* =========================================================
+                        SIDEBAR
+                        ========================================================= */
+
+                        .sidebar {
+
+                            position: fixed;
+
+                            top: 0;
+                            left: 0;
+
+                            width: 250px;
+                            height: 100vh;
+
+                            background: #1b5e20;
+
+                            color: white;
+
+                            padding: 25px 15px;
+
+                            z-index: 1000;
+
+                        }
+
+
+                        .sidebar-logo {
+
+                            text-align: center;
+
+                            font-size: 22px;
+
+                            font-weight: 700;
+
+                            margin-bottom: 35px;
+
+                        }
+
+
+                        .sidebar-subtitle {
+
+                            text-align: center;
+
+                            font-size: 12px;
+
+                            opacity: 0.75;
+
+                            margin-top: -25px;
+
+                            margin-bottom: 30px;
+
+                        }
+
+
+                        .sidebar button {
+
+                            width: 100%;
+
+                            border: none;
+
+                            background: transparent;
+
+                            color: white;
+
+                            text-align: left;
+
+                            padding: 13px 15px;
+
+                            border-radius: 10px;
+
+                            margin-bottom: 8px;
+
+                            font-size: 14px;
+
+                            transition: 0.25s;
+
+                        }
+
+
+                        .sidebar button:hover,
+
+                        .sidebar button.active {
+
+                            background: rgba(255,255,255,0.15);
+
+                        }
+
+
+                        .sidebar button i {
+
+                            width: 25px;
+
+                        }
+
+
+                        /* =========================================================
+                        MAIN
+                        ========================================================= */
+
+                        .main-content {
+
+                            margin-left: 250px;
+
+                            min-height: 100vh;
+
+                            padding: 30px;
+
+                        }
+
+
+                        /* =========================================================
+                        TOP BAR
+                        ========================================================= */
+
+                        .topbar {
+
+                            background: white;
+
+                            padding: 20px 25px;
+
+                            border-radius: 15px;
+
+                            margin-bottom: 25px;
+
+                            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+                            display: flex;
+
+                            justify-content: space-between;
+
+                            align-items: center;
+
+                            gap: 15px;
+
+                        }
+
+
+                        .topbar h1 {
+
+                            font-size: 25px;
+
+                            margin: 0;
+
+                            font-weight: 700;
+
+                        }
+
+
+                        .topbar p {
+
+                            margin: 4px 0 0;
+
+                            color: #777;
+
+                            font-size: 13px;
+
+                        }
+
+
+                        /* =========================================================
+                        SECTIONS
+                        ========================================================= */
+
+                        .admin-section {
+
+                            display: none;
+
+                        }
+
+
+                        .admin-section.active {
+
+                            display: block;
+
+                        }
+
+
+                        /* =========================================================
+                        STAT CARDS
+                        ========================================================= */
+
+                        .stat-card {
+
+                            background: white;
+
+                            border-radius: 15px;
+
+                            padding: 22px;
+
+                            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+                            height: 100%;
+
+                        }
+
+
+                        .stat-icon {
+
+                            width: 48px;
+
+                            height: 48px;
+
+                            border-radius: 12px;
+
+                            background: #e8f5e9;
+
+                            color: #2e7d32;
+
+                            display: flex;
+
+                            align-items: center;
+
+                            justify-content: center;
+
+                            font-size: 22px;
+
+                            margin-bottom: 12px;
+
+                        }
+
+
+                        .stat-card h3 {
+
+                            font-size: 28px;
+
+                            margin: 0;
+
+                            font-weight: 700;
+
+                        }
+
+
+                        .stat-card p {
+
+                            margin: 3px 0 0;
+
+                            color: #777;
+
+                            font-size: 13px;
+
+                        }
+
+
+                        /* =========================================================
+                        PANEL
+                        ========================================================= */
+
+                        .panel {
+
+                            background: white;
+
+                            border-radius: 15px;
+
+                            padding: 25px;
+
+                            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+                            margin-bottom: 25px;
+
+                        }
+
+
+                        .panel-header {
+
+                            display: flex;
+
+                            justify-content: space-between;
+
+                            align-items: center;
+
+                            gap: 15px;
+
+                            margin-bottom: 20px;
+
+                        }
+
+
+                        .panel-header h3 {
+
+                            font-size: 20px;
+
+                            margin: 0;
+
+                            font-weight: 700;
+
+                        }
+
+
+                        /* =========================================================
+                        BUTTONS
+                        ========================================================= */
+
+                        .btn-success {
+
+                            background: #2e7d32;
+
+                            border-color: #2e7d32;
+
+                        }
+
+
+                        .btn-success:hover {
+
+                            background: #256b29;
+
+                            border-color: #256b29;
+
+                        }
+
+
+                        /* =========================================================
+                        PRODUCT TABLE
+                        ========================================================= */
+
+                        .table {
+
+                            vertical-align: middle;
+
+                        }
+
+
+                        .product-table-image {
+
+                            width: 60px;
+
+                            height: 60px;
+
+                            object-fit: cover;
+
+                            border-radius: 10px;
+
+                            background: #f1f5f1;
+
+                        }
+
+
+                        .badge-category {
+
+                            background: #e8f5e9;
+
+                            color: #2e7d32;
+
+                            padding: 6px 10px;
+
+                            border-radius: 20px;
+
+                            font-size: 11px;
+
+                        }
+
+
+                        .action-btn {
+
+                            border: none;
+
+                            width: 35px;
+
+                            height: 35px;
+
+                            border-radius: 8px;
+
+                            margin-right: 4px;
+
+                        }
+
+
+                        .edit-btn {
+
+                            background: #fff3cd;
+
+                            color: #856404;
+
+                        }
+
+
+                        .delete-btn {
+
+                            background: #f8d7da;
+
+                            color: #842029;
+
+                        }
+
+
+                        /* =========================================================
+                        FORMS
+                        ========================================================= */
+
+                        .form-label {
+
+                            font-weight: 600;
+
+                            font-size: 13px;
+
+                        }
+
+
+                        .form-control,
+
+                        .form-select {
+
+                            border-radius: 10px;
+
+                            padding: 11px 13px;
+
+                        }
+
+
+                        .form-control:focus,
+
+                        .form-select:focus {
+
+                            border-color: #2e7d32;
+
+                            box-shadow: 0 0 0 3px rgba(46,125,50,0.10);
+
+                        }
+
+
+                        .image-preview {
+
+                            width: 150px;
+
+                            height: 150px;
+
+                            object-fit: cover;
+
+                            border-radius: 12px;
+
+                            border: 1px solid #ddd;
+
+                            background: #f5f5f5;
+
+                            display: none;
+
+                        }
+
+
+                        /* =========================================================
+                        ORDERS
+                        ========================================================= */
+
+                        .order-card {
+
+                            background: white;
+
+                            border: 1px solid #e8ece8;
+
+                            border-radius: 15px;
+
+                            padding: 20px;
+
+                            margin-bottom: 15px;
+
+                            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+
+                        }
+
+
+                        .order-header {
+
+                            display: flex;
+
+                            justify-content: space-between;
+
+                            align-items: flex-start;
+
+                            gap: 15px;
+
+                            margin-bottom: 15px;
+
+                        }
+
+
+                        .order-id {
+
+                            font-weight: 700;
+
+                            color: #2e7d32;
+
+                        }
+
+
+                        .order-product {
+
+                            font-size: 18px;
+
+                            font-weight: 700;
+
+                        }
+
+
+                        .order-details-grid {
+
+                            display: grid;
+
+                            grid-template-columns:
+                                repeat(2, minmax(0, 1fr));
+
+                            gap: 12px;
+
+                            margin-bottom: 18px;
+
+                        }
+
+
+                        .order-detail {
+
+                            background: #f7faf7;
+
+                            padding: 12px;
+
+                            border-radius: 10px;
+
+                        }
+
+
+                        .order-detail-label {
+
+                            font-size: 11px;
+
+                            color: #888;
+
+                            margin-bottom: 3px;
+
+                            text-transform: uppercase;
+
+                        }
+
+
+                        .order-detail-value {
+
+                            font-size: 13px;
+
+                            font-weight: 600;
+
+                            word-break: break-word;
+
+                        }
+
+
+                        .order-status {
+
+                            display: inline-block;
+
+                            padding: 6px 12px;
+
+                            border-radius: 20px;
+
+                            font-size: 11px;
+
+                            font-weight: 700;
+
+                        }
+
+
+                        .status-NEW {
+
+                            background: #fff3cd;
+
+                            color: #856404;
+
+                        }
+
+
+                        .status-CONFIRMED {
+
+                            background: #cff4fc;
+
+                            color: #055160;
+
+                        }
+
+
+                        .status-PROCESSING {
+
+                            background: #e2d9f3;
+
+                            color: #432874;
+
+                        }
+
+
+                        .status-SHIPPED {
+
+                            background: #cfe2ff;
+
+                            color: #084298;
+
+                        }
+
+
+                        .status-DELIVERED {
+
+                            background: #d1e7dd;
+
+                            color: #0f5132;
+
+                        }
+
+
+                        .status-CANCELLED {
+
+                            background: #f8d7da;
+
+                            color: #842029;
+
+                        }
+
+
+                        .order-actions {
+
+                            display: flex;
+
+                            align-items: center;
+
+                            gap: 10px;
+
+                            flex-wrap: wrap;
+
+                        }
+
+
+                        .order-actions .form-select {
+
+                            max-width: 180px;
+
+                        }
+
+
+                        /* =========================================================
+                        EMPTY STATE
+                        ========================================================= */
+
+                        .empty-state {
+
+                            text-align: center;
+
+                            padding: 60px 20px;
+
+                            color: #777;
+
+                        }
+
+
+                        .empty-state i {
+
+                            font-size: 50px;
+
+                            color: #a9b9aa;
+
+                            margin-bottom: 15px;
+
+                        }
+
+
+                        /* =========================================================
+                        LOADING
+                        ========================================================= */
+
+                        .loading {
+
+                            text-align: center;
+
+                            padding: 50px;
+
+                            color: #777;
+
+                        }
+
+
+                        .spinner-border {
+
+                            color: #2e7d32;
+
+                        }
+
+
+                        /* =========================================================
+                        MOBILE
+                        ========================================================= */
+
+                        @media (max-width: 900px) {
+
+                            .sidebar {
+
+                                width: 210px;
+
+                            }
+
+                            .main-content {
+
+                                margin-left: 210px;
+
+                            }
+
+                        }
+
+
+                        @media (max-width: 768px) {
+
+                            .sidebar {
+
+                                position: relative;
+
+                                width: 100%;
+
+                                height: auto;
+
+                                padding: 15px;
+
+                            }
+
+
+                            .sidebar-logo {
+
+                                margin-bottom: 10px;
+
+                            }
+
+
+                            .sidebar-subtitle {
+
+                                margin-top: 0;
+
+                                margin-bottom: 15px;
+
+                            }
+
+
+                            .sidebar-menu {
+
+                                display: flex;
+
+                                gap: 5px;
+
+                                overflow-x: auto;
+
+                            }
+
+
+                            .sidebar button {
+
+                                white-space: nowrap;
+
+                                width: auto;
+
+                                margin-bottom: 0;
+
+                            }
+
+
+                            .main-content {
+
+                                margin-left: 0;
+
+                                padding: 15px;
+
+                            }
+
+
+                            .topbar {
+
+                                padding: 18px;
+
+                            }
+
+
+                            .order-details-grid {
+
+                                grid-template-columns: 1fr;
+
+                            }
+
+
+                            .table-responsive {
+
+                                font-size: 13px;
+
+                            }
+
+                        }
+/* Add to your admin CSS or inside <style> tags in admin.html */
+.existing-offers-container img, 
+#offersList img,
+.offer-admin-card img {
+    max-width: 300px; /* Constrains giant width */
+    max-height: 150px; /* Keeps height proportional */
+    object-fit: cover; /* Prevents stretching */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+                    </style>
+
+                </head>
+
+
+                <body>
+
+
+                    <!-- =========================================================
+                        SIDEBAR
+                    ========================================================== -->
+
+                    <aside class="sidebar">
+
+                        <div class="sidebar-logo">
+
+                            <i class="bi bi-leaf-fill"></i>
+
+                            DPD Agro Fresh
+
+                        </div>
+
+
+                        <div class="sidebar-subtitle">
+
+                            Admin Panel
+
+                        </div>
+
+
+                        <div class="sidebar-menu">
+
+                            <button
+                                class="nav-btn active"
+                                data-section="dashboardSection">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                Dashboard
+
+                            </button>
+                <button
+                    class="nav-btn"
+                    data-section="offersSection">
+
+                    <i class="bi bi-megaphone"></i>
+
+                    Offers
+
+                </button>
+
+                            <button
+                                class="nav-btn"
+                                data-section="productsSection">
+
+                                <i class="bi bi-box-seam"></i>
+
+                                Products
+
+                            </button>
+
+
+                            <button
+                                class="nav-btn"
+                                data-section="ordersSection">
+
+                                <i class="bi bi-cart-check"></i>
+
+                                Orders
+
+                            </button>
+
+
+                            <button
+                                class="nav-btn"
+                                data-section="addProductSection">
+
+                                <i class="bi bi-plus-circle"></i>
+
+                                Add Product
+
+                            </button>
+
+                        </div>
+
+                    </aside>
+
+
+                    <!-- =========================================================
+                        MAIN CONTENT
+                    ========================================================== -->
+
+                    <main class="main-content">
+
+
+                        <!-- =====================================================
+                            TOP BAR
+                        ====================================================== -->
+
+                        <div class="topbar">
+
+                            <div>
+
+                                <h1 id="pageTitle">
+                                    Dashboard
+                                </h1>
+
+                                <p>
+                                    Manage DPD Agro Fresh products and orders.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="btn btn-outline-success"
+                                onclick="refreshCurrentSection()">
+
+                                <i class="bi bi-arrow-clockwise"></i>
+
+                                Refresh
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- =====================================================
+                            DASHBOARD
+                        ====================================================== -->
+
+                        <section
+                            id="dashboardSection"
+                            class="admin-section active">
+
+                            <div class="row g-4 mb-4">
+
+
+                                <div class="col-md-4">
+
+                                    <div class="stat-card">
+
+                                        <div class="stat-icon">
+
+                                            <i class="bi bi-box-seam"></i>
+
+                                        </div>
+
+                                        <h3 id="dashboardProductCount">
+                                            0
+                                        </h3>
+
+                                        <p>
+                                            Total Products
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-4">
+
+                                    <div class="stat-card">
+
+                                        <div class="stat-icon">
+
+                                            <i class="bi bi-cart-check"></i>
+
+                                        </div>
+
+                                        <h3 id="dashboardOrderCount">
+                                            0
+                                        </h3>
+
+                                        <p>
+                                            Total Orders
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-4">
+
+                                    <div class="stat-card">
+
+                                        <div class="stat-icon">
+
+                                            <i class="bi bi-bell"></i>
+
+                                        </div>
+
+                                        <h3 id="dashboardNewOrderCount">
+                                            0
+                                        </h3>
+
+                                        <p>
+                                            New Orders
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="panel">
+
+                                <div class="panel-header">
+
+                                    <h3>
+                                        Quick Actions
+                                    </h3>
+
+                                </div>
+
+
+                                <div class="row g-3">
+
+                                    <div class="col-md-4">
+
+                                        <button
+                                            class="btn btn-success w-100 py-3"
+                                            onclick="showSection('addProductSection')">
+
+                                            <i class="bi bi-plus-circle"></i>
+
+                                            Add Product
+
+                                        </button>
+
+                                    </div>
+
+
+                                    <div class="col-md-4">
+
+                                        <button
+                                            class="btn btn-outline-success w-100 py-3"
+                                            onclick="showSection('productsSection')">
+
+                                            <i class="bi bi-box-seam"></i>
+
+                                            Manage Products
+
+                                        </button>
+
+                                    </div>
+
+
+                                    <div class="col-md-4">
+
+                                        <button
+                                            class="btn btn-outline-success w-100 py-3"
+                                            onclick="showSection('ordersSection')">
+
+                                            <i class="bi bi-cart-check"></i>
+
+                                            Manage Orders
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                <section
+                    id="offersSection"
+                    class="admin-section">
+
+                    <div class="admin-card">
+
+                        <div class="admin-card-header">
+
+                            <div>
+
+                                <h3>
+                                    <i class="bi bi-megaphone"></i>
+                                    Offer Management
+                                </h3>
+
+                                <p class="text-muted mb-0">
+                                    Upload promotional offers
+                                    displayed on the homepage.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-card-body">
+
+                            <!-- ADD OFFER -->
+
+                            <form id="offerForm">
+
+                                <div class="mb-4">
+
+                                    <label
+                                        for="offerImage"
+                                        class="form-label">
+
+                                        Offer Image
+
+                                    </label>
+
+
+                                    <input
+                                        type="file"
+                                        id="offerImage"
+                                        class="form-control"
+                                        accept="image/*"
+                                        required>
+
+
+                                    <div class="form-text">
+
+                                        Recommended:
+                                        high-quality promotional banner.
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    id="offerPreviewContainer"
+                                    style="display:none;">
+
+                                    <img
+                                        id="offerPreview"
+                                        src=""
+                                        alt="Offer Preview"
+                                        style="
+                                            width:100%;
+                                            max-height:300px;
+                                            object-fit:cover;
+                                            border-radius:15px;
+                                            margin-bottom:20px;
+                                        ">
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    id="saveOfferButton"
+                                    class="btn btn-success">
+
+                                    <i class="bi bi-cloud-arrow-up"></i>
+
+                                    Upload Offer
+
+                                </button>
+
+                            </form>
+
+
+                            <hr class="my-4">
+
+
+                            <!-- EXISTING OFFERS -->
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                <h5 class="mb-0">
+
+                                    Existing Offers
+
+                                </h5>
+
+
+                                <button
+                                    class="btn btn-outline-success btn-sm"
+                                    onclick="loadOffers()">
+
+                                    <i class="bi bi-arrow-clockwise"></i>
+
+                                    Refresh
+
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                id="offersAdminContainer">
+
+                                <div class="text-muted">
+
+                                    Loading offers...
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+                        <!-- =====================================================
+                            PRODUCTS
+                        ====================================================== -->
+
+                        <section
+                            id="productsSection"
+                            class="admin-section">
+
+                            <div class="panel">
+
+                                <div class="panel-header">
+
+                                    <h3>
+                                        Product Management
+                                    </h3>
+
+                                    <button
+                                        class="btn btn-success"
+                                        onclick="showSection('addProductSection'); resetProductForm();">
+
+                                        <i class="bi bi-plus-circle"></i>
+
+                                        Add Product
+
+                                    </button>
+
+                                </div>
+
+
+                                <div class="table-responsive">
+
+                                    <table class="table">
+
+                                        <thead>
+
+                                            <tr>
+
+                                                <th>
+                                                    Image
+                                                </th>
+
+                                                <th>
+                                                    Product
+                                                </th>
+
+                                                <th>
+                                                    Category
+                                                </th>
+
+                                                <th>
+                                                    Availability
+                                                </th>
+
+                                                <th>
+                                                    Actions
+                                                </th>
+
+                                            </tr>
+
+                                        </thead>
+
+
+                                        <tbody id="productsTableBody">
+
+                                            <tr>
+
+                                                <td
+                                                    colspan="5"
+                                                    class="loading">
+
+                                                    Loading products...
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- =====================================================
+                            ADD / EDIT PRODUCT
+                        ====================================================== -->
+
+                        <section
+                            id="addProductSection"
+                            class="admin-section">
+
+                            <div class="panel">
+
+                                <div class="panel-header">
+
+                                    <h3 id="productFormTitle">
+                                        Add New Product
+                                    </h3>
+
+                                    <button
+                                        class="btn btn-outline-secondary"
+                                        onclick="showSection('productsSection')">
+
+                                        <i class="bi bi-arrow-left"></i>
+
+                                        Back
+
+                                    </button>
+
+                                </div>
+
+
+                                <form id="productForm">
+
+
+                                    <!-- PRODUCT ID -->
+
+                                    <input
+                                        type="hidden"
+                                        id="productId">
+
+
+                                    <div class="row g-4">
+
+
+                                        <!-- NAME -->
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Product Name
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                id="productName"
+                                                class="form-control"
+                                                placeholder="Example: Mango"
+                                                required>
+
+                                        </div>
+
+
+                                        <!-- CATEGORY -->
+
+<div class="col-md-6">
+
+    <label class="form-label">
+        Category
+    </label>
+
+    <select
+        id="productCategory"
+        class="form-select"
+        required>
+
+        <option value="">
+            Select Category
+        </option>
+
+        <!-- EXISTING CATEGORIES -->
+
+        <option value="exotic-vegetables">
+            Exotic Vegetables
+        </option>
+
+        <option value="vegetables">
+            Indian Vegetables
+        </option>
+
+        <option value="pulses">
+            Pulses
+        </option>
+
+        <option value="domestic-fruits">
+            Domestic Fruits
+        </option>
+
+        <option value="exotic-fruits">
+            Exotic Fruits
+        </option>
+
+
+        <!-- NEW CATEGORIES -->
+
+        <option value="leafy-vegetables">
+            Leafy Vegetables
+        </option>
+
+        <option value="chillies">
+            Chillies
+        </option>
+
+        <option value="cabbage-cruciferous">
+            Cabbage / Cruciferous Vegetables
+        </option>
+
+        <option value="beans-peas">
+            Beans &amp; Peas
+        </option>
+
+        <option value="root-vegetables">
+            Root Vegetables
+        </option>
+
+        <option value="other-vegetables">
+            Other Vegetables
+        </option>
+
+    </select>
+
+</div>
+
+                                        <!-- DESCRIPTION -->
+
+                                        <div class="col-12">
+
+                                            <label class="form-label">
+                                                Description
+                                            </label>
+
+                                            <textarea
+                                                id="productDescription"
+                                                class="form-control"
+                                                rows="4"
+                                                placeholder="Enter product description"
+                                                required></textarea>
+
+                                        </div>
+
+
+                                        <!-- IMAGE -->
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+
+                                                Product Image
+
+                                            </label>
+
+                                            <input
+                                                type="file"
+                                                id="productImage"
+                                                class="form-control"
+                                                accept="image/*">
+
+
+                                            <small
+                                                class="text-muted">
+
+                                                Take a photo or choose an image
+                                                from your device.
+
+                                            </small>
+
+                                        </div>
+
+
+                                        <!-- IMAGE PREVIEW -->
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Image Preview
+                                            </label>
+
+                                            <br>
+
+                                            <img
+                                                id="imagePreview"
+                                                class="image-preview"
+                                                alt="Preview">
+
+                                        </div>
+
+
+                                        <!-- AVAILABILITY -->
+
+                                        <div class="col-12">
+
+                                            <div class="form-check">
+
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="productAvailable"
+                                                    checked>
+
+                                                <label
+                                                    class="form-check-label"
+                                                    for="productAvailable">
+
+                                                    Product is available
+
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- BUTTONS -->
+
+                                        <div class="col-12">
+
+                                            <button
+                                                type="submit"
+                                                id="saveProductButton"
+                                                class="btn btn-success">
+
+                                                <i class="bi bi-check-circle"></i>
+
+                                                Save Product
+
+                                            </button>
+
+
+                                            <button
+                                                type="button"
+                                                class="btn btn-outline-secondary ms-2"
+                                                onclick="resetProductForm()">
+
+                                                Clear
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- =====================================================
+                            ORDERS
+                        ====================================================== -->
+
+                        <section
+                            id="ordersSection"
+                            class="admin-section">
+
+                            <div class="panel">
+
+                                <div class="panel-header">
+
+                                    <h3>
+                                        Order Management
+                                    </h3>
+
+
+                                    <div class="d-flex gap-2">
+
+                                        <select
+                                            id="orderStatusFilter"
+                                            class="form-select">
+
+                                            <option value="ALL">
+                                                All Orders
+                                            </option>
+
+                                            <option value="NEW">
+                                                New
+                                            </option>
+
+                                            <option value="CONFIRMED">
+                                                Confirmed
+                                            </option>
+
+                                            <option value="PROCESSING">
+                                                Processing
+                                            </option>
+
+                                            <option value="SHIPPED">
+                                                Shipped
+                                            </option>
+
+                                            <option value="DELIVERED">
+                                                Delivered
+                                            </option>
+
+                                            <option value="CANCELLED">
+                                                Cancelled
+                                            </option>
+
+                                        </select>
+
+
+                                        <button
+                                            class="btn btn-outline-success"
+                                            onclick="loadOrders()">
+
+                                            <i class="bi bi-arrow-clockwise"></i>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div id="ordersContainer">
+
+                                    <div class="loading">
+
+                                        Loading orders...
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                    </main>
+
+
+                    <!-- =========================================================
+                        DELETE PRODUCT MODAL
+                    ========================================================== -->
+
+                    <div
+                        class="modal fade"
+                        id="deleteProductModal"
+                        tabindex="-1">
+
+                        <div class="modal-dialog modal-dialog-centered">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title">
+                                        Delete Product
+                                    </h5>
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal">
+                                    </button>
+
+                                </div>
+
+
+                                <div class="modal-body">
+
+                                    <p id="deleteProductMessage">
+
+                                        Are you sure you want to delete this product?
+
+                                    </p>
+
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+
+                                        Cancel
+
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        id="confirmDeleteProductButton">
+
+                                        Delete
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================================
+                        DELETE ORDER MODAL
+                    ========================================================== -->
+
+                    <div
+                        class="modal fade"
+                        id="deleteOrderModal"
+                        tabindex="-1">
+
+                        <div class="modal-dialog modal-dialog-centered">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title">
+                                        Delete Order
+                                    </h5>
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal">
+                                    </button>
+
+                                </div>
+
+
+                                <div class="modal-body">
+
+                                    Are you sure you want to permanently delete
+                                    this order?
+
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+
+                                        Cancel
+
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        id="confirmDeleteOrderButton">
+
+                                        Delete Order
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Bootstrap JS -->
+
+                    <script
+                        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+                    </script>
+
+
+                    <!-- =========================================================
+                        ADMIN JAVASCRIPT
+                    ========================================================== -->
+
+                    <script>
+
+
+                        /* =========================================================
+                        API
+                        ========================================================== */
+
+                        /* =========================================================
+   API
+========================================================== */
+const API_BASE_URL =
+    "http://localhost:8080/api";
+const PRODUCTS_API =
+    `${API_BASE_URL}/products`;
+const ORDERS_API =
+    `${API_BASE_URL}/orders`;
+const OFFERS_API =
+    `${API_BASE_URL}/offers`;
+
+                        /* =========================================================
+                        GLOBAL VARIABLES
+                        ========================================================== */
+
+                        let products = [];
+
+                        let orders = [];
+                let offers = [];
+                        let editingProductId = null;
+
+                        let deletingProductId = null;
+
+                        let deletingOrderId = null;
+
+
+                        /* =========================================================
+                        DOM ELEMENTS
+                        ========================================================== */
+
+                        const productForm =
+                            document.getElementById("productForm");
+
+
+                        const productImage =
+                            document.getElementById("productImage");
+
+
+                        const imagePreview =
+                            document.getElementById("imagePreview");
+
+
+                        const productsTableBody =
+                            document.getElementById("productsTableBody");
+
+
+                        const ordersContainer =
+                            document.getElementById("ordersContainer");
+
+
+                        const orderStatusFilter =
+                            document.getElementById("orderStatusFilter");
+
+
+                        /* =========================================================
+                        NAVIGATION
+                        ========================================================== */
+
+                        document
+                            .querySelectorAll(".nav-btn")
+                            .forEach(button => {
+
+                                button.addEventListener(
+                                    "click",
+                                    function() {
+
+                                        const section =
+                                            this.dataset.section;
+
+                                        showSection(section);
+
+                                    }
+                                );
+
+                            });
+
+                async function loadOffers() {
+
+                    const container =
+                        document.getElementById(
+                            "offersAdminContainer"
+                        );
+
+
+                    container.innerHTML = `
+
+                        <div class="text-center py-4">
+
+                            <div
+                                class="spinner-border text-success">
+                            </div>
+
+                            <div class="mt-2">
+                                Loading offers...
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                OFFERS_API
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                `HTTP ${response.status}`
+                            );
+
+                        }
+
+
+                        offers =
+                            await response.json();
+
+
+                        renderAdminOffers();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Error loading offers:",
+                            error
+                        );
+
+
+                        container.innerHTML = `
+
+                            <div class="alert alert-danger">
+
+                                Failed to load offers.
+
+                            </div>
+
+                        `;
+
+                    }
+                }
+                async function loadHomepageOffers() {
+
+                    const section =
+                        document.getElementById(
+                            "offersSection"
+                        );
+
+
+                    const carouselInner =
+                        document.getElementById(
+                            "offersCarouselInner"
+                        );
+
+
+                    if (!section ||
+                        !carouselInner) {
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `${OFFERS_API}/active`
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                `HTTP ${response.status}`
+                            );
+
+                        }
+
+
+                        const offers =
+                            await response.json();
+
+
+                        /*
+                        * =====================================================
+                        * NO OFFERS
+                        * =====================================================
+                        */
+
+                        if (!offers.length) {
+
+                            section.style.display =
+                                "none";
+
+                            carouselInner.innerHTML =
+                                "";
+
+                            return;
+
+                        }
+
+
+                        /*
+                        * =====================================================
+                        * OFFERS AVAILABLE
+                        * =====================================================
+                        */
+
+                        section.style.display =
+                            "block";
+
+
+                        carouselInner.innerHTML =
+                            "";
+
+
+                        offers.forEach(
+                            (offer, index) => {
+
+                                const slide =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                slide.className =
+                                    "carousel-item" +
+                                    (
+                                        index === 0
+                                            ? " active"
+                                            : ""
+                                    );
+
+
+                                slide.innerHTML = `
+
+                                    <div class="offer-slide">
+
+                                        <img
+                                            src="./${offer.imageUrl}"
+                                            alt="Special Offer">
+
+                                    </div>
+
+                                `;
+
+
+                                carouselInner.appendChild(
+                                    slide
+                                );
+
+                            }
+                        );
+
+
+                        /*
+                        * =====================================================
+                        * AUTOMATIC SLIDE
+                        * =====================================================
+                        */
+
+                        if (offers.length > 1) {
+
+                            const carouselElement =
+                                document.getElementById(
+                                    "offersCarousel"
+                                );
+
+
+                            bootstrap
+                                .Carousel
+                                .getOrCreateInstance(
+                                    carouselElement,
+                                    {
+                                        interval: 4000,
+                                        ride: "carousel",
+                                        pause: "hover",
+                                        wrap: true
+                                    }
+                                );
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Failed to load offers:",
+                            error
+                        );
+
+
+                        /*
+                        * If backend is unavailable,
+                        * don't show an empty offer section.
+                        */
+
+                        section.style.display =
+                            "none";
+
+                    }
+                }
+                function renderAdminOffers() {
+
+                    const container =
+                        document.getElementById(
+                            "offersAdminContainer"
+                        );
+
+
+                    if (!offers.length) {
+
+                        container.innerHTML = `
+
+                            <div class="text-center py-5 text-muted">
+
+                                <i
+                                    class="bi bi-megaphone"
+                                    style="font-size:40px;">
+                                </i>
+
+                                <h5 class="mt-3">
+                                    No offers added yet
+                                </h5>
+
+                                <p>
+                                    Upload an offer image above.
+                                </p>
+
+                            </div>
+
+                        `;
+
+                        return;
+                    }
+
+
+                    container.innerHTML = "";
+
+
+                    offers
+                        .slice()
+                        .sort(
+                            (a, b) =>
+                                Number(b.id) -
+                                Number(a.id)
+                        )
+                        .forEach(offer => {
+
+                            const card =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            card.className =
+                                "offer-admin-card";
+
+
+                            const imagePath =
+                                "./" +
+                                offer.imageUrl;
+
+
+                            card.innerHTML = `
+
+                                <div class="offer-admin-image-wrapper">
+
+                                    <img
+                                        src="${imagePath}"
+                                        alt="Offer ${offer.id}"
+                                        class="offer-admin-image">
+
+                                </div>
+
+
+                                <div class="offer-admin-info">
+
+                                    <div>
+
+                                        <strong>
+                                            Offer #${offer.id}
+                                        </strong>
+
+                                        <br>
+
+                                        ${
+                                            offer.active
+
+                                            ?
+
+                                            `
+                                            <span class="badge bg-success">
+                                                Active
+                                            </span>
+                                            `
+
+                                            :
+
+                                            `
+                                            <span class="badge bg-secondary">
+                                                Hidden
+                                            </span>
+                                            `
+                                        }
+
+                                    </div>
+
+
+                                    <div class="d-flex gap-2">
+
+                                        <button
+                                            class="btn btn-sm ${
+                                                offer.active
+                                                    ? "btn-warning"
+                                                    : "btn-success"
+                                            }"
+                                            onclick="toggleOfferStatus(
+                                                ${offer.id},
+                                                ${offer.active}
+                                            )">
+
+                                            <i class="bi ${
+                                                offer.active
+                                                    ? "bi-eye-slash"
+                                                    : "bi-eye"
+                                            }"></i>
+
+                                            ${
+                                                offer.active
+                                                    ? "Hide"
+                                                    : "Show"
+                                            }
+
+                                        </button>
+
+
+                                        <button
+                                            class="btn btn-sm btn-outline-danger"
+                                            onclick="deleteOffer(${offer.id})">
+
+                                            <i class="bi bi-trash"></i>
+
+                                            Delete
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+
+                            container.appendChild(card);
+
+                        });
+                }
+                document
+                    .getElementById("offerForm")
+                    .addEventListener(
+                        "submit",
+                        async function(event) {
+
+                            event.preventDefault();
+
+
+                            const imageInput =
+                                document.getElementById(
+                                    "offerImage"
+                                );
+
+
+                            const image =
+                                imageInput.files[0];
+
+
+                            if (!image) {
+
+                                alert(
+                                    "Please select an offer image."
+                                );
+
+                                return;
+
+                            }
+
+
+                            const button =
+                                document.getElementById(
+                                    "saveOfferButton"
+                                );
+
+
+                            button.disabled = true;
+
+
+                            button.innerHTML = `
+
+                                <span
+                                    class="spinner-border spinner-border-sm">
+                                </span>
+
+                                Uploading...
+
+                            `;
+
+
+                            try {
+
+                                const formData =
+                                    new FormData();
+
+
+                                formData.append(
+                                    "image",
+                                    image
+                                );
+
+
+                                const response =
+                                    await fetch(
+                                        `${OFFERS_API}/with-image`,
+                                        {
+                                            method: "POST",
+                                            body: formData
+                                        }
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                alert(
+                                    "Offer uploaded successfully."
+                                );
+
+
+                                document
+                                    .getElementById(
+                                        "offerForm"
+                                    )
+                                    .reset();
+
+
+                                document
+                                    .getElementById(
+                                        "offerPreviewContainer"
+                                    )
+                                    .style.display =
+                                    "none";
+
+
+                                await loadOffers();
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Offer upload error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Failed to upload offer.\n\n" +
+                                    error.message
+                                );
+
+                            }
+                            finally {
+
+                                button.disabled = false;
+
+
+                                button.innerHTML = `
+
+                                    <i class="bi bi-cloud-arrow-up"></i>
+
+                                    Upload Offer
+
+                                `;
+
+                            }
+
+                        }
+                    );
+                    document
+                    .getElementById("offerImage")
+                    .addEventListener(
+                        "change",
+                        function() {
+
+                            const file =
+                                this.files[0];
+
+
+                            if (!file) {
+
+                                return;
+
+                            }
+
+
+                            if (
+                                !file.type.startsWith(
+                                    "image/"
+                                )
+                            ) {
+
+                                alert(
+                                    "Please select an image file."
+                                );
+
+                                this.value = "";
+
+                                return;
+
+                            }
+
+
+                            const reader =
+                                new FileReader();
+
+
+                            reader.onload =
+                                function(event) {
+
+                                    document
+                                        .getElementById(
+                                            "offerPreview"
+                                        )
+                                        .src =
+                                        event.target.result;
+
+
+                                    document
+                                        .getElementById(
+                                            "offerPreviewContainer"
+                                        )
+                                        .style.display =
+                                        "block";
+
+                                };
+
+
+                            reader.readAsDataURL(file);
+
+                        }
+                    );
+                    async function toggleOfferStatus(
+                    id,
+                    currentStatus
+                ) {
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `${OFFERS_API}/${id}/status?active=${!currentStatus}`,
+                                {
+                                    method: "PUT"
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                `HTTP ${response.status}`
+                            );
+
+                        }
+
+
+                        await loadOffers();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Offer status error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Failed to update offer."
+                        );
+
+                    }
+                }
+                async function deleteOffer(id) {
+
+                    const confirmed =
+                        confirm(
+                            "Are you sure you want to delete this offer?"
+                        );
+
+
+                    if (!confirmed) {
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `${OFFERS_API}/${id}`,
+                                {
+                                    method: "DELETE"
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                `HTTP ${response.status}`
+                            );
+
+                        }
+
+
+                        alert(
+                            "Offer deleted successfully."
+                        );
+
+
+                        await loadOffers();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Delete offer error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Failed to delete offer."
+                        );
+
+                    }
+                }
+                        function showSection(sectionId) {
+
+                            document
+                                .querySelectorAll(".admin-section")
+                                .forEach(section => {
+
+                                    section.classList.remove("active");
+
+                                });
+
+
+                            document
+                                .getElementById(sectionId)
+                                .classList.add("active");
+
+
+                            document
+                                .querySelectorAll(".nav-btn")
+                                .forEach(button => {
+
+                                    button.classList.remove("active");
+
+                                    if (
+                                        button.dataset.section ===
+                                        sectionId
+                                    ) {
+
+                                        button.classList.add("active");
+
+                                    }
+
+                                });
+
+
+                            const titles = {
+
+                    dashboardSection:
+                        "Dashboard",
+
+                    productsSection:
+                        "Product Management",
+
+                    addProductSection:
+                        editingProductId
+                            ? "Edit Product"
+                            : "Add New Product",
+
+                    ordersSection:
+                        "Order Management",
+
+                    offersSection:
+                        "Offer Management"
+                };
+                if (
+                    sectionId ===
+                    "offersSection"
+                ) {
+
+                    loadOffers();
+
+                }
+
+
+                            document.getElementById("pageTitle").textContent =
+                                titles[sectionId] || "Admin Panel";
+
+
+                            if (sectionId === "productsSection") {
+
+                                loadProducts();
+
+                            }
+
+
+                            if (sectionId === "ordersSection") {
+
+                                loadOrders();
+
+                            }
+
+
+                            if (sectionId === "dashboardSection") {
+
+                                loadDashboardData();
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        REFRESH CURRENT SECTION
+                        ========================================================== */
+
+                        function refreshCurrentSection() {
+
+                            const activeSection =
+                                document.querySelector(
+                                    ".admin-section.active"
+                                );
+
+
+                            if (!activeSection) {
+
+                                return;
+
+                            }
+
+
+                            if (
+                                activeSection.id ===
+                                "productsSection"
+                            ) {
+
+                                loadProducts();
+
+                            }
+                            else if (
+                                activeSection.id ===
+                                "ordersSection"
+                            ) {
+
+                                loadOrders();
+
+                            }
+                            else if (
+                                activeSection.id ===
+                                "dashboardSection"
+                            ) {
+
+                                loadDashboardData();
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        LOAD PRODUCTS
+                        ========================================================== */
+
+                        async function loadProducts() {
+
+                            productsTableBody.innerHTML = `
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        class="loading">
+
+                                        <div
+                                            class="spinner-border"
+                                            role="status">
+                                        </div>
+
+                                        <div class="mt-2">
+                                            Loading products...
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+
+                            try {
+
+                                const response =
+                                    await fetch(PRODUCTS_API);
+
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                products =
+                                    await response.json();
+
+
+                                renderProducts();
+
+
+                                document
+                                    .getElementById(
+                                        "dashboardProductCount"
+                                    )
+                                    .textContent =
+                                    products.length;
+
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Error loading products:",
+                                    error
+                                );
+
+
+                                productsTableBody.innerHTML = `
+
+                                    <tr>
+
+                                        <td
+                                            colspan="5"
+                                            class="text-center text-danger py-5">
+
+                                            <i class="bi bi-exclamation-triangle"></i>
+
+                                            <br>
+
+                                            Failed to fetch products.
+
+                                            <br>
+
+                                            <small>
+                                                Make sure Spring Boot is running on port 8080.
+                                            </small>
+
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        IMAGE PATH
+                        ========================================================== */
+
+                        function getImagePath(imageUrl) {
+
+                            if (!imageUrl) {
+
+                                return "";
+
+                            }
+
+
+                            /*
+                            * Database stores values like:
+                            *
+                            * images/products/exotic/broccoli.jpg
+                            *
+                            * Admin page is:
+                            *
+                            * frontend/admin.html
+                            *
+                            * Therefore:
+                            *
+                            * ./images/products/...
+                            */
+
+                            return "./" + imageUrl;
+
+                        }
+
+
+                        /* =========================================================
+                        CATEGORY NAME
+                        ========================================================== */
+function getCategoryName(category) {
+
+    switch (category) {
+
+        case "exotic-vegetables":
+            return "Exotic Vegetables";
+
+        case "vegetables":
+            return "Indian Vegetables";
+
+        case "pulses":
+            return "Pulses";
+
+        case "domestic-fruits":
+            return "Domestic Fruits";
+
+        case "exotic-fruits":
+            return "Exotic Fruits";
+
+
+        // NEW CATEGORIES
+
+        case "leafy-vegetables":
+            return "Leafy Vegetables";
+
+        case "chillies":
+            return "Chillies";
+
+        case "cruciferous-vegetables":
+            return "Cabbage / Cruciferous Vegetables";
+
+        case "beans-peas":
+            return "Beans & Peas";
+
+        case "root-vegetables":
+            return "Root Vegetables / Others";
+
+
+        default:
+            return category || "Unknown";
+    }
+
+}
+
+
+                        /* =========================================================
+                        RENDER PRODUCTS
+                        ========================================================== */
+
+                        function renderProducts() {
+
+                            if (!products.length) {
+
+                                productsTableBody.innerHTML = `
+
+                                    <tr>
+
+                                        <td
+                                            colspan="5"
+                                            class="empty-state">
+
+                                            <i class="bi bi-box"></i>
+
+                                            <div>
+                                                No products found.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                                return;
+
+                            }
+
+
+                            productsTableBody.innerHTML = "";
+
+
+                            products.forEach(product => {
+
+                                const row =
+                                    document.createElement("tr");
+
+
+                                const imagePath =
+                                    getImagePath(
+                                        product.imageUrl
+                                    );
+
+
+                                row.innerHTML = `
+
+                                    <td>
+
+                                        ${
+                                            imagePath
+                                            ?
+
+                                            `
+                                            <img
+                                                src="${imagePath}"
+                                                class="product-table-image"
+                                                alt="${escapeHtml(product.name)}"
+                                                onerror="this.style.display='none';">
+                                            `
+
+                                            :
+
+                                            `
+                                            <div
+                                                class="product-table-image d-flex align-items-center justify-content-center">
+
+                                                <i class="bi bi-image text-muted"></i>
+
+                                            </div>
+                                            `
+                                        }
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <strong>
+                                            ${escapeHtml(product.name)}
+                                        </strong>
+
+                                        <br>
+
+                                        <small class="text-muted">
+
+                                            ID:
+                                            ${product.id}
+
+                                        </small>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="badge-category">
+
+                                            ${escapeHtml(
+                                                getCategoryName(
+                                                    product.category
+                                                )
+                                            )}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${
+                                            product.available
+
+                                            ?
+
+                                            `
+                                            <span class="badge bg-success">
+                                                Available
+                                            </span>
+                                            `
+
+                                            :
+
+                                            `
+                                            <span class="badge bg-secondary">
+                                                Not Available
+                                            </span>
+                                            `
+                                        }
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            class="action-btn edit-btn"
+                                            title="Edit"
+                                            onclick="editProduct(${product.id})">
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </button>
+
+
+                                        <button
+                                            class="action-btn delete-btn"
+                                            title="Delete"
+                                            onclick="openDeleteProductModal(
+                                                ${product.id},
+                                                '${escapeJs(product.name)}'
+                                            )">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </td>
+
+                                `;
+
+
+                                productsTableBody.appendChild(row);
+
+                            });
+
+                        }
+
+
+                        /* =========================================================
+                        ESCAPE HTML
+                        ========================================================== */
+
+                        function escapeHtml(value) {
+
+                            if (value === null || value === undefined) {
+
+                                return "";
+
+                            }
+
+
+                            return String(value)
+
+                                .replace(/&/g, "&amp;")
+
+                                .replace(/</g, "&lt;")
+
+                                .replace(/>/g, "&gt;")
+
+                                .replace(/"/g, "&quot;")
+
+                                .replace(/'/g, "&#039;");
+
+                        }
+
+
+                        /* =========================================================
+                        ESCAPE JAVASCRIPT STRING
+                        ========================================================== */
+
+                        function escapeJs(value) {
+
+                            return String(value || "")
+                                .replace(/\\/g, "\\\\")
+                                .replace(/'/g, "\\'")
+                                .replace(/"/g, '\\"')
+                                .replace(/\n/g, "\\n")
+                                .replace(/\r/g, "\\r");
+
+                        }
+
+
+                        /* =========================================================
+                        EDIT PRODUCT
+                        ========================================================== */
+
+                        function editProduct(id) {
+
+                            const product =
+                                products.find(
+                                    item => Number(item.id) === Number(id)
+                                );
+
+
+                            if (!product) {
+
+                                alert("Product not found.");
+
+                                return;
+
+                            }
+
+
+                            editingProductId =
+                                product.id;
+
+
+                            document.getElementById(
+                                "productId"
+                            ).value =
+                                product.id;
+
+
+                            document.getElementById(
+                                "productName"
+                            ).value =
+                                product.name || "";
+
+
+                            document.getElementById(
+                                "productCategory"
+                            ).value =
+                                product.category || "";
+
+
+                            document.getElementById(
+                                "productDescription"
+                            ).value =
+                                product.description || "";
+
+
+                            document.getElementById(
+                                "productAvailable"
+                            ).checked =
+                                product.available !== false;
+
+
+                            document.getElementById(
+                                "productImage"
+                            ).value = "";
+
+
+                            if (product.imageUrl) {
+
+                                imagePreview.src =
+                                    getImagePath(
+                                        product.imageUrl
+                                    );
+
+                                imagePreview.style.display =
+                                    "inline-block";
+
+                            }
+                            else {
+
+                                imagePreview.style.display =
+                                    "none";
+
+                            }
+
+
+                            document.getElementById(
+                                "productFormTitle"
+                            ).textContent =
+                                "Edit Product";
+
+
+                            document.getElementById(
+                                "saveProductButton"
+                            ).innerHTML = `
+
+                                <i class="bi bi-check-circle"></i>
+
+                                Update Product
+
+                            `;
+
+
+                            showSection(
+                                "addProductSection"
+                            );
+
+                        }
+
+
+                        /* =========================================================
+                        RESET PRODUCT FORM
+                        ========================================================== */
+
+                        function resetProductForm() {
+
+                            editingProductId = null;
+
+
+                            productForm.reset();
+
+
+                            document.getElementById(
+                                "productId"
+                            ).value = "";
+
+
+                            document.getElementById(
+                                "productAvailable"
+                            ).checked = true;
+
+
+                            imagePreview.src = "";
+
+                            imagePreview.style.display =
+                                "none";
+
+
+                            document.getElementById(
+                                "productFormTitle"
+                            ).textContent =
+                                "Add New Product";
+
+
+                            document.getElementById(
+                                "saveProductButton"
+                            ).innerHTML = `
+
+                                <i class="bi bi-check-circle"></i>
+
+                                Save Product
+
+                            `;
+
+                        }
+
+
+                        /* =========================================================
+                        IMAGE PREVIEW
+                        ========================================================== */
+
+                        productImage.addEventListener(
+                            "change",
+                            function() {
+
+                                const file =
+                                    this.files[0];
+
+
+                                if (!file) {
+
+                                    return;
+
+                                }
+
+
+                                if (!file.type.startsWith("image/")) {
+
+                                    alert(
+                                        "Please select an image file."
+                                    );
+
+                                    this.value = "";
+
+                                    return;
+
+                                }
+
+
+                                const reader =
+                                    new FileReader();
+
+
+                                reader.onload =
+                                    function(event) {
+
+                                        imagePreview.src =
+                                            event.target.result;
+
+                                        imagePreview.style.display =
+                                            "inline-block";
+
+                                    };
+
+
+                                reader.readAsDataURL(file);
+
+                            }
+                        );
+
+
+                        /* =========================================================
+                        SAVE / ADD / EDIT PRODUCT
+                        ========================================================== */
+
+                        productForm.addEventListener(
+                            "submit",
+                            async function(event) {
+
+                                event.preventDefault();
+
+
+                                const name =
+                                    document.getElementById(
+                                        "productName"
+                                    ).value.trim();
+
+
+                                const category =
+                                    document.getElementById(
+                                        "productCategory"
+                                    ).value;
+
+
+                                const description =
+                                    document.getElementById(
+                                        "productDescription"
+                                    ).value.trim();
+
+
+                                const available =
+                                    document.getElementById(
+                                        "productAvailable"
+                                    ).checked;
+
+
+                                const imageFile =
+                                    productImage.files[0];
+
+
+                                if (!name) {
+
+                                    alert(
+                                        "Please enter product name."
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                if (!category) {
+
+                                    alert(
+                                        "Please select a category."
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                if (!description) {
+
+                                    alert(
+                                        "Please enter product description."
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                const saveButton =
+                                    document.getElementById(
+                                        "saveProductButton"
+                                    );
+
+
+                                saveButton.disabled = true;
+
+
+                                saveButton.innerHTML = `
+
+                                    <span
+                                        class="spinner-border spinner-border-sm">
+                                    </span>
+
+                                    Saving...
+
+                                `;
+
+
+                                try {
+
+                                    /*
+                                    * =================================================
+                                    * ADD NEW PRODUCT
+                                    * =================================================
+                                    */
+
+                                    if (!editingProductId) {
+
+                                        if (!imageFile) {
+
+                                            throw new Error(
+                                                "Please select or take a product image."
+                                            );
+
+                                        }
+
+
+                                        const formData =
+                                            new FormData();
+
+
+                                        /*
+                                        * Product JSON
+                                        */
+
+                                        const productData = {
+
+                                            name: name,
+
+                                            category: category,
+
+                                            description: description,
+
+                                            available: available
+
+                                        };
+
+
+                                        formData.append(
+                                            "product",
+                                            new Blob(
+                                                [
+                                                    JSON.stringify(
+                                                        productData
+                                                    )
+                                                ],
+                                                {
+                                                    type:
+                                                        "application/json"
+                                                }
+                                            )
+                                        );
+
+
+                                        /*
+                                        * Image
+                                        */
+
+                                        formData.append(
+                                            "image",
+                                            imageFile
+                                        );
+
+
+                                        const response =
+                                            await fetch(
+                                                `${PRODUCTS_API}/with-image`,
+                                                {
+                                                    method: "POST",
+                                                    body: formData
+                                                }
+                                            );
+
+
+                                        if (!response.ok) {
+
+                                            const errorText =
+                                                await response.text();
+
+                                            throw new Error(
+                                                errorText ||
+                                                `HTTP ${response.status}`
+                                            );
+
+                                        }
+
+
+                                        alert(
+                                            "Product added successfully."
+                                        );
+
+                                    }
+
+
+                                    /*
+                                    * =================================================
+                                    * EDIT EXISTING PRODUCT
+                                    * =================================================
+                                    */
+
+                                    else {
+
+                                        /*
+                                        * IMPORTANT:
+                                        *
+                                        * Existing products can be edited
+                                        * without uploading a new image.
+                                        *
+                                        * If a new image is selected, the
+                                        * backend endpoint must support it.
+                                        *
+                                        * For the already-tested backend,
+                                        * first update the product JSON.
+                                        */
+
+                                        const productData = {
+
+                                            name: name,
+
+                                            category: category,
+
+                                            description: description,
+
+                                            available: available
+
+                                        };
+
+
+                                        /*
+                                        * Keep existing image unless
+                                        * backend receives a replacement.
+                                        */
+
+                                        const existingProduct =
+                                            products.find(
+                                                item =>
+                                                    Number(item.id) ===
+                                                    Number(editingProductId)
+                                            );
+
+
+                                        if (
+                                            existingProduct &&
+                                            existingProduct.imageUrl
+                                        ) {
+
+                                            productData.imageUrl =
+                                                existingProduct.imageUrl;
+
+                                        }
+
+
+                                        const response =
+                                            await fetch(
+                                                `${PRODUCTS_API}/${editingProductId}`,
+                                                {
+                                                    method: "PUT",
+
+                                                    headers: {
+                                                        "Content-Type":
+                                                            "application/json"
+                                                    },
+
+                                                    body:
+                                                        JSON.stringify(
+                                                            productData
+                                                        )
+                                                }
+                                            );
+
+
+                                        if (!response.ok) {
+
+                                            const errorText =
+                                                await response.text();
+
+                                            throw new Error(
+                                                errorText ||
+                                                `HTTP ${response.status}`
+                                            );
+
+                                        }
+
+
+                                        alert(
+                                            "Product updated successfully."
+                                        );
+
+                                    }
+
+
+                                    resetProductForm();
+
+                                    await loadProducts();
+
+                                    showSection(
+                                        "productsSection"
+                                    );
+
+                                    await loadDashboardData();
+
+                                }
+                                catch (error) {
+
+                                    console.error(
+                                        "Product save error:",
+                                        error
+                                    );
+
+
+                                    alert(
+                                        "Failed to save product.\n\n" +
+                                        error.message
+                                    );
+
+                                }
+                                finally {
+
+                                    saveButton.disabled = false;
+
+
+                                    saveButton.innerHTML =
+                                        editingProductId
+
+                                        ?
+
+                                        `
+                                        <i class="bi bi-check-circle"></i>
+                                        Update Product
+                                        `
+
+                                        :
+
+                                        `
+                                        <i class="bi bi-check-circle"></i>
+                                        Save Product
+                                        `;
+
+                                }
+
+                            }
+                        );
+
+
+                        /* =========================================================
+                        DELETE PRODUCT MODAL
+                        ========================================================== */
+
+                        function openDeleteProductModal(
+                            id,
+                            name
+                        ) {
+
+                            deletingProductId =
+                                id;
+
+
+                            document.getElementById(
+                                "deleteProductMessage"
+                            ).textContent =
+
+                                `Are you sure you want to delete "${name}"?`;
+
+
+                            const modal =
+                                new bootstrap.Modal(
+                                    document.getElementById(
+                                        "deleteProductModal"
+                                    )
+                                );
+
+
+                            modal.show();
+
+                        }
+
+
+                        document
+                            .getElementById(
+                                "confirmDeleteProductButton"
+                            )
+                            .addEventListener(
+                                "click",
+                                deleteProduct
+                            );
+
+
+                        /* =========================================================
+                        DELETE PRODUCT
+                        ========================================================== */
+
+                        async function deleteProduct() {
+
+                            if (!deletingProductId) {
+
+                                return;
+
+                            }
+
+
+                            const button =
+                                document.getElementById(
+                                    "confirmDeleteProductButton"
+                                );
+
+
+                            button.disabled = true;
+
+
+                            try {
+
+                                const response =
+                                    await fetch(
+                                        `${PRODUCTS_API}/${deletingProductId}`,
+                                        {
+                                            method: "DELETE"
+                                        }
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    const errorText =
+                                        await response.text();
+
+                                    throw new Error(
+                                        errorText ||
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                const modal =
+                                    bootstrap.Modal.getInstance(
+                                        document.getElementById(
+                                            "deleteProductModal"
+                                        )
+                                    );
+
+
+                                if (modal) {
+
+                                    modal.hide();
+
+                                }
+
+
+                                alert(
+                                    "Product deleted successfully."
+                                );
+
+
+                                deletingProductId = null;
+
+
+                                await loadProducts();
+
+                                await loadDashboardData();
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Delete product error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Failed to delete product.\n\n" +
+                                    error.message
+                                );
+
+                            }
+                            finally {
+
+                                button.disabled = false;
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        LOAD ORDERS
+                        ========================================================== */
+
+                        async function loadOrders() {
+
+                            ordersContainer.innerHTML = `
+
+                                <div class="loading">
+
+                                    <div
+                                        class="spinner-border"
+                                        role="status">
+                                    </div>
+
+                                    <div class="mt-2">
+                                        Loading orders...
+                                    </div>
+
+                                </div>
+
+                            `;
+
+
+                            try {
+
+                                const response =
+                                    await fetch(
+                                        ORDERS_API
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                orders =
+                                    await response.json();
+
+
+                                renderOrders();
+
+
+                                updateOrderCounts();
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Error loading orders:",
+                                    error
+                                );
+
+
+                                ordersContainer.innerHTML = `
+
+                                    <div class="empty-state text-danger">
+
+                                        <i class="bi bi-exclamation-triangle"></i>
+
+                                        <h5>
+                                            Failed to fetch orders
+                                        </h5>
+
+                                        <p>
+                                            Make sure the Spring Boot backend
+                                            is running and /api/orders is available.
+                                        </p>
+
+                                    </div>
+
+                                `;
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        RENDER ORDERS
+                        ========================================================== */
+
+                        function renderOrders() {
+
+                            const selectedStatus =
+                                orderStatusFilter.value;
+
+
+                            let filteredOrders =
+                                orders;
+
+
+                            if (
+                                selectedStatus !== "ALL"
+                            ) {
+
+                                filteredOrders =
+                                    orders.filter(
+                                        order =>
+                                            (
+                                                order.status ||
+                                                "NEW"
+                                            ).toUpperCase() ===
+                                            selectedStatus
+                                    );
+
+                            }
+
+
+                            if (!filteredOrders.length) {
+
+                                ordersContainer.innerHTML = `
+
+                                    <div class="empty-state">
+
+                                        <i class="bi bi-cart-x"></i>
+
+                                        <h5>
+                                            No orders found
+                                        </h5>
+
+                                        <p>
+                                            There are no orders for the selected filter.
+                                        </p>
+
+                                    </div>
+
+                                `;
+
+                                return;
+
+                            }
+
+
+                            ordersContainer.innerHTML = "";
+
+
+                            /*
+                            * Newest database records normally have
+                            * higher IDs, so show highest ID first.
+                            */
+
+                            filteredOrders
+                                .slice()
+                                .sort(
+                                    (a,b) =>
+                                        Number(b.id) -
+                                        Number(a.id)
+                                )
+                                .forEach(order => {
+
+                                    const card =
+                                        document.createElement(
+                                            "div"
+                                        );
+
+
+                                    card.className =
+                                        "order-card";
+
+
+                                    const status =
+                                        (
+                                            order.status ||
+                                            "NEW"
+                                        ).toUpperCase();
+
+
+                                    card.innerHTML = `
+
+                                        <div class="order-header">
+
+                                            <div>
+
+                                                <div class="order-id">
+
+                                                    Order #${order.id}
+
+                                                </div>
+
+                                                <div class="order-product">
+
+                                                    ${escapeHtml(
+                                                        order.productName
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <span
+                                                class="order-status status-${status}">
+
+                                                ${escapeHtml(status)}
+
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="order-details-grid">
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Quantity
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${escapeHtml(
+                                                        order.quantity
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Customer
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${escapeHtml(
+                                                        order.customerName
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Mobile
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${escapeHtml(
+                                                        order.customerPhone
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Delivery Location
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${escapeHtml(
+                                                        order.deliveryLocation
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Delivery Address
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${escapeHtml(
+                                                        order.deliveryAddress
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="order-detail">
+
+                                                <div class="order-detail-label">
+                                                    Additional Details
+                                                </div>
+
+                                                <div class="order-detail-value">
+
+                                                    ${
+                                                        order.additionalDetails
+                                                        ?
+                                                        escapeHtml(
+                                                            order.additionalDetails
+                                                        )
+                                                        :
+                                                        "None"
+                                                    }
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="order-actions">
+
+
+                                            <select
+                                                class="form-select"
+                                                id="status-${order.id}">
+
+                                                <option
+                                                    value="NEW"
+                                                    ${status === "NEW" ? "selected" : ""}>
+
+                                                    New
+
+                                                </option>
+
+
+                                                <option
+                                                    value="CONFIRMED"
+                                                    ${status === "CONFIRMED" ? "selected" : ""}>
+
+                                                    Confirmed
+
+                                                </option>
+
+
+                                                <option
+                                                    value="PROCESSING"
+                                                    ${status === "PROCESSING" ? "selected" : ""}>
+
+                                                    Processing
+
+                                                </option>
+
+
+                                                <option
+                                                    value="SHIPPED"
+                                                    ${status === "SHIPPED" ? "selected" : ""}>
+
+                                                    Shipped
+
+                                                </option>
+
+
+                                                <option
+                                                    value="DELIVERED"
+                                                    ${status === "DELIVERED" ? "selected" : ""}>
+
+                                                    Delivered
+
+                                                </option>
+
+
+                                                <option
+                                                    value="CANCELLED"
+                                                    ${status === "CANCELLED" ? "selected" : ""}>
+
+                                                    Cancelled
+
+                                                </option>
+
+                                            </select>
+
+
+                                            <button
+                                                class="btn btn-success"
+                                                onclick="updateOrderStatus(${order.id})">
+
+                                                <i class="bi bi-check-lg"></i>
+
+                                                Update Status
+
+                                            </button>
+
+
+                                            <button
+                                                class="btn btn-outline-danger"
+                                                onclick="openDeleteOrderModal(${order.id})">
+
+                                                <i class="bi bi-trash"></i>
+
+                                                Delete
+
+                                            </button>
+
+
+                                            ${
+                                                order.customerPhone
+
+                                                ?
+
+                                                `
+                                                <a
+                                                    class="btn btn-outline-success"
+                                                    href="tel:${escapeHtml(order.customerPhone)}">
+
+                                                    <i class="bi bi-telephone"></i>
+
+                                                    Call
+
+                                                </a>
+                                                `
+
+                                                :
+
+                                                ""
+                                            }
+
+
+                                        </div>
+
+                                    `;
+
+
+                                    ordersContainer.appendChild(
+                                        card
+                                    );
+
+                                });
+
+                        }
+
+
+                        /* =========================================================
+                        STATUS FILTER
+                        ========================================================== */
+
+                        orderStatusFilter.addEventListener(
+                            "change",
+                            renderOrders
+                        );
+
+
+                        /* =========================================================
+                        UPDATE ORDER STATUS
+                        ========================================================== */
+
+                        async function updateOrderStatus(id) {
+
+                            const order =
+                                orders.find(
+                                    item =>
+                                        Number(item.id) ===
+                                        Number(id)
+                                );
+
+
+                            if (!order) {
+
+                                alert("Order not found.");
+
+                                return;
+
+                            }
+
+
+                            const select =
+                                document.getElementById(
+                                    `status-${id}`
+                                );
+
+
+                            const newStatus =
+                                select.value;
+
+
+                            const updatedOrder = {
+
+                                productName:
+                                    order.productName,
+
+                                quantity:
+                                    order.quantity,
+
+                                customerName:
+                                    order.customerName,
+
+                                customerPhone:
+                                    order.customerPhone,
+
+                                deliveryLocation:
+                                    order.deliveryLocation,
+
+                                deliveryAddress:
+                                    order.deliveryAddress,
+
+                                additionalDetails:
+                                    order.additionalDetails,
+
+                                status:
+                                    newStatus
+
+                            };
+
+
+                            try {
+
+                                const response =
+                                    await fetch(
+                                        `${ORDERS_API}/${id}`,
+                                        {
+
+                                            method: "PUT",
+
+                                            headers: {
+
+                                                "Content-Type":
+                                                    "application/json"
+
+                                            },
+
+                                            body:
+                                                JSON.stringify(
+                                                    updatedOrder
+                                                )
+
+                                        }
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    const errorText =
+                                        await response.text();
+
+                                    throw new Error(
+                                        errorText ||
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                alert(
+                                    "Order status updated successfully."
+                                );
+
+
+                                await loadOrders();
+
+                                await loadDashboardData();
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Update order error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Failed to update order status.\n\n" +
+                                    error.message
+                                );
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        DELETE ORDER MODAL
+                        ========================================================== */
+
+                        function openDeleteOrderModal(id) {
+
+                            deletingOrderId =
+                                id;
+
+
+                            const modal =
+                                new bootstrap.Modal(
+                                    document.getElementById(
+                                        "deleteOrderModal"
+                                    )
+                                );
+
+
+                            modal.show();
+
+                        }
+
+
+                        document
+                            .getElementById(
+                                "confirmDeleteOrderButton"
+                            )
+                            .addEventListener(
+                                "click",
+                                deleteOrder
+                            );
+
+
+                        /* =========================================================
+                        DELETE ORDER
+                        ========================================================== */
+
+                        async function deleteOrder() {
+
+                            if (!deletingOrderId) {
+
+                                return;
+
+                            }
+
+
+                            const button =
+                                document.getElementById(
+                                    "confirmDeleteOrderButton"
+                                );
+
+
+                            button.disabled = true;
+
+
+                            try {
+
+                                const response =
+                                    await fetch(
+                                        `${ORDERS_API}/${deletingOrderId}`,
+                                        {
+                                            method: "DELETE"
+                                        }
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    const errorText =
+                                        await response.text();
+
+                                    throw new Error(
+                                        errorText ||
+                                        `HTTP ${response.status}`
+                                    );
+
+                                }
+
+
+                                const modal =
+                                    bootstrap.Modal.getInstance(
+                                        document.getElementById(
+                                            "deleteOrderModal"
+                                        )
+                                    );
+
+
+                                if (modal) {
+
+                                    modal.hide();
+
+                                }
+
+
+                                alert(
+                                    "Order deleted successfully."
+                                );
+
+
+                                deletingOrderId = null;
+
+
+                                await loadOrders();
+
+                                await loadDashboardData();
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Delete order error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Failed to delete order.\n\n" +
+                                    error.message
+                                );
+
+                            }
+                            finally {
+
+                                button.disabled = false;
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        UPDATE ORDER COUNTS
+                        ========================================================== */
+
+                        function updateOrderCounts() {
+
+                            document
+                                .getElementById(
+                                    "dashboardOrderCount"
+                                )
+                                .textContent =
+                                orders.length;
+
+
+                            const newOrders =
+                                orders.filter(
+                                    order =>
+                                        (
+                                            order.status ||
+                                            "NEW"
+                                        ).toUpperCase() ===
+                                        "NEW"
+                                );
+
+
+                            document
+                                .getElementById(
+                                    "dashboardNewOrderCount"
+                                )
+                                .textContent =
+                                newOrders.length;
+
+                        }
+
+
+                        /* =========================================================
+                        DASHBOARD DATA
+                        ========================================================== */
+
+                        async function loadDashboardData() {
+
+                            try {
+
+                                const [
+                                    productsResponse,
+                                    ordersResponse
+                                ] =
+                                    await Promise.all([
+                                        fetch(PRODUCTS_API),
+                                        fetch(ORDERS_API)
+                                    ]);
+
+
+                                if (
+                                    productsResponse.ok
+                                ) {
+
+                                    const dashboardProducts =
+                                        await productsResponse.json();
+
+
+                                    document
+                                        .getElementById(
+                                            "dashboardProductCount"
+                                        )
+                                        .textContent =
+                                        dashboardProducts.length;
+
+                                }
+
+
+                                if (
+                                    ordersResponse.ok
+                                ) {
+
+                                    const dashboardOrders =
+                                        await ordersResponse.json();
+
+
+                                    document
+                                        .getElementById(
+                                            "dashboardOrderCount"
+                                        )
+                                        .textContent =
+                                        dashboardOrders.length;
+
+
+                                    const newOrders =
+                                        dashboardOrders.filter(
+                                            order =>
+                                                (
+                                                    order.status ||
+                                                    "NEW"
+                                                ).toUpperCase() ===
+                                                "NEW"
+                                        );
+
+
+                                    document
+                                        .getElementById(
+                                            "dashboardNewOrderCount"
+                                        )
+                                        .textContent =
+                                        newOrders.length;
+
+                                }
+
+                            }
+                            catch (error) {
+
+                                console.error(
+                                    "Dashboard loading error:",
+                                    error
+                                );
+
+                            }
+
+                        }
+
+
+                        /* =========================================================
+                        INITIAL LOAD
+                        ========================================================== */
+
+                        async function initializeAdmin() {
+
+                            await loadDashboardData();
+
+                            await loadProducts();
+
+                            await loadOrders();
+
+                        }
+
+
+                        initializeAdmin();
+
+                    </script>
+
+
+                </body>
+
+                </html>

@@ -3,1221 +3,3718 @@
 
 <head>
 
-    <!-- Character Encoding -->
     <meta charset="UTF-8">
 
-    <!-- Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-    <title>Products | FreshFlow Export</title>
+    <title>Products | DPD Agro Fresh</title>
 
-    <meta name="description"
-        content="Explore FreshFlow Export's premium range of fresh fruits, vegetables, spices and grains exported worldwide.">
+    <meta
+        name="description"
+        content="Explore fresh vegetables, exotic vegetables, pulses, domestic fruits and exotic fruits from DPD Agro Fresh.">
 
-    <meta name="keywords"
-        content="Fresh Fruits Export, Vegetables Export, Indian Export Products">
 
-    <meta name="author"
-        content="FreshFlow Export">
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    <link
         rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-        crossorigin="anonymous">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- Google Font -->
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Main CSS -->
-    <link rel="stylesheet"
-        href="css/style.css">
 
-    <link rel="icon"
-        href="images/logo.png"
-        type="image/png">
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =====================================================
+         MAIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        :root {
+
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary-green: #a5d66a;
+            --light-green: #e8f5e9;
+            --page-bg: #f7faf7;
+            --dark-green: #102b17;
+            --text-dark: #193c20;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: 'Poppins', sans-serif;
+
+            background: var(--page-bg);
+
+            color: #222;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .products-page {
+
+            min-height: 100vh;
+
+            background: var(--page-bg);
+
+        }
+
+
+        /* =====================================================
+           SCROLL REVEAL ANIMATION
+        ====================================================== */
+
+        .reveal {
+
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+
+        }
+
+
+        .reveal.active {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+        .reveal-left {
+
+            opacity: 0;
+
+            transform: translateX(-45px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+
+        }
+
+
+        .reveal-left.active {
+
+            opacity: 1;
+
+            transform: translateX(0);
+
+        }
+
+
+        .reveal-right {
+
+            opacity: 0;
+
+            transform: translateX(45px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+
+        }
+
+
+        .reveal-right.active {
+
+            opacity: 1;
+
+            transform: translateX(0);
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .products-page .navbar {
+
+            background: rgba(255, 255, 255, 0.94);
+
+            backdrop-filter: blur(16px);
+
+            -webkit-backdrop-filter: blur(16px);
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.06);
+
+            transition:
+                all 0.3s ease;
+
+            padding: 14px 0;
+
+            z-index: 1050;
+
+        }
+
+
+        .products-page .navbar.scrolled {
+
+            background: rgba(255, 255, 255, 0.98);
+
+            padding: 9px 0;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.10);
+
+        }
+
+
+        .navbar-brand {
+
+            color: var(--primary) !important;
+
+            font-weight: 700;
+
+            font-size: 21px;
+
+            letter-spacing: -0.3px;
+
+        }
+
+
+        .navbar-brand::before {
+
+            content: "🌿";
+
+            margin-right: 7px;
+
+            font-size: 17px;
+
+        }
+
+
+        .nav-link {
+
+            position: relative;
+
+            color: #333 !important;
+
+            font-weight: 500;
+
+            margin-left: 8px;
+
+            padding: 9px 12px !important;
+
+            transition: color 0.3s ease;
+
+        }
+
+
+        .nav-link::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 12px;
+
+            right: 12px;
+
+            bottom: 2px;
+
+            height: 2px;
+
+            background: var(--primary);
+
+            border-radius: 10px;
+
+            transform: scaleX(0);
+
+            transform-origin: center;
+
+            transition: transform 0.3s ease;
+
+        }
+
+
+        .nav-link:hover,
+
+        .nav-link.active {
+
+            color: var(--primary) !important;
+
+        }
+
+
+        .nav-link:hover::after,
+
+        .nav-link.active::after {
+
+            transform: scaleX(1);
+
+        }
+
+
+        .admin-login-link {
+
+            color: #1b5e20 !important;
+
+            font-weight: 600;
+
+        }
+
+
+        .admin-login-link i {
+
+            margin-right: 4px;
+
+        }
+
+
+        .navbar-toggler {
+
+            border: 1px solid #d7e6d8;
+
+            border-radius: 10px;
+
+        }
+
+
+        .navbar-toggler:focus {
+
+            box-shadow:
+                0 0 0 3px rgba(46,125,50,0.12);
+
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .products-hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 155px 20px 90px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(9, 52, 19, 0.94),
+                    rgba(26, 92, 35, 0.86)
+                ),
+
+                url("./images/products/exotic/broccoli.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            color: #fff;
+
+        }
+
+
+        .products-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            background: rgba(165, 214, 106, 0.08);
+
+            top: -160px;
+
+            right: -80px;
+
+            animation: heroFloat 7s ease-in-out infinite;
+
+        }
+
+
+        .products-hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+
+            height: 220px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            bottom: -120px;
+
+            left: 8%;
+
+            animation: heroFloatReverse 9s ease-in-out infinite;
+
+        }
+
+
+        .products-hero .container {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .hero-leaf {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 17px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,0.12);
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            margin-bottom: 18px;
+
+            animation: fadeDown 0.8s ease both;
+
+        }
+
+
+        .products-hero h1 {
+
+            font-size: clamp(40px, 6vw, 58px);
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+
+            line-height: 1.1;
+
+            animation: fadeUp 0.9s ease 0.1s both;
+
+        }
+
+
+        .products-hero h1 span {
+
+            color: var(--secondary-green);
+
+        }
+
+
+        .products-hero p {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            color: rgba(255,255,255,0.88);
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            animation: fadeUp 0.9s ease 0.25s both;
+
+        }
+
+
+        /* =====================================================
+           HERO ANIMATIONS
+        ====================================================== */
+
+        @keyframes fadeUp {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes fadeDown {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(-20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes heroFloat {
+
+            0%, 100% {
+
+                transform: translateY(0) rotate(0deg);
+
+            }
+
+            50% {
+
+                transform: translateY(20px) rotate(8deg);
+
+            }
+
+        }
+
+
+        @keyframes heroFloatReverse {
+
+            0%, 100% {
+
+                transform: translateY(0);
+
+            }
+
+            50% {
+
+                transform: translateY(-18px);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           SEARCH & FILTER
+        ====================================================== */
+
+        .product-tools {
+
+            padding: 42px 0 15px;
+
+        }
+
+
+        .search-box {
+
+            position: relative;
+
+        }
+
+
+        .search-box i {
+
+            position: absolute;
+
+            left: 18px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--primary);
+
+            font-size: 19px;
+
+            z-index: 2;
+
+        }
+
+
+        .search-box input {
+
+            height: 56px;
+
+            padding-left: 50px;
+
+            padding-right: 110px;
+
+            border: 1px solid #dce7dc;
+
+            border-radius: 50px;
+
+            background: #fff;
+
+            box-shadow:
+                0 7px 25px rgba(0,0,0,0.05);
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .search-box input:hover {
+
+            box-shadow:
+                0 10px 30px rgba(46,125,50,0.08);
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(46,125,50,0.10);
+
+        }
+
+
+        .clear-search {
+
+            position: absolute;
+
+            right: 18px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--primary);
+
+            font-weight: 600;
+
+            display: none;
+
+            z-index: 2;
+
+        }
+
+
+        .clear-search:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           CATEGORY BUTTONS
+        ====================================================== */
+
+        .category-buttons {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin: 25px 0;
+
+        }
+
+
+        .category-btn {
+
+            border: 1px solid #cfe1d0;
+
+            background: #fff;
+
+            color: var(--primary);
+
+            padding: 10px 20px;
+
+            border-radius: 50px;
+
+            font-weight: 600;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .category-btn:hover {
+
+            background: #edf7ee;
+
+            border-color: var(--primary);
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .category-btn.active {
+
+            background: var(--primary);
+
+            color: #fff;
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 8px 18px rgba(46,125,50,0.20);
+
+        }
+
+
+        /* =====================================================
+           RESULT COUNT
+        ====================================================== */
+
+        .product-count {
+
+            text-align: center;
+
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT GRID
+        ====================================================== */
+
+        #productGrid {
+
+            min-height: 150px;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ====================================================== */
+
+        .product-card-new {
+
+            position: relative;
+
+            background: #fff;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            height: 100%;
+
+            border: 1px solid #edf2ed;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.06);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+
+        }
+
+
+        .product-card-new:hover {
+
+            transform: translateY(-9px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.12);
+
+            border-color: #d7e9d8;
+
+        }
+
+
+        .product-card-new::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2e7d32,
+                    #8bc34a
+                );
+
+            transform: scaleX(0);
+
+            transform-origin: left;
+
+            transition:
+                transform 0.4s ease;
+
+            z-index: 2;
+
+        }
+
+
+        .product-card-new:hover::before {
+
+            transform: scaleX(1);
+
+        }
+
+
+        /* =====================================================
+           PRODUCT IMAGE
+        ====================================================== */
+
+        .product-image-wrapper {
+
+            position: relative;
+
+            height: 220px;
+
+            overflow: hidden;
+
+            background: #f2f7f2;
+
+        }
+
+
+        .product-image-wrapper::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,0.10),
+                    transparent 45%
+                );
+
+            opacity: 0;
+
+            transition:
+                opacity 0.4s ease;
+
+        }
+
+
+        .product-card-new:hover
+        .product-image-wrapper::after {
+
+            opacity: 1;
+
+        }
+
+
+        .product-image-wrapper img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.6s ease;
+
+        }
+
+
+        .product-card-new:hover
+        .product-image-wrapper img {
+
+            transform: scale(1.08);
+
+        }
+
+
+        /* =====================================================
+           PRODUCT INFO
+        ====================================================== */
+
+        .product-info {
+
+            padding: 22px;
+
+        }
+
+
+        .product-category {
+
+            display: inline-block;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: var(--primary);
+
+            background: #eaf6eb;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .product-info h4 {
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            color: #222;
+
+        }
+
+
+        .product-info p {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            margin-bottom: 18px;
+
+            min-height: 45px;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ====================================================== */
+
+        .view-details-btn {
+
+            width: 100%;
+
+            border: 1px solid var(--primary);
+
+            background: #fff;
+
+            color: var(--primary);
+
+            padding: 10px 18px;
+
+            border-radius: 50px;
+
+            font-weight: 600;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .view-details-btn:hover {
+
+            background: var(--primary);
+
+            color: #fff;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .whatsapp-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background: #25d366;
+
+            color: #fff;
+
+            padding: 11px 18px;
+
+            border-radius: 50px;
+
+            font-weight: 600;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .whatsapp-btn:hover {
+
+            background: #1ebe5d;
+
+            color: #fff;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(37,211,102,0.22);
+
+        }
+
+
+        /* =====================================================
+           NO PRODUCTS
+        ====================================================== */
+
+        .no-products {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: #777;
+
+        }
+
+
+        .no-products i {
+
+            font-size: 55px;
+
+            color: #9ab99d;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .no-products h4 {
+
+            font-weight: 600;
+
+            color: #444;
+
+        }
+
+
+        /* =====================================================
+           MODALS
+        ====================================================== */
+
+        .modal-content {
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: none;
+
+        }
+
+
+        .modal-header {
+
+            padding: 20px 24px;
+
+        }
+
+
+        .modal-body {
+
+            padding: 24px;
+
+        }
+
+
+        .product-details-image {
+
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: cover;
+
+            border-radius: 16px;
+
+            background: #f2f7f2;
+
+        }
+
+
+        .product-details-category {
+
+            display: inline-block;
+
+            background: #e8f5e9;
+
+            color: var(--primary);
+
+            padding: 6px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .product-details-title {
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            color: #222;
+
+        }
+
+
+        .product-details-description {
+
+            color: #666;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+        }
+
+
+        .product-availability {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--primary);
+
+            background: #f0f8f0;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-control {
+
+            border-radius: 10px;
+
+            padding: 11px 14px;
+
+            border-color: #dce7dc;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(46,125,50,0.10);
+
+        }
+
+
+        /* =====================================================
+           PREMIUM FOOTER
+           ALL ORIGINAL LINKS PRESERVED
+        ====================================================== */
+
+        .footer {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(76,175,80,0.13),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(139,195,74,0.10),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0b2111,
+                    #102b17 50%,
+                    #08190d
+                );
+
+            color: #fff;
+
+            padding: 80px 0 25px;
+
+            margin-top: 70px;
+
+        }
+
+
+        .footer::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(139,195,74,0.08);
+
+            top: -220px;
+
+            right: -100px;
+
+        }
+
+
+        .footer::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+
+            height: 260px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(139,195,74,0.06);
+
+            bottom: -180px;
+
+            left: -100px;
+
+        }
+
+
+        .footer .container {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .footer-logo {
+
+            font-weight: 700;
+
+            font-size: 25px;
+
+            letter-spacing: -0.4px;
+
+        }
+
+
+        .footer-logo i {
+
+            color: #8bc34a;
+
+            margin-right: 5px;
+
+        }
+
+
+        .footer-text {
+
+            color: rgba(255,255,255,0.68);
+
+            line-height: 1.9;
+
+            max-width: 400px;
+
+            font-size: 14px;
+
+        }
+
+
+        .footer h5 {
+
+            color: #fff;
+
+            margin-bottom: 22px;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+        }
+
+
+        .footer h5::after {
+
+            content: "";
+
+            display: block;
+
+            width: 30px;
+
+            height: 2px;
+
+            background: #8bc34a;
+
+            border-radius: 10px;
+
+            margin-top: 9px;
+
+        }
+
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+
+        .footer-links li {
+
+            margin-bottom: 11px;
+
+        }
+
+
+        .footer-links a {
+
+            position: relative;
+
+            color: rgba(255,255,255,0.68);
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color: #a5d66a;
+
+            padding-left: 5px;
+
+        }
+
+
+        .footer-contact p {
+
+            color: rgba(255,255,255,0.68);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .footer-contact i {
+
+            width: 24px;
+
+            color: #8bc34a;
+
+        }
+
+
+        .social-icons {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .social-icons a {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            color: white;
+
+            text-decoration: none;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .social-icons a:hover {
+
+            background: #2e7d32;
+
+            border-color: #2e7d32;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 8px 20px rgba(46,125,50,0.25);
+
+        }
+
+
+        .footer-admin-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+        }
+
+
+        .footer-bottom {
+
+            border-top: 1px solid rgba(255,255,255,0.10);
+
+            margin-top: 45px;
+
+            padding-top: 22px;
+
+            text-align: center;
+
+            color: rgba(255,255,255,0.48);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           FLOATING WHATSAPP
+        ====================================================== */
+
+        .whatsapp-float {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            width: 60px;
+
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #25d366;
+
+            color: white;
+
+            font-size: 29px;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.22);
+
+            z-index: 1100;
+
+            animation:
+                whatsappPulse 2.2s infinite;
+
+            transition:
+                transform 0.3s ease;
+
+        }
+
+
+        .whatsapp-float:hover {
+
+            color: white;
+
+            transform: scale(1.10);
+
+            animation: none;
+
+        }
+
+
+        @keyframes whatsappPulse {
+
+            0% {
+
+                box-shadow:
+                    0 0 0 0 rgba(37,211,102,0.45);
+
+            }
+
+            70% {
+
+                box-shadow:
+                    0 0 0 14px rgba(37,211,102,0);
+
+            }
+
+            100% {
+
+                box-shadow:
+                    0 0 0 0 rgba(37,211,102,0);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .products-page .navbar {
+
+                padding: 11px 0;
+
+            }
+
+
+            .navbar-collapse {
+
+                background: rgba(255,255,255,0.98);
+
+                margin-top: 12px;
+
+                padding: 12px;
+
+                border-radius: 16px;
+
+                box-shadow:
+                    0 15px 35px rgba(0,0,0,0.10);
+
+            }
+
+
+            .nav-link {
+
+                margin-left: 0;
+
+            }
+
+
+            .products-hero {
+
+                padding: 125px 20px 65px;
+
+            }
+
+
+            .products-hero h1 {
+
+                font-size: 38px;
+
+            }
+
+
+            .products-hero p {
+
+                font-size: 15px;
+
+            }
+
+
+            .product-image-wrapper {
+
+                height: 200px;
+
+            }
+
+
+            .product-details-image {
+
+                height: 240px;
+
+            }
+
+
+            .product-details-title {
+
+                font-size: 25px;
+
+            }
+
+
+            .category-btn {
+
+                padding: 9px 15px;
+
+                font-size: 13px;
+
+            }
+
+
+            .footer {
+
+                padding-top: 60px;
+
+            }
+
+
+            .whatsapp-float {
+
+                width: 55px;
+
+                height: 55px;
+
+                right: 18px;
+
+                bottom: 18px;
+
+                font-size: 26px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION ACCESSIBILITY
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+
+                scroll-behavior: auto;
+
+            }
+
+
+            * {
+
+                animation-duration: 0.01ms !important;
+
+                animation-iteration-count: 1 !important;
+
+                transition-duration: 0.01ms !important;
+
+            }
+
+        }
+/* =========================================
+   GOOGLE TRANSLATE - HIDE TOP BANNER
+========================================= */
+
+/* Hide Google Translate top notification bar */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+iframe.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Prevent Google from pushing the website down */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* Hide Google Translate injected iframe */
+iframe.skiptranslate {
+    visibility: hidden !important;
+}
+
+/* Keep our own language selector visible */
+#google_translate_element {
+    display: none !important;
+}
+    </style>
 
 </head>
 
-<body>
 
-<!-- ===========================================
-                NAVBAR
-============================================ -->
+<body class="products-page">
+<div id="google_translate_element" style="display:none;"></div>
 
-<nav class="navbar navbar-expand-lg fixed-top">
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
 
-    <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top">
 
-        <a class="navbar-brand" href="index.html">
+        <div class="container">
 
-            <i class="fa-solid fa-leaf"></i>
+            <a
+                class="navbar-brand"
+                href="./index.html">
 
-            FreshFlow Export
+                DPD Agro Fresh
 
-        </a>
+            </a>
 
-        <button class="navbar-toggler"
+
+            <button
+                class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
 
-        </button>
+            </button>
 
-        <div class="collapse navbar-collapse justify-content-end"
-             id="navbarNav">
 
-            <ul class="navbar-nav">
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar">
 
-                <li class="nav-item">
+                <ul class="navbar-nav ms-auto">
 
-                    <a class="nav-link"
-                       href="index.html">
+                    <li class="nav-item">
 
-                        Home
+                        <a
+                            class="nav-link"
+                            href="./index.html">
 
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="about.html">
-
-                        About
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link active"
-                       href="products.html">
-
-                        Products
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="export.html">
-
-                        Export
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="contact.html">
-
-                        Contact
-
-                    </a>
-
-                </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-</nav>
-
-<!-- ===========================================
-                HERO
-============================================ -->
-
-<section class="products-hero">
-
-<div class="container">
-
-<div class="row align-items-center">
-
-<div class="col-lg-6">
-
-<span class="hero-badge">
-
-PREMIUM EXPORT PRODUCTS
-
-</span>
-
-<h1>
-
-Fresh From Indian Farms To Global Markets
-
-</h1>
-
-<p>
-
-We export premium-quality fruits, vegetables, grains and spices sourced directly from trusted farmers and packed according to international export standards.
-
-</p>
-
-<div class="hero-buttons">
-
-<a href="contact.html"
-class="btn btn-success btn-lg">
-
-Request Quote
-
-</a>
-
-<a href="#categories"
-class="btn btn-outline-light btn-lg ms-3">
-
-Explore Products
-
-</a>
-
-</div>
-
-</div>
-
-<div class="col-lg-6 text-center">
-
-<img
-src="images/products/mango.jpg"
-class="img-fluid products-hero-image"
-alt="Fresh Products">
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================================
-            PRODUCT CATEGORIES
-============================================ -->
-
-<section id="categories"
-class="product-categories">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<span class="section-badge">
-
-OUR CATEGORIES
-
-</span>
-
-<h2 class="section-title">
-
-Premium Agricultural Products
-
-</h2>
-
-<p class="section-subtitle">
-
-Explore our carefully selected export-quality products sourced from India's finest farms.
-
-</p>
-
-</div>
-
-<div class="row g-4">
-
-<!-- Fruits -->
-
-<div class="col-lg-3 col-md-6">
-
-<div class="category-card">
-
-<div class="category-icon">
-
-<i class="fa-solid fa-apple-whole"></i>
-
-</div>
-
-<h4>
-
-Fresh Fruits
-
-</h4>
-
-<p>
-
-Naturally fresh seasonal fruits packed for international markets.
-
-</p>
-
-<a href="#fruits">
-
-View Collection
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-</div>
-
-<!-- Vegetables -->
-
-<div class="col-lg-3 col-md-6">
-
-<div class="category-card">
-
-<div class="category-icon">
-
-<i class="fa-solid fa-carrot"></i>
-
-</div>
-
-<h4>
-
-Fresh Vegetables
-
-</h4>
-
-<p>
-
-Farm fresh vegetables with premium export quality.
-
-</p>
-
-<a href="#vegetables">
-
-View Collection
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-</div>
-
-<!-- Spices -->
-
-<div class="col-lg-3 col-md-6">
-
-<div class="category-card">
-
-<div class="category-icon">
-
-<i class="fa-solid fa-pepper-hot"></i>
-
-</div>
-
-<h4>
-
-Indian Spices
-
-</h4>
-
-<p>
-
-Authentic spices processed and packed under international standards.
-
-</p>
-
-<a href="#spices">
-
-View Collection
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-</div>
-
-<!-- Grains -->
-
-<div class="col-lg-3 col-md-6">
-
-<div class="category-card">
-
-<div class="category-icon">
-
-<i class="fa-solid fa-wheat-awn"></i>
-
-</div>
-
-<h4>
-
-Grains
-
-</h4>
-
-<p>
-
-Premium grains selected for superior quality and freshness.
-
-</p>
-
-<a href="#grains">
-
-View Collection
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<!-- ===========================================
-            FEATURED PRODUCTS
-============================================ -->
-<!-- Featured Products will be added in Message 2 -->
-
-<section class="featured-products">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-                FEATURED PRODUCTS
-            </span>
-
-            <h2 class="section-title">
-                Export Quality Products
-            </h2>
-
-            <p class="section-subtitle">
-                Carefully selected premium agricultural products for international markets.
-            </p>
-
-        </div>
-
-        <!-- ================= FRUITS ================= -->
-
-        <h3 id="fruits" class="product-heading">🍎 Fresh Fruits</h3>
-
-        <div class="row g-4 mb-5">
-
-            <!-- Mango -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="product-card">
-
-                    <span class="product-badge">Best Seller</span>
-
-                    <img src="images/products/mango.jpg"
-                        alt="Mango">
-
-                    <div class="product-content">
-
-                        <h4>Alphonso Mango</h4>
-
-                        <p>Premium export-quality mangoes with rich taste and aroma.</p>
-
-                        <ul>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Farm Fresh</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Export Grade</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Premium Quality</li>
-
-                        </ul>
-
-                        <a href="contact.html" class="quote-btn">
-
-                            Request Quote
+                            Home
 
                         </a>
 
-                    </div>
+                    </li>
 
-                </div>
 
-            </div>
+                    <li class="nav-item">
 
-            <!-- Banana -->
+                        <a
+                            class="nav-link"
+                            href="./about.html">
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="product-card">
-
-                    <img src="images/products/banana.jpg"
-                        alt="Banana">
-
-                    <div class="product-content">
-
-                        <h4>Banana</h4>
-
-                        <p>Fresh Cavendish bananas packed for global export.</p>
-
-                        <ul>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Rich Nutrition</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Long Shelf Life</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Export Grade</li>
-
-                        </ul>
-
-                        <a href="contact.html"
-                            class="quote-btn">
-
-                            Request Quote
+                            About
 
                         </a>
 
-                    </div>
+                    </li>
 
-                </div>
 
-            </div>
+                    <li class="nav-item">
 
-            <!-- Grapes -->
+                        <a
+                            class="nav-link active"
+                            href="./products.html">
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="product-card">
-
-                    <img src="images/products/grapes.jpg"
-                        alt="Grapes">
-
-                    <div class="product-content">
-
-                        <h4>Fresh Grapes</h4>
-
-                        <p>Sweet seedless grapes sourced from premium vineyards.</p>
-
-                        <ul>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Sweet Taste</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Export Packed</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Fresh Harvest</li>
-
-                        </ul>
-
-                        <a href="contact.html"
-                            class="quote-btn">
-
-                            Request Quote
+                            Products
 
                         </a>
 
-                    </div>
+                    </li>
 
-                </div>
 
-            </div>
+                    <li class="nav-item">
 
-            <!-- Pomegranate -->
+                        <a
+                            class="nav-link"
+                            href="./export.html">
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="product-card">
-
-                    <img src="images/products/pomegranate.jpg"
-                        alt="Pomegranate">
-
-                    <div class="product-content">
-
-                        <h4>Pomegranate</h4>
-
-                        <p>Premium juicy pomegranates with vibrant color.</p>
-
-                        <ul>
-
-                            <li><i class="fa-solid fa-circle-check"></i> High Quality</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Rich Color</li>
-
-                            <li><i class="fa-solid fa-circle-check"></i> Export Ready</li>
-
-                        </ul>
-
-                        <a href="contact.html"
-                            class="quote-btn">
-
-                            Request Quote
+                            Export
 
                         </a>
 
-                    </div>
+                    </li>
 
-                </div>
 
-            </div>
+                    <li class="nav-item">
 
-        </div>
+                        <a
+                            class="nav-link"
+                            href="./contact.html">
 
-        <!-- ================= VEGETABLES ================= -->
+                            Contact
 
-        <h3 id="vegetables" class="product-heading">🥬 Fresh Vegetables</h3>
+                        </a>
 
-        <div class="row g-4">
+                    </li>
+<li class="nav-item ms-lg-2">
+    <select
+        id="languageSelect"
+        class="language-select"
+        aria-label="Select language">
 
-            <!-- Onion -->
+        <option value="">🌐 Language</option>
+        <option value="en">English</option>
+        <option value="mr">मराठी</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
 
-            <div class="col-lg-4">
+    </select>
+</li>
 
-                <div class="product-card">
-
-                    <img src="images/products/onion.jpg" alt="Onion">
-
-                    <div class="product-content">
-
-                        <h4>Fresh Onion</h4>
-
-                        <p>Premium red onions suitable for export.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Potato -->
-
-            <div class="col-lg-4">
-
-                <div class="product-card">
-
-                    <img src="images/products/potato.jpg" alt="Potato">
-
-                    <div class="product-content">
-
-                        <h4>Fresh Potato</h4>
-
-                        <p>Selected potatoes with superior quality.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Tomato -->
-
-            <div class="col-lg-4">
-
-                <div class="product-card">
-
-                    <img src="images/products/tomato.jpg" alt="Tomato">
-
-                    <div class="product-content">
-
-                        <h4>Fresh Tomato</h4>
-
-                        <p>Farm-fresh tomatoes with export packaging.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ================= SPICES ================= -->
-
-        <h3 id="spices" class="product-heading mt-5">🌿 Indian Spices</h3>
-
-        <div class="row g-4">
-
-            <div class="col-lg-4">
-
-                <div class="product-card">
-
-                    <img src="images/products/ginger.jpg" alt="Ginger">
-
-                    <div class="product-content">
-
-                        <h4>Fresh Ginger</h4>
-
-                        <p>Premium export-grade ginger.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4">
-
-                <div class="product-card">
-
-                    <img src="images/products/garlic.jpg" alt="Garlic">
-
-                    <div class="product-content">
-
-                        <h4>Garlic</h4>
-
-                        <p>High-quality garlic bulbs with rich flavor.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4">
-
-                <div class="product-card">
-
-                    <img src="images/products/turmeric.jpg" alt="Turmeric">
-
-                    <div class="product-content">
-
-                        <h4>Turmeric</h4>
-
-                        <p>Natural turmeric with excellent curcumin content.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ================= GRAINS ================= -->
-
-        <h3 id="grains" class="product-heading mt-5">🌾 Grains</h3>
-
-        <div class="row g-4">
-
-            <div class="col-lg-6">
-
-                <div class="product-card">
-
-                    <img src="images/products/rice.jpg" alt="Rice">
-
-                    <div class="product-content">
-
-                        <h4>Basmati Rice</h4>
-
-                        <p>Premium long-grain basmati rice for export.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-6">
-
-                <div class="product-card">
-
-                    <img src="images/products/wheat.jpg" alt="Wheat">
-
-                    <div class="product-content">
-
-                        <h4>Wheat</h4>
-
-                        <p>Superior quality wheat sourced directly from farms.</p>
-
-                        <a href="contact.html" class="quote-btn">Request Quote</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ===========================================
-            WHY OUR PRODUCTS
-============================================ -->
-
-<section class="why-products">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                WHY OUR PRODUCTS
-
-            </span>
-
-            <h2 class="section-title">
-
-                Freshness You Can Trust
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Every shipment is carefully selected, inspected and packed
-                to meet international export standards.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="feature-box">
-
-                    <i class="fa-solid fa-seedling"></i>
-
-                    <h4>
-
-                        Farm Fresh
-
-                    </h4>
-
-                    <p>
-
-                        Directly sourced from trusted farmers.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="feature-box">
-
-                    <i class="fa-solid fa-award"></i>
-
-                    <h4>
-
-                        Premium Quality
-
-                    </h4>
-
-                    <p>
-
-                        Multiple quality inspections before export.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="feature-box">
-
-                    <i class="fa-solid fa-temperature-low"></i>
-
-                    <h4>
-
-                        Cold Storage
-
-                    </h4>
-
-                    <p>
-
-                        Freshness maintained throughout transportation.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="feature-box">
-
-                    <i class="fa-solid fa-earth-americas"></i>
-
-                    <h4>
-
-                        Global Export
-
-                    </h4>
-
-                    <p>
-
-                        Supplying products across international markets.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ===========================================
-            EXPORT STANDARDS
-============================================ -->
-
-<section class="export-standards">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                CERTIFICATIONS
-
-            </span>
-
-            <h2 class="section-title">
-
-                International Export Standards
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Our products are packed and processed according
-                to globally accepted quality standards.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="standard-card">
-
-                    <i class="fa-solid fa-certificate"></i>
-
-                    <h4>
-
-                        APEDA
-
-                    </h4>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="standard-card">
-
-                    <i class="fa-solid fa-shield-check"></i>
-
-                    <h4>
-
-                        FSSAI
-
-                    </h4>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="standard-card">
-
-                    <i class="fa-solid fa-medal"></i>
-
-                    <h4>
-
-                        ISO 9001
-
-                    </h4>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="standard-card">
-
-                    <i class="fa-solid fa-globe"></i>
-
-                    <h4>
-
-                        Global GAP
-
-                    </h4>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ===========================================
-            CTA
-============================================ -->
-
-<section class="products-cta">
-
-    <div class="container">
-
-        <div class="products-cta-box">
-
-            <div class="row align-items-center">
-
-                <div class="col-lg-8">
-
-                    <h2>
-
-                        Looking For Bulk Export Orders?
-
-                    </h2>
-
-                    <p>
-
-                        Contact our export team today for pricing,
-                        packaging details and worldwide shipping.
-
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4 text-lg-end">
-
-                    <a href="contact.html"
-                       class="btn btn-light btn-lg">
-
-                        Request Quote
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ===========================================
-            FOOTER
-============================================ -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="row gy-5">
-
-            <!-- Company -->
-
-            <div class="col-lg-4">
-
-                <h2 class="footer-logo">
-
-                    <i class="fa-solid fa-leaf"></i>
-
-                    FreshFlow Export
-
-                </h2>
-
-                <p class="footer-text">
-
-                    Delivering premium quality fruits and vegetables from trusted Indian farms to global markets with reliability, freshness and excellence.
-
-                </p>
-
-                <div class="social-icons">
-
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-
-                </div>
-
-            </div>
-
-            <!-- Quick Links -->
-
-            <div class="col-lg-2 col-md-6">
-
-                <h5>Quick Links</h5>
-
-                <ul class="footer-links">
-
-                    <li><a href="index.html">Home</a></li>
-
-                    <li><a href="about.html">About</a></li>
-
-                    <li><a href="products.html">Products</a></li>
-
-                    <li><a href="export.html">Export</a></li>
-
-                    <li><a href="contact.html">Contact</a></li>
+                   
 
                 </ul>
 
             </div>
 
-            <!-- Products -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <h5>Products</h5>
-
-                <ul class="footer-links">
-
-                    <li><a href="#">Fresh Mango</a></li>
-
-                    <li><a href="#">Onion</a></li>
-
-                    <li><a href="#">Potato</a></li>
-
-                    <li><a href="#">Tomato</a></li>
-
-                    <li><a href="#">Seasonal Vegetables</a></li>
-
-                </ul>
-
-            </div>
-
-            <!-- Contact -->
-
-            <div class="col-lg-3">
-
-                <h5>Contact Us</h5>
-
-                <div class="footer-contact">
-
-                    <p>
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Sangamner, Maharashtra, India
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        +91 7057402592
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-envelope"></i>
-
-                        info@freshflowexport.com
-
-                    </p>
-
-                    <p>
-
-                        <i class="fa-solid fa-globe"></i>
-
-                        www.freshflowexport.com
-
-                    </p>
-
-                </div>
-
-            </div>
-
         </div>
 
-        <hr>
+    </nav>
 
-        <div class="footer-bottom">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="products-hero text-center">
+
+        <div class="container">
+
+            <div class="hero-leaf">
+
+                <i class="bi bi-leaf"></i>
+
+                Fresh • Quality • Reliable Supply
+
+            </div>
+
+
+            <h1>
+
+                Our <span>Products</span>
+
+            </h1>
+
 
             <p>
 
-                © 2026 FreshFlow Export. All Rights Reserved.
+                Fresh vegetables, exotic produce, pulses
+                and premium fruits supplied by
+                DPD Agro Fresh.
 
             </p>
 
         </div>
 
+    </section>
+
+
+    <!-- =====================================================
+         SEARCH & FILTER
+    ====================================================== -->
+
+    <section class="product-tools reveal">
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-7">
+
+                    <div class="search-box">
+
+                        <i class="bi bi-search"></i>
+
+
+                        <input
+                            type="text"
+                            id="productSearch"
+                            class="form-control"
+                            placeholder="Search vegetables, fruits, pulses..."
+                            autocomplete="off">
+
+
+                        <button
+                            type="button"
+                            id="clearSearch"
+                            class="clear-search">
+
+                            Clear
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY FILTERS -->
+
+            <div class="category-buttons">
+
+                <button
+                    class="category-btn active"
+                    data-category="all">
+
+                    All Products
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="exotic-vegetables">
+
+                    Exotic Vegetables
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="vegetables">
+
+                    Indian Vegetables
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="pulses">
+
+                    Pulses
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="domestic-fruits">
+
+                    Domestic Fruits
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="exotic-fruits">
+
+                    Exotic Fruits
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="leafy-vegetables">
+
+                    Leafy Vegetables
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="chillies">
+
+                    Chillies
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="cruciferous-vegetables">
+
+                    Cabbage / Cruciferous Vegetables
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="beans-peas">
+
+                    Beans & Peas
+
+                </button>
+
+
+                <button
+                    class="category-btn"
+                    data-category="root-vegetables">
+
+                    Root Vegetables / Others
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT COUNT -->
+
+            <div
+                class="product-count"
+                id="productCount">
+
+                Loading products...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRODUCT GRID
+    ====================================================== -->
+
+    <section class="pb-5">
+
+        <div class="container">
+
+            <div
+                class="row g-4"
+                id="productGrid">
+            </div>
+
+
+            <!-- NO RESULTS -->
+
+            <div
+                class="no-products"
+                id="noProducts">
+
+                <i class="bi bi-search"></i>
+
+                <h4>
+                    No products found
+                </h4>
+
+                <p>
+                    Try another product name or category.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRODUCT DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal fade"
+        id="productDetailsModal"
+        tabindex="-1"
+        aria-labelledby="productDetailsModalLabel"
+        aria-hidden="true">
+
+        <div
+            class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content border-0 shadow-lg">
+
+                <div class="modal-header border-0">
+
+                    <h5
+                        class="modal-title"
+                        id="productDetailsModalLabel">
+
+                        Product Details
+
+                    </h5>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+
+                </div>
+
+
+                <div class="modal-body">
+
+                    <div class="row g-4 align-items-center">
+
+                        <!-- IMAGE -->
+
+                        <div class="col-md-6">
+
+                            <img
+                                id="detailsImage"
+                                src=""
+                                alt="Product"
+                                class="product-details-image">
+
+                        </div>
+
+
+                        <!-- INFORMATION -->
+
+                        <div class="col-md-6">
+
+                            <span
+                                id="detailsCategory"
+                                class="product-details-category">
+                            </span>
+
+
+                            <h2
+                                id="detailsName"
+                                class="product-details-title mb-3">
+                            </h2>
+
+
+                            <p
+                                id="detailsDescription"
+                                class="product-details-description">
+                            </p>
+
+
+                            <div
+                                class="product-availability mb-4">
+
+                                <i
+                                    class="bi bi-check-circle-fill">
+                                </i>
+
+                                Available for enquiry
+
+                            </div>
+
+
+                            <button
+                                id="detailsOrderButton"
+                                class="whatsapp-btn"
+                                type="button">
+
+                                <i class="bi bi-whatsapp"></i>
+
+                                Order on WhatsApp
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-</footer>
 
-<!-- ===========================================
-        FLOATING WHATSAPP BUTTON
-============================================ -->
+    <!-- =====================================================
+         ORDER MODAL
+    ====================================================== -->
 
-<a href="https://wa.me/919999999999"
-class="whatsapp-float"
-target="_blank"
-rel="noopener noreferrer">
+    <div
+        class="modal fade"
+        id="orderModal"
+        tabindex="-1"
+        aria-labelledby="orderModalLabel"
+        aria-hidden="true">
 
-<i class="fa-brands fa-whatsapp"></i>
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 
-</a>
+            <div
+                class="modal-content border-0 shadow-lg">
+
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="orderModalLabel">
+
+                        <i
+                            class="bi bi-bag-check text-success">
+                        </i>
+
+                        Place Your Order
+
+                    </h5>
 
 
-<!-- Bootstrap -->
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-crossorigin="anonymous"></script>
+                </div>
 
+
+                <div class="modal-body">
+
+                    <form id="orderForm">
+
+                        <!-- PRODUCT -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="selectedProduct">
+
+                                Selected Product
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="selectedProduct"
+                                class="form-control"
+                                readonly>
+
+                        </div>
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="orderQuantity">
+
+                                Quantity
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="orderQuantity"
+                                class="form-control"
+                                placeholder="Example: 10 kg / 5 boxes"
+                                required>
+
+                        </div>
+
+
+                        <!-- NAME -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="customerName">
+
+                                Full Name
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                                required>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="customerPhone">
+
+                                Mobile Number
+
+                            </label>
+
+
+                            <input
+                                type="tel"
+                                id="customerPhone"
+                                class="form-control"
+                                placeholder="Enter mobile number"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                required>
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="deliveryLocation">
+
+                                Delivery Location
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="deliveryLocation"
+                                class="form-control"
+                                placeholder="City / Area / Market"
+                                required>
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="deliveryAddress">
+
+                                Full Delivery Address
+
+                            </label>
+
+
+                            <textarea
+                                id="deliveryAddress"
+                                class="form-control"
+                                rows="3"
+                                placeholder="Enter complete delivery address"
+                                required></textarea>
+
+                        </div>
+
+
+                        <!-- ADDITIONAL DETAILS -->
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label"
+                                for="additionalDetails">
+
+                                Additional Details
+
+                                <span class="text-muted">
+                                    (Optional)
+                                </span>
+
+                            </label>
+
+
+                            <textarea
+                                id="additionalDetails"
+                                class="form-control"
+                                rows="2"
+                                placeholder="Any special requirement?"></textarea>
+
+                        </div>
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            class="whatsapp-btn">
+
+                            <i class="bi bi-whatsapp"></i>
+
+                            Continue on WhatsApp
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ORIGINAL FOOTER LINKS PRESERVED
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="row gy-5">
+
+                <!-- BRAND -->
+
+                <div class="col-lg-4 reveal-left">
+
+                    <h3 class="footer-logo">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                        DPD Agro Fresh
+
+                    </h3>
+
+
+                    <p class="footer-text mt-3">
+
+                        Fresh vegetables, exotic vegetables,
+                        pulses and fruits supplied to
+                        customers across multiple markets.
+
+                    </p>
+
+
+                    <div class="social-icons mt-4">
+
+                        <a href="#" aria-label="Facebook">
+
+                            <i class="fab fa-facebook-f"></i>
+
+                        </a>
+
+
+                        <a href="#" aria-label="Instagram">
+
+                            <i class="fab fa-instagram"></i>
+
+                        </a>
+
+
+                        <a href="#" aria-label="WhatsApp">
+
+                            <i class="fab fa-whatsapp"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="col-lg-2 col-md-6 reveal">
+
+                    <h5>
+                        Quick Links
+                    </h5>
+
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="../frontend/index.html">
+                                Home
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="products.html">
+                                Products
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="export.html">
+                                Supply & Export
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item ms-lg-2">
+
+                            <a
+                                class="nav-link admin-login-link footer-admin-link"
+                                href="admin-login.html">
+
+                                <i class="bi bi-shield-lock"></i>
+
+                                Admin
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- PRODUCTS -->
+
+                <div class="col-lg-3 col-md-6 reveal">
+
+                    <h5>
+                        Products
+                    </h5>
+
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="products.html">
+                                Exotic Vegetables
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="products.html">
+                                Indian Vegetables
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="products.html">
+                                Pulses
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="products.html">
+                                Domestic Fruits
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="products.html">
+                                Exotic Fruits
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="col-lg-3 reveal-right">
+
+                    <h5>
+                        Contact
+                    </h5>
+
+
+                    <div class="footer-contact">
+
+                        <p>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Nashik, Maharashtra, India
+
+                        </p>
+
+
+                        <p>
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            +91 7721082828
+
+                        </p>
+
+
+                        <p>
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            dpdagrofresh@gmail.com
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                © 2026 DPD Agro Fresh.
+                All Rights Reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         FLOATING WHATSAPP
+    ====================================================== -->
+
+    <a
+        href="https://wa.me/917721082828"
+        class="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with DPD Agro Fresh on WhatsApp">
+
+        <i class="fab fa-whatsapp"></i>
+
+    </a>
+
+
+    <!-- =====================================================
+         BOOTSTRAP JS
+         Only one copy
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- =====================================================
+         PRODUCTS JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =====================================================
+           PRODUCT DATA
+        ====================================================== */
+
+        let productsData = [];
+
+
+        /* =====================================================
+           GLOBAL VARIABLES
+        ====================================================== */
+
+        let selectedCategory = "all";
+
+        let selectedProductName = "";
+
+
+        /* =====================================================
+           DOM ELEMENTS
+        ====================================================== */
+
+        const productGrid =
+            document.getElementById("productGrid");
+
+
+        const searchInput =
+            document.getElementById("productSearch");
+
+
+        const clearSearch =
+            document.getElementById("clearSearch");
+
+
+        const categoryButtons =
+            document.querySelectorAll(".category-btn");
+
+
+        const noProducts =
+            document.getElementById("noProducts");
+
+
+        const productCount =
+            document.getElementById("productCount");
+
+
+        /* =====================================================
+           CATEGORY DISPLAY NAME
+        ====================================================== */
+
+        function getCategoryName(category) {
+
+            switch (category) {
+
+                case "exotic-vegetables":
+                    return "Exotic Vegetable";
+
+                case "vegetables":
+                    return "Indian Vegetable";
+
+                case "pulses":
+                    return "Pulses";
+
+                case "domestic-fruits":
+                    return "Domestic Fruit";
+
+                case "exotic-fruits":
+                    return "Exotic Fruit";
+
+                case "leafy-vegetables":
+                    return "Leafy Vegetable";
+
+                case "chillies":
+                    return "Chillies";
+
+                case "cruciferous-vegetables":
+                    return "Cruciferous Vegetable";
+
+                case "beans-peas":
+                    return "Beans & Peas";
+
+                case "root-vegetables":
+                    return "Root Vegetable";
+
+                default:
+                    return category || "Product";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           IMAGE PATH
+        ====================================================== */
+
+        function getImagePath(imageUrl) {
+
+            if (!imageUrl) {
+
+                return "./images/placeholder.jpg";
+
+            }
+
+
+            if (
+                imageUrl.startsWith("http://") ||
+                imageUrl.startsWith("https://") ||
+                imageUrl.startsWith("/")
+            ) {
+
+                return imageUrl;
+
+            }
+
+
+            return "./" + imageUrl;
+
+        }
+
+
+        /* =====================================================
+           LOAD PRODUCTS FROM SPRING BOOT API
+        ====================================================== */
+
+        async function loadProducts() {
+
+            try {
+
+                console.log(
+                    "Loading products from Spring Boot..."
+                );
+
+
+                const response = await fetch(
+                    "http://localhost:8080/api/products"
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load products. HTTP status: " +
+                        response.status
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Products received from backend:",
+                    data
+                );
+
+
+                productsData =
+                    data.map(product => ({
+
+                        id:
+                            product.id,
+
+                        name:
+                            product.name,
+
+                        category:
+                            product.category,
+
+                        categoryName:
+                            getCategoryName(
+                                product.category
+                            ),
+
+                        description:
+                            product.description,
+
+                        image:
+                            getImagePath(
+                                product.imageUrl
+                            ),
+
+                        available:
+                            product.available
+
+                    }));
+
+
+                filterProducts();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading products:",
+                    error
+                );
+
+
+                productGrid.innerHTML = "";
+
+
+                noProducts.style.display =
+                    "block";
+
+
+                productCount.textContent =
+                    "Unable to load products";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           RENDER PRODUCTS
+        ====================================================== */
+
+        function renderProducts(list) {
+
+            productGrid.innerHTML = "";
+
+
+            if (list.length === 0) {
+
+                noProducts.style.display =
+                    "block";
+
+
+                productCount.textContent =
+                    "No products found";
+
+
+                return;
+
+            }
+
+
+            noProducts.style.display =
+                "none";
+
+
+            productCount.textContent =
+                `Showing ${list.length} product${
+                    list.length !== 1 ? "s" : ""
+                }`;
+
+
+            list.forEach((product, index) => {
+
+                const productColumn =
+                    document.createElement("div");
+
+
+                productColumn.className =
+                    "col-lg-3 col-md-4 col-sm-6 reveal";
+
+
+                productColumn.style.transitionDelay =
+                    `${Math.min(index * 60, 400)}ms`;
+
+
+                productColumn.innerHTML = `
+
+                    <div class="product-card-new">
+
+                        <div class="product-image-wrapper">
+
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                                loading="lazy"
+                                onerror="this.onerror=null; this.src='./images/placeholder.jpg';">
+
+                        </div>
+
+
+                        <div class="product-info">
+
+                            <span class="product-category">
+
+                                ${product.categoryName}
+
+                            </span>
+
+
+                            <h4>
+
+                                ${product.name}
+
+                            </h4>
+
+
+                            <p>
+
+                                ${product.description || ""}
+
+                            </p>
+
+
+                            <div class="d-grid gap-2">
+
+                                <button
+                                    type="button"
+                                    class="view-details-btn"
+                                    onclick="showProductDetails(${product.id})">
+
+                                    <i class="bi bi-eye"></i>
+
+                                    View Details
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="whatsapp-btn"
+                                    onclick="orderProduct(${product.id})">
+
+                                    <i class="bi bi-whatsapp"></i>
+
+                                    Order on WhatsApp
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                productGrid.appendChild(
+                    productColumn
+                );
+
+
+                requestAnimationFrame(() => {
+
+                    setTimeout(() => {
+
+                        productColumn.classList.add(
+                            "active"
+                        );
+
+                    }, 30);
+
+                });
+
+            });
+
+        }
+
+
+        /* =====================================================
+           FILTER PRODUCTS
+        ====================================================== */
+
+        function filterProducts() {
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const filteredProducts =
+                productsData.filter(product => {
+
+                    const name =
+                        (product.name || "")
+                            .toLowerCase();
+
+
+                    const category =
+                        (product.category || "")
+                            .toLowerCase();
+
+
+                    const categoryName =
+                        (product.categoryName || "")
+                            .toLowerCase();
+
+
+                    const description =
+                        (product.description || "")
+                            .toLowerCase();
+
+
+                    const matchesSearch =
+
+                        name.includes(searchText) ||
+
+                        category.includes(searchText) ||
+
+                        categoryName.includes(searchText) ||
+
+                        description.includes(searchText);
+
+
+                    const matchesCategory =
+
+                        selectedCategory === "all" ||
+
+                        product.category ===
+                            selectedCategory;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesCategory
+                    );
+
+                });
+
+
+            renderProducts(
+                filteredProducts
+            );
+
+
+            clearSearch.style.display =
+
+                searchText.length > 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ====================================================== */
+
+        searchInput.addEventListener(
+            "input",
+            filterProducts
+        );
+
+
+        /* =====================================================
+           CLEAR SEARCH
+        ====================================================== */
+
+        clearSearch.addEventListener(
+            "click",
+            function() {
+
+                searchInput.value = "";
+
+                filterProducts();
+
+                searchInput.focus();
+
+            }
+        );
+
+
+        /* =====================================================
+           CATEGORY BUTTONS
+        ====================================================== */
+
+        categoryButtons.forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        categoryButtons.forEach(
+                            btn => {
+
+                                btn.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        selectedCategory =
+                            this.dataset.category;
+
+
+                        filterProducts();
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           PRODUCT DETAILS
+        ====================================================== */
+
+        function showProductDetails(productId) {
+
+            const product =
+                productsData.find(
+                    item =>
+                        item.id === productId
+                );
+
+
+            if (!product) {
+
+                console.error(
+                    "Product not found:",
+                    productId
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "detailsName"
+            ).textContent =
+                product.name;
+
+
+            document.getElementById(
+                "detailsCategory"
+            ).textContent =
+                product.categoryName;
+
+
+            document.getElementById(
+                "detailsDescription"
+            ).textContent =
+                product.description || "";
+
+
+            const detailsImage =
+                document.getElementById(
+                    "detailsImage"
+                );
+
+
+            detailsImage.src =
+                product.image;
+
+
+            detailsImage.alt =
+                product.name;
+
+
+            detailsImage.onerror =
+                function() {
+
+                    this.onerror = null;
+
+                    this.src =
+                        "./images/placeholder.jpg";
+
+                };
+
+
+            document.getElementById(
+                "detailsOrderButton"
+            ).onclick =
+                function() {
+
+                    const detailsModal =
+                        bootstrap.Modal.getInstance(
+                            document.getElementById(
+                                "productDetailsModal"
+                            )
+                        );
+
+
+                    if (detailsModal) {
+
+                        detailsModal.hide();
+
+                    }
+
+
+                    setTimeout(
+                        () => {
+                            orderProduct(
+                                product.id
+                            );
+                        },
+                        250
+                    );
+
+                };
+
+
+            const detailsModal =
+                bootstrap.Modal.getOrCreateInstance(
+                    document.getElementById(
+                        "productDetailsModal"
+                    )
+                );
+
+
+            detailsModal.show();
+
+        }
+
+
+        /* =====================================================
+           OPEN ORDER MODAL
+        ====================================================== */
+
+        function orderProduct(productId) {
+
+            const product =
+                productsData.find(
+                    item =>
+                        item.id === productId
+                );
+
+
+            if (!product) {
+
+                console.error(
+                    "Product not found:",
+                    productId
+                );
+
+                return;
+
+            }
+
+
+            selectedProductName =
+                product.name;
+
+
+            document.getElementById(
+                "selectedProduct"
+            ).value =
+                product.name;
+
+
+            const orderModal =
+                bootstrap.Modal.getOrCreateInstance(
+                    document.getElementById(
+                        "orderModal"
+                    )
+                );
+
+
+            orderModal.show();
+
+        }
+
+
+        /* =====================================================
+           ORDER FORM
+        ====================================================== */
+
+        document
+            .getElementById("orderForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const quantity =
+                        document.getElementById(
+                            "orderQuantity"
+                        ).value.trim();
+
+
+                    const customerName =
+                        document.getElementById(
+                            "customerName"
+                        ).value.trim();
+
+
+                    const customerPhone =
+                        document.getElementById(
+                            "customerPhone"
+                        ).value.trim();
+
+
+                    const location =
+                        document.getElementById(
+                            "deliveryLocation"
+                        ).value.trim();
+
+
+                    const address =
+                        document.getElementById(
+                            "deliveryAddress"
+                        ).value.trim();
+
+
+                    const additionalDetails =
+                        document.getElementById(
+                            "additionalDetails"
+                        ).value.trim();
+
+
+                    /*
+                     * DPD Agro Fresh WhatsApp number
+                     */
+
+                    const phoneNumber =
+                        "917721082828";
+
+
+                    const message =
+
+                        `Hello DPD Agro Fresh,%0A%0A` +
+
+                        `I would like to place an order.%0A%0A` +
+
+                        `Product: ${encodeURIComponent(
+                            selectedProductName
+                        )}%0A` +
+
+                        `Quantity: ${encodeURIComponent(
+                            quantity
+                        )}%0A%0A` +
+
+                        `Customer Details:%0A` +
+
+                        `Name: ${encodeURIComponent(
+                            customerName
+                        )}%0A` +
+
+                        `Mobile: ${encodeURIComponent(
+                            customerPhone
+                        )}%0A` +
+
+                        `Delivery Location: ${encodeURIComponent(
+                            location
+                        )}%0A` +
+
+                        `Full Address: ${encodeURIComponent(
+                            address
+                        )}%0A` +
+
+                        `Additional Details: ${encodeURIComponent(
+                            additionalDetails ||
+                            "None"
+                        )}`;
+
+
+                    const whatsappURL =
+
+                        `https://wa.me/${phoneNumber}?text=${message}`;
+
+
+                    window.open(
+                        whatsappURL,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           NAVBAR SCROLL EFFECT
+        ====================================================== */
+
+        const navbar =
+            document.querySelector(
+                ".navbar"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            function() {
+
+                if (window.scrollY > 40) {
+
+                    navbar.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    navbar.classList.remove(
+                        "scrolled"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal, .reveal-left, .reveal-right"
+            );
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                function(entries) {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "active"
+                                );
+
+
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.10,
+                    rootMargin: "0px 0px -50px 0px"
+                }
+            );
+
+
+        revealElements.forEach(
+            element => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           CLOSE MOBILE NAVBAR AFTER CLICK
+        ====================================================== */
+
+        document
+            .querySelectorAll(
+                ".navbar .nav-link"
+            )
+            .forEach(
+                link => {
+
+                    link.addEventListener(
+                        "click",
+                        function() {
+
+                            const navbarCollapse =
+                                document.getElementById(
+                                    "mainNavbar"
+                                );
+
+
+                            if (
+                                navbarCollapse.classList.contains(
+                                    "show"
+                                )
+                            ) {
+
+                                const collapse =
+                                    bootstrap.Collapse.getInstance(
+                                        navbarCollapse
+                                    );
+
+
+                                if (collapse) {
+
+                                    collapse.hide();
+
+                                }
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           INITIAL LOAD
+        ====================================================== */
+
+        loadProducts();
+
+    </script>
+<script>
+
+    function googleTranslateElementInit() {
+
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,mr,hi,kn,gu,ta,te',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+    }
+
+</script>
+
+<script
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    if (!languageSelect) return;
+
+    languageSelect.addEventListener("change", function () {
+
+        const language = this.value;
+
+        if (!language) return;
+
+        const googleSelect =
+            document.querySelector(".goog-te-combo");
+
+        if (!googleSelect) {
+            console.log("Google Translate is still loading...");
+            return;
+        }
+
+        googleSelect.value = language;
+
+        googleSelect.dispatchEvent(
+            new Event("change")
+        );
+
+    });
+
+});
+
+</script>
 </body>
 
 </html>

@@ -3,88 +3,1983 @@
 
 <head>
 
-    <!-- Character Encoding -->
     <meta charset="UTF-8">
 
-    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-    <title>Contact | FreshFlow Export</title>
+    <title>Contact & Order | DPD Agro Fresh</title>
 
-    <meta name="description"
-        content="Contact FreshFlow Export for premium fruits, vegetables, spices, grains and worldwide export services.">
+    <meta
+        name="description"
+        content="Contact DPD Agro Fresh for fresh vegetables, exotic vegetables, fruits, pulses and bulk supply requirements."
+    >
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <!-- =========================================================
+         BOOTSTRAP
+    ========================================================== -->
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-    <!-- Main CSS -->
-    <link rel="stylesheet"
-        href="css/style.css">
+    <!-- =========================================================
+         BOOTSTRAP ICONS
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- =========================================================
+         GOOGLE FONT
+    ========================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================================================
+         MAIN CSS
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../frontend/css/style.css"
+    >
+
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================== */
+
+        :root {
+
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #e8f5e9;
+
+            --accent: #a5d66a;
+
+            --dark: #102b17;
+            --dark-2: #193c20;
+
+            --text: #202820;
+            --muted: #707870;
+
+            --border: #e2ebe2;
+
+            --background: #f7faf7;
+            --white: #ffffff;
+
+            --shadow-sm:
+                0 8px 25px rgba(20, 60, 25, 0.06);
+
+            --shadow-md:
+                0 18px 50px rgba(20, 60, 25, 0.10);
+
+            --shadow-lg:
+                0 30px 80px rgba(20, 60, 25, 0.14);
+
+            --radius-lg: 24px;
+            --radius-md: 18px;
+
+        }
+
+
+        /* =========================================================
+           GLOBAL
+        ========================================================== */
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: "DM Sans", sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            overflow-x: hidden;
+
+        }
+
+
+        ::selection {
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+        a {
+
+            transition:
+                color .3s ease,
+                background .3s ease,
+                transform .3s ease,
+                border-color .3s ease;
+
+        }
+
+
+        /* =========================================================
+           SCROLL REVEAL ANIMATION
+        ========================================================== */
+
+        .reveal {
+
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.22, 1, .36, 1);
+
+        }
+
+
+        .reveal-left {
+
+            opacity: 0;
+
+            transform: translateX(-45px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.22, 1, .36, 1);
+
+        }
+
+
+        .reveal-right {
+
+            opacity: 0;
+
+            transform: translateX(45px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.22, 1, .36, 1);
+
+        }
+
+
+        .reveal-scale {
+
+            opacity: 0;
+
+            transform: scale(.92);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.22, 1, .36, 1);
+
+        }
+
+
+        .reveal.show,
+        .reveal-left.show,
+        .reveal-right.show,
+        .reveal-scale.show {
+
+            opacity: 1;
+
+            transform: translate(0) scale(1);
+
+        }
+
+
+        /* stagger */
+
+        .delay-1 {
+            transition-delay: .08s;
+        }
+
+        .delay-2 {
+            transition-delay: .16s;
+        }
+
+        .delay-3 {
+            transition-delay: .24s;
+        }
+
+        .delay-4 {
+            transition-delay: .32s;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================== */
+
+        .main-navbar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 1000;
+
+            padding: 17px 0;
+
+            background: rgba(255,255,255,.78);
+
+            backdrop-filter: blur(18px);
+
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.35);
+
+            transition:
+                padding .35s ease,
+                background .35s ease,
+                box-shadow .35s ease;
+
+        }
+
+
+        .main-navbar.scrolled {
+
+            padding: 10px 0;
+
+            background: rgba(255,255,255,.96);
+
+            box-shadow:
+                0 10px 35px rgba(20,60,25,.08);
+
+        }
+
+
+        .navbar-brand {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            color: var(--primary) !important;
+
+            letter-spacing: -.3px;
+
+        }
+
+
+        .navbar-brand i {
+
+            margin-right: 7px;
+
+        }
+
+
+        .nav-link {
+
+            position: relative;
+
+            color: #344034 !important;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin-left: 20px;
+
+            padding: 8px 2px !important;
+
+        }
+
+
+        .nav-link::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+
+            height: 2px;
+
+            border-radius: 20px;
+
+            background: var(--primary);
+
+            transition: width .3s ease;
+
+        }
+
+
+        .nav-link:hover,
+        .nav-link.active {
+
+            color: var(--primary) !important;
+
+        }
+
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+
+            width: 100%;
+
+        }
+
+
+        .admin-login-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+        }
+
+
+        .navbar-toggler {
+
+            border: none;
+
+            box-shadow: none !important;
+
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================== */
+
+        .contact-hero {
+
+            position: relative;
+
+            min-height: 570px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding:
+                150px 20px 100px;
+
+            color: white;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    105deg,
+                    rgba(6,36,14,.96) 0%,
+                    rgba(11,65,24,.78) 45%,
+                    rgba(8,52,19,.35) 100%
+                ),
+
+                url("../frontend/images/hero/hero.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+
+        .contact-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(165,214,106,.16),
+                    transparent 35%
+                );
+
+            pointer-events: none;
+
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 780px;
+
+        }
+
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.10);
+
+            border:
+                1px solid rgba(255,255,255,.20);
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+
+            backdrop-filter: blur(10px);
+
+        }
+
+
+        .contact-hero h1 {
+
+            margin-top: 20px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(46px, 7vw, 78px);
+
+            line-height: 1.05;
+
+            font-weight: 700;
+
+            letter-spacing: -2px;
+
+        }
+
+
+        .contact-hero h1 span {
+
+            color: var(--accent);
+
+        }
+
+
+        .contact-hero p {
+
+            max-width: 670px;
+
+            margin-top: 25px;
+
+            color: rgba(255,255,255,.82);
+
+            line-height: 1.8;
+
+            font-size: 17px;
+
+        }
+
+
+        .hero-line {
+
+            width: 70px;
+
+            height: 4px;
+
+            border-radius: 50px;
+
+            background: var(--accent);
+
+            margin-top: 28px;
+
+        }
+
+
+        /* =========================================================
+           COMMON SECTION
+        ========================================================== */
+
+        .section {
+
+            padding: 100px 0;
+
+        }
+
+
+        .section-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 7px 14px;
+
+            border-radius: 50px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: .6px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .section-title {
+
+            margin-bottom: 14px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(30px, 4vw, 43px);
+
+            line-height: 1.15;
+
+            font-weight: 700;
+
+            color: var(--dark-2);
+
+            letter-spacing: -.8px;
+
+        }
+
+
+        .section-text {
+
+            max-width: 680px;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+            color: var(--muted);
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =========================================================
+           CONTACT CARDS
+        ========================================================== */
+
+        .contact-card {
+
+            position: relative;
+
+            height: 100%;
+
+            padding: 32px;
+
+            background: rgba(255,255,255,.92);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius-lg);
+
+            box-shadow: var(--shadow-sm);
+
+            overflow: hidden;
+
+            transition:
+                transform .4s cubic-bezier(.22,1,.36,1),
+                box-shadow .4s ease,
+                border-color .4s ease;
+
+        }
+
+
+        .contact-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            transform: scaleX(0);
+
+            transform-origin: left;
+
+            transition: transform .4s ease;
+
+        }
+
+
+        .contact-card:hover {
+
+            transform: translateY(-10px);
+
+            box-shadow: var(--shadow-md);
+
+            border-color: #cddccd;
+
+        }
+
+
+        .contact-card:hover::before {
+
+            transform: scaleX(1);
+
+        }
+
+
+        .contact-icon {
+
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 23px;
+
+            margin-bottom: 22px;
+
+            transition:
+                transform .35s ease,
+                background .35s ease;
+
+        }
+
+
+        .contact-card:hover .contact-icon {
+
+            transform: scale(1.08) rotate(-4deg);
+
+            background: #d9efd9;
+
+        }
+
+
+        .contact-card h5 {
+
+            color: var(--dark-2);
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .contact-card p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.75;
+
+            min-height: 48px;
+
+        }
+
+
+        .contact-card a {
+
+            color: var(--primary);
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        .contact-card a:hover {
+
+            color: var(--primary-dark);
+
+        }
+
+
+        /* =========================================================
+           ORDER SECTION
+        ========================================================== */
+
+        .order-section {
+
+            position: relative;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(46,125,50,.06),
+                    transparent 30%
+                ),
+
+                #edf7ed;
+
+        }
+
+
+        .order-wrapper {
+
+            position: relative;
+
+            background: rgba(255,255,255,.96);
+
+            border: 1px solid rgba(220,232,220,.9);
+
+            border-radius: 28px;
+
+            padding: 48px;
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+
+        .form-section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--dark-2);
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .form-section-title i {
+
+            color: var(--primary);
+
+        }
+
+
+        .form-label {
+
+            margin-bottom: 8px;
+
+            color: #294c2d;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .required {
+
+            color: #d32f2f;
+
+        }
+
+
+        .form-control,
+        .form-select {
+
+            min-height: 52px;
+
+            border-radius: 13px;
+
+            border: 1px solid #d8e3d8;
+
+            background: #fcfefc;
+
+            padding: 12px 16px;
+
+            color: #263326;
+
+            font-size: 14px;
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+
+        }
+
+
+        .form-control:hover,
+        .form-select:hover {
+
+            border-color: #b9cdb9;
+
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: var(--primary);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(46,125,50,.09);
+
+        }
+
+
+        textarea.form-control {
+
+            min-height: 135px;
+
+            resize: vertical;
+
+        }
+
+
+        hr {
+
+            border-color: #e5ece5;
+
+            opacity: 1;
+
+        }
+
+
+        /* =========================================================
+           PRODUCT SELECTOR
+        ========================================================== */
+
+        .product-selector {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0,1fr));
+
+            gap: 12px;
+
+        }
+
+
+        .product-option {
+
+            position: relative;
+
+        }
+
+
+        .product-option input {
+
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+        }
+
+
+        .product-option label {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 52px;
+
+            padding: 12px 15px;
+
+            text-align: center;
+
+            border: 1px solid #dce6dc;
+
+            border-radius: 13px;
+
+            background: white;
+
+            cursor: pointer;
+
+            color: #49604b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .product-option label:hover {
+
+            border-color: #9fbe9f;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .product-option input:checked + label {
+
+            background: var(--primary-light);
+
+            border-color: var(--primary);
+
+            color: var(--primary);
+
+            box-shadow:
+                0 8px 20px rgba(46,125,50,.08);
+
+        }
+
+
+        /* =========================================================
+           LOCATION BOX
+        ========================================================== */
+
+        .location-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f8f1,
+                    #e8f5e9
+                );
+
+            border: 1px solid #dcebdc;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .location-icon {
+
+            flex-shrink: 0;
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: white;
+
+            color: var(--primary);
+
+            font-size: 21px;
+
+        }
+
+
+        .location-content {
+
+            flex: 1;
+
+        }
+
+
+        .location-content strong {
+
+            display: block;
+
+            color: var(--dark-2);
+
+            font-size: 14px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .location-content p {
+
+            margin: 0;
+
+            color: #747d74;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .location-button {
+
+            flex-shrink: 0;
+
+            border: none;
+
+            background: var(--primary);
+
+            color: white;
+
+            padding: 10px 17px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: .3s ease;
+
+        }
+
+
+        .location-button:hover {
+
+            background: var(--primary-dark);
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .location-button:disabled {
+
+            opacity: .75;
+
+            cursor: wait;
+
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================== */
+
+        .btn-main {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2e7d32,
+                    #256b29
+                );
+
+            color: white;
+
+            padding: 14px 27px;
+
+            border-radius: 50px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 10px 25px rgba(46,125,50,.20);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+
+        }
+
+
+        .btn-main:hover {
+
+            color: white;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 30px rgba(46,125,50,.27);
+
+        }
+
+
+        .btn-main:disabled {
+
+            opacity: .7;
+
+            cursor: wait;
+
+            transform: none;
+
+        }
+
+
+        .btn-whatsapp {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 14px 27px;
+
+            border-radius: 50px;
+
+            background: #25d366;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 10px 25px rgba(37,211,102,.17);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+
+        }
+
+
+        .btn-whatsapp:hover {
+
+            color: white;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 30px rgba(37,211,102,.25);
+
+        }
+
+
+        /* =========================================================
+           FORM MESSAGE
+        ========================================================== */
+
+        #formMessage {
+
+            display: none;
+
+            padding: 13px 18px;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            background: #f7faf7;
+
+        }
+
+
+        /* =========================================================
+           FAQ
+        ========================================================== */
+
+        .faq-section {
+
+            background: #f7faf7;
+
+        }
+
+
+        .accordion-item {
+
+            border: 1px solid var(--border);
+
+            margin-bottom: 12px;
+
+            border-radius: 16px !important;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 20px rgba(20,60,25,.035);
+
+        }
+
+
+        .accordion-button {
+
+            padding: 21px;
+
+            color: var(--dark-2);
+
+            background: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            box-shadow: none !important;
+
+        }
+
+
+        .accordion-button:not(.collapsed) {
+
+            color: var(--primary);
+
+            background: var(--primary-light);
+
+        }
+
+
+        .accordion-body {
+
+            padding: 0 21px 21px;
+
+            background: white;
+
+            color: #6f776f;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================== */
+
+        .footer {
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #102b17,
+                    #0a2110
+                );
+
+            color: white;
+
+            padding: 80px 0 25px;
+
+            overflow: hidden;
+
+        }
+
+
+        .footer::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+
+            height: 400px;
+
+            right: -180px;
+
+            top: -180px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(139,195,74,.06);
+
+        }
+
+
+        .footer-logo {
+
+            font-family: "Playfair Display", serif;
+
+            font-weight: 700;
+
+            font-size: 25px;
+
+        }
+
+
+        .footer-logo i {
+
+            color: #8bc34a;
+
+        }
+
+
+        .footer-text {
+
+            max-width: 360px;
+
+            color: rgba(255,255,255,.63);
+
+            line-height: 1.8;
+
+            font-size: 14px;
+
+        }
+
+
+        .footer h5 {
+
+            margin-bottom: 22px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+        }
+
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+
+        .footer-links li {
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .footer-links a {
+
+            color: rgba(255,255,255,.63);
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color: white;
+
+            padding-left: 4px;
+
+        }
+
+
+        .footer-contact p {
+
+            color: rgba(255,255,255,.63);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .footer-contact i {
+
+            width: 23px;
+
+            color: #8bc34a;
+
+        }
+
+
+        .social-icons {
+
+            display: flex;
+
+            gap: 9px;
+
+        }
+
+
+        .social-icons a {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.07);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            color: white;
+
+            text-decoration: none;
+
+            transition: .3s ease;
+
+        }
+
+
+        .social-icons a:hover {
+
+            background: var(--primary);
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .footer-bottom {
+
+            border-top:
+                1px solid rgba(255,255,255,.09);
+
+            margin-top: 45px;
+
+            padding-top: 22px;
+
+            text-align: center;
+
+            color: rgba(255,255,255,.45);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           FLOATING WHATSAPP
+        ========================================================== */
+
+        .whatsapp-float {
+
+            position: fixed;
+
+            right: 24px;
+
+            bottom: 24px;
+
+            width: 60px;
+
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #25d366;
+
+            color: white;
+
+            font-size: 29px;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,.20);
+
+            z-index: 999;
+
+            animation:
+                whatsappPulse 2.5s infinite;
+
+        }
+
+
+        .whatsapp-float:hover {
+
+            color: white;
+
+            transform: scale(1.08);
+
+        }
+
+
+        @keyframes whatsappPulse {
+
+            0%,
+            100% {
+
+                box-shadow:
+                    0 12px 35px rgba(0,0,0,.20);
+
+            }
+
+            50% {
+
+                box-shadow:
+                    0 12px 35px rgba(37,211,102,.35);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           BACK TO TOP
+        ========================================================== */
+
+        .back-to-top {
+
+            position: fixed;
+
+            right: 27px;
+
+            bottom: 96px;
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: var(--primary);
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.12);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(10px);
+
+            transition: .3s ease;
+
+            z-index: 998;
+
+        }
+
+
+        .back-to-top.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+
+        }
+
+
+        .back-to-top:hover {
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================== */
+
+        @media (max-width: 991px) {
+
+            .nav-link {
+
+                margin-left: 0;
+
+                padding: 11px 0 !important;
+
+            }
+
+            .nav-link::after {
+
+                display: none;
+
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .contact-hero {
+
+                min-height: 500px;
+
+                padding:
+                    140px 20px 80px;
+
+            }
+
+
+            .contact-hero h1 {
+
+                letter-spacing: -1px;
+
+            }
+
+
+            .section {
+
+                padding: 75px 0;
+
+            }
+
+
+            .order-wrapper {
+
+                padding: 27px 20px;
+
+                border-radius: 21px;
+
+            }
+
+
+            .product-selector {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .location-box {
+
+                align-items: flex-start;
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .location-button {
+
+                width: 100%;
+
+            }
+
+
+            .whatsapp-float {
+
+                width: 54px;
+
+                height: 54px;
+
+                right: 17px;
+
+                bottom: 17px;
+
+            }
+
+
+            .back-to-top {
+
+                right: 23px;
+
+                bottom: 82px;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+
+                scroll-behavior: auto;
+
+            }
+
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration: .01ms !important;
+
+                animation-iteration-count: 1 !important;
+
+                transition-duration: .01ms !important;
+
+            }
+
+
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .reveal-scale {
+
+                opacity: 1;
+
+                transform: none;
+
+            }
+
+        }
+/* =========================================
+   GOOGLE TRANSLATE - HIDE TOP BANNER
+========================================= */
+
+/* Hide Google Translate top notification bar */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+iframe.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Prevent Google from pushing the website down */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* Hide Google Translate injected iframe */
+iframe.skiptranslate {
+    visibility: hidden !important;
+}
+
+/* Keep our own language selector visible */
+#google_translate_element {
+    display: none !important;
+}
+    </style>
 
 </head>
 
+
 <body>
 
-<!-- ==========================================
-                NAVBAR
-=========================================== -->
+<div id="google_translate_element" style="display:none;"></div>
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav
+    class="navbar navbar-expand-lg fixed-top main-navbar"
+    id="mainNavbar"
+>
 
     <div class="container">
 
-        <a class="navbar-brand" href="index.html">
+        <a
+            class="navbar-brand"
+            href="../frontend/index.html"
+        >
 
             <i class="fa-solid fa-leaf"></i>
 
-            FreshFlow Export
+            DPD Agro Fresh
 
         </a>
 
-        <button class="navbar-toggler"
+
+        <button
+            class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav">
+            data-bs-target="#mainNavbarMenu"
+            aria-controls="mainNavbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
 
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-list fs-3"></i>
 
         </button>
 
-        <div class="collapse navbar-collapse justify-content-end"
-            id="navbarNav">
 
-            <ul class="navbar-nav">
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbarMenu"
+        >
 
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
+            <ul class="navbar-nav ms-auto align-items-lg-center">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="products.html">Products</a>
+
+                    <a
+                        class="nav-link"
+                        href="../frontend/index.html"
+                    >
+                        Home
+                    </a>
+
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="export.html">Export</a>
-                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="contact.html">Contact</a>
+
+                    <a
+                        class="nav-link"
+                        href="about.html"
+                    >
+                        About
+                    </a>
+
                 </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="products.html"
+                    >
+                        Products
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="export.html"
+                    >
+                        Supply & Export
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="contact.html"
+                    >
+                        Contact
+                    </a>
+
+                </li>
+<li class="nav-item ms-lg-2">
+    <select
+        id="languageSelect"
+        class="language-select"
+        aria-label="Select language">
+
+        <option value="">🌐 Language</option>
+        <option value="en">English</option>
+        <option value="mr">मराठी</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+
+    </select>
+</li>
+
+                
 
             </ul>
 
@@ -94,54 +1989,56 @@
 
 </nav>
 
-<!-- ==========================================
-                HERO
-=========================================== -->
+
+<!-- =========================================================
+     HERO
+========================================================== -->
 
 <section class="contact-hero">
 
     <div class="container">
 
-        <div class="row align-items-center">
+        <div class="hero-content">
 
-            <div class="col-lg-6">
+            <div
+                class="hero-badge reveal"
+            >
 
-                <span class="hero-badge">
+                <i class="bi bi-chat-dots-fill"></i>
 
-                    GET IN TOUCH
-
-                </span>
-
-                <h1>
-
-                    Let's Build Your Global Supply Chain Together
-
-                </h1>
-
-                <p>
-
-                    Whether you're looking for premium fruits,
-                    vegetables, spices, grains or customized export
-                    solutions, our team is ready to assist you.
-
-                </p>
-
-                <a href="#contact-form"
-                    class="btn btn-success btn-lg">
-
-                    Send Inquiry
-
-                </a>
+                Contact & Order
 
             </div>
 
-            <div class="col-lg-6 text-center">
 
-                <img src="images/contact/contacthero.jpg"
-                    class="img-fluid contact-hero-image"
-                    alt="Contact">
+            <h1
+                class="reveal delay-1"
+            >
 
-            </div>
+                Let's Talk About
+
+                <br>
+
+                <span>Your Requirement</span>
+
+            </h1>
+
+
+            <p
+                class="reveal delay-2"
+            >
+
+                Looking for fresh vegetables, exotic produce,
+                pulses or fruits? Tell us what you need and
+                our team will get back to you with the right
+                supply solution.
+
+            </p>
+
+
+            <div
+                class="hero-line reveal delay-3"
+            ></div>
 
         </div>
 
@@ -149,544 +2046,84 @@
 
 </section>
 
-<!-- ==========================================
-            CONTACT INFORMATION
-=========================================== -->
 
-<section class="contact-info">
+<!-- =========================================================
+     CONTACT OPTIONS
+========================================================== -->
+
+<section class="section">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+
+        <div
+            class="text-center mb-5 reveal"
+        >
 
             <span class="section-badge">
 
-                CONTACT DETAILS
+                <i class="bi bi-telephone"></i>
+
+                Get In Touch
 
             </span>
 
+
             <h2 class="section-title">
 
-                We're Always Ready To Help
+                Choose How You Want To Contact Us
 
             </h2>
 
-            <p class="section-subtitle">
 
-                Reach us through any of the following channels.
+            <p class="section-text">
+
+                Whether you have a quick question or a bulk
+                requirement, our team is ready to assist you.
 
             </p>
 
         </div>
+
 
         <div class="row g-4">
 
-            <!-- Address -->
 
-            <div class="col-lg-3 col-md-6">
+            <!-- PHONE -->
 
-                <div class="contact-card">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <h4>Office</h4>
-
-                    <p>
-
-                        Pune, Maharashtra<br>
-
-                        India
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Phone -->
-
-            <div class="col-lg-3 col-md-6">
+            <div
+                class="col-lg-4 col-md-6 reveal delay-1"
+            >
 
                 <div class="contact-card">
 
-                    <i class="fa-solid fa-phone"></i>
+                    <div class="contact-icon">
 
-                    <h4>Call Us</h4>
+                        <i class="bi bi-telephone-fill"></i>
+
+                    </div>
+
+
+                    <h5>
+
+                        Call Us
+
+                    </h5>
+
 
                     <p>
 
-                        +91 98765 43210
+                        Speak directly with the
+                        DPD Agro Fresh team.
 
                     </p>
 
-                </div>
 
-            </div>
+                    <a href="tel:+917721082828">
 
-            <!-- Email -->
+                        +91 7721082828
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="contact-card">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                    <h4>Email</h4>
-
-                    <p>
-
-                        info@freshflowexport.com
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- Hours -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="contact-card">
-
-                    <i class="fa-solid fa-clock"></i>
-
-                    <h4>Business Hours</h4>
-
-                    <p>
-
-                        Mon - Sat<br>
-
-                        9:00 AM - 6:00 PM
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ==========================================
-            CONTACT FORM
-=========================================== -->
-
-<section id="contact-form" class="contact-form-section">
-
-    <div class="container">
-
-        <div class="row align-items-center g-5">
-
-            <!-- Left Side -->
-
-            <div class="col-lg-6">
-
-                <span class="section-badge">
-
-                    SEND AN INQUIRY
-
-                </span>
-
-                <h2 class="section-title">
-
-                    Tell Us About Your Requirement
-
-                </h2>
-
-                <p class="section-subtitle">
-
-                    Fill out the form below and our export specialists
-                    will get back to you within 24 hours.
-
-                </p>
-
-                <form>
-
-                    <div class="row">
-
-                        <div class="col-md-6 mb-4">
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Full Name"
-                                   required>
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Company Name">
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <input type="email"
-                                   class="form-control"
-                                   placeholder="Email Address"
-                                   required>
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <input type="tel"
-                                   class="form-control"
-                                   placeholder="Phone Number">
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Country">
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <select class="form-select" aria-label="Product Interested In" title="Product Interested In">
-
-                                <option selected>
-
-                                    Product Interested In
-
-                                </option>
-
-                                <option>
-
-                                    Fresh Fruits
-
-                                </option>
-
-                                <option>
-
-                                    Fresh Vegetables
-
-                                </option>
-
-                                <option>
-
-                                    Spices
-
-                                </option>
-
-                                <option>
-
-                                    Grains
-
-                                </option>
-
-                                <option>
-
-                                    Mixed Products
-
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="col-12 mb-4">
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Estimated Quantity (Optional)">
-
-                        </div>
-
-                        <div class="col-12 mb-4">
-
-                            <textarea rows="6"
-                                      class="form-control"
-                                      placeholder="Write Your Message"></textarea>
-
-                        </div>
-
-                        <div class="col-12">
-
-                            <button class="btn btn-success btn-lg">
-
-                                Send Inquiry
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-            <!-- Right Side -->
-
-            <div class="col-lg-6">
-
-                <div class="office-image">
-
-                    <img src="images/contact/office.jpg"
-                         class="img-fluid"
-                         alt="Office">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-            GOOGLE MAP
-=========================================== -->
-
-<section class="map-section">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                OUR LOCATION
-
-            </span>
-
-            <h2 class="section-title">
-
-                Visit Our Office
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                We welcome international buyers,
-                distributors and business partners.
-
-            </p>
-
-        </div>
-
-        <div class="map-box">
-
-            <iframe
-                src="https://www.google.com/maps?q=Pune,Maharashtra&output=embed"
-                width="100%"
-                height="500"
-                style="border:0;"
-                loading="lazy"
-                allowfullscreen>
-
-            </iframe>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ==========================================
-                FAQ SECTION
-=========================================== -->
-
-<section class="faq-section">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="section-badge">
-
-                FAQ
-
-            </span>
-
-            <h2 class="section-title">
-
-                Frequently Asked Questions
-
-            </h2>
-
-            <p class="section-subtitle">
-
-                Find answers to the most common questions from our global buyers.
-
-            </p>
-
-        </div>
-
-        <div class="accordion" id="faqAccordion">
-
-            <div class="accordion-item">
-
-                <h2 class="accordion-header">
-
-                    <button class="accordion-button"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#faq1">
-
-                        Which countries do you export to?
-
-                    </button>
-
-                </h2>
-
-                <div id="faq1"
-                     class="accordion-collapse collapse show"
-                     data-bs-parent="#faqAccordion">
-
-                    <div class="accordion-body">
-
-                        We export fresh fruits, vegetables, spices and grains
-                        to the Middle East, Europe, Asia, Africa and many other
-                        international markets.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="accordion-item">
-
-                <h2 class="accordion-header">
-
-                    <button class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#faq2">
-
-                        Can I request custom packaging?
-
-                    </button>
-
-                </h2>
-
-                <div id="faq2"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#faqAccordion">
-
-                    <div class="accordion-body">
-
-                        Yes. We provide customized export packaging based on
-                        customer requirements and destination country standards.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="accordion-item">
-
-                <h2 class="accordion-header">
-
-                    <button class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#faq3">
-
-                        Do you provide export documentation?
-
-                    </button>
-
-                </h2>
-
-                <div id="faq3"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#faqAccordion">
-
-                    <div class="accordion-body">
-
-                        Yes. We assist with all export documentation including
-                        invoices, certificates and customs paperwork.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="accordion-item">
-
-                <h2 class="accordion-header">
-
-                    <button class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#faq4">
-
-                        How quickly do you respond?
-
-                    </button>
-
-                </h2>
-
-                <div id="faq4"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#faqAccordion">
-
-                    <div class="accordion-body">
-
-                        Our team normally responds within 24 business hours.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-                CTA
-=========================================== -->
-
-<section class="contact-cta">
-
-    <div class="container">
-
-        <div class="contact-cta-box">
-
-            <div class="row align-items-center">
-
-                <div class="col-lg-8">
-
-                    <h2>
-
-                        Ready To Start Your Global Business Journey?
-
-                    </h2>
-
-                    <p>
-
-                        FreshFlow Export delivers premium-quality agricultural
-                        products worldwide with trusted logistics and exceptional
-                        customer service.
-
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4 text-lg-end">
-
-                    <a href="products.html"
-                       class="btn btn-light btn-lg">
-
-                        Explore Products
+                        <i class="bi bi-arrow-right ms-1"></i>
 
                     </a>
 
@@ -694,98 +2131,688 @@
 
             </div>
 
+
+            <!-- WHATSAPP -->
+
+            <div
+                class="col-lg-4 col-md-6 reveal delay-2"
+            >
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+
+                        <i class="bi bi-whatsapp"></i>
+
+                    </div>
+
+
+                    <h5>
+
+                        WhatsApp
+
+                    </h5>
+
+
+                    <p>
+
+                        Send your product requirement
+                        directly through WhatsApp.
+
+                    </p>
+
+
+                    <a
+                        href="https://wa.me/917721082828"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        Start WhatsApp Chat
+
+                        <i class="bi bi-arrow-right ms-1"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div
+                class="col-lg-4 col-md-6 reveal delay-3"
+            >
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                    </div>
+
+
+                    <h5>
+
+                        Location
+
+                    </h5>
+
+
+                    <p>
+
+                        Sangamner, Maharashtra,
+                        India.
+
+                    </p>
+
+
+                    <a href="#orderForm">
+
+                        Send Requirement
+
+                        <i class="bi bi-arrow-right ms-1"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
         </div>
 
     </div>
 
 </section>
 
-<!-- ==========================================
-                FOOTER
-=========================================== -->
 
-<footer class="footer">
+<!-- =========================================================
+     ORDER SECTION
+========================================================== -->
+
+<section
+    class="section order-section"
+    id="orderForm"
+>
 
     <div class="container">
 
-        <div class="row gy-5">
 
-            <div class="col-lg-4">
+        <div
+            class="text-center mb-5 reveal"
+        >
 
-                <h3>
+            <span class="section-badge">
 
-                    <i class="fa-solid fa-leaf"></i>
+                <i class="bi bi-basket2"></i>
 
-                    FreshFlow Export
+                Customer Enquiry
 
-                </h3>
+            </span>
 
-                <p>
 
-                    Exporting premium Indian fruits, vegetables, spices and grains
-                    worldwide with quality, trust and reliability.
+            <h2 class="section-title">
 
-                </p>
+                Tell Us What You Need
 
-            </div>
+            </h2>
 
-            <div class="col-lg-2">
 
-                <h5>Quick Links</h5>
+            <p class="section-text">
 
-                <ul class="footer-links">
+                Share your basic requirement below.
+                Our team will review your enquiry and
+                contact you shortly.
 
-                    <li><a href="index.html">Home</a></li>
+            </p>
 
-                    <li><a href="about.html">About</a></li>
+        </div>
 
-                    <li><a href="products.html">Products</a></li>
 
-                    <li><a href="export.html">Export</a></li>
+        <div class="row justify-content-center">
 
-                    <li><a href="contact.html">Contact</a></li>
+            <div class="col-xl-9">
 
-                </ul>
 
-            </div>
+                <div
+                    class="order-wrapper reveal-scale"
+                >
 
-            <div class="col-lg-3">
+                    <form id="orderFormElement">
 
-                <h5>Contact</h5>
 
-                <p>
+                        <!-- =================================================
+                             CUSTOMER DETAILS
+                        ================================================== -->
 
-                    Pune, Maharashtra, India
+                        <h5 class="form-section-title">
 
-                </p>
+                            <i class="bi bi-person-circle"></i>
 
-                <p>
+                            Customer Details
 
-                    +91 98765 43210
+                        </h5>
 
-                </p>
 
-                <p>
+                        <div class="row g-4">
 
-                    info@freshflowexport.com
 
-                </p>
+                            <div class="col-md-6">
 
-            </div>
+                                <label
+                                    class="form-label"
+                                    for="customerName"
+                                >
 
-            <div class="col-lg-3">
+                                    Full Name
 
-                <h5>Follow Us</h5>
+                                    <span class="required">*</span>
 
-                <div class="social-links">
+                                </label>
 
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
 
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="customerName"
+                                    placeholder="Enter your full name"
+                                    required
+                                >
 
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
 
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="customerPhone"
+                                >
+
+                                    Mobile Number
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <input
+                                    type="tel"
+                                    class="form-control"
+                                    id="customerPhone"
+                                    placeholder="Enter mobile number"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="customerEmail"
+                                >
+
+                                    Email
+
+                                </label>
+
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="customerEmail"
+                                    placeholder="Enter email address"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="language"
+                                >
+
+                                    Preferred Language
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="language"
+                                >
+
+                                    <option value="English">
+                                        English
+                                    </option>
+
+                                    <option value="Marathi">
+                                        मराठी
+                                    </option>
+
+                                    <option value="Hindi">
+                                        हिन्दी
+                                    </option>
+
+                                    <option value="Kannada">
+                                        ಕನ್ನಡ
+                                    </option>
+
+                                    <option value="Telugu">
+                                        తెలుగు
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <hr class="my-5">
+
+
+                        <!-- =================================================
+                             PRODUCT
+                        ================================================== -->
+
+                        <h5 class="form-section-title">
+
+                            <i class="bi bi-basket2-fill"></i>
+
+                            Product Requirement
+
+                        </h5>
+
+
+                        <label class="form-label mb-3">
+
+                            Select Product Category
+
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="product-selector">
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="exotic"
+                                    value="Exotic Vegetables"
+                                    required
+                                >
+
+                                <label for="exotic">
+
+                                    🥦 Exotic Vegetables
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="indian"
+                                    value="Indian Vegetables"
+                                >
+
+                                <label for="indian">
+
+                                    🥬 Indian Vegetables
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="pulses"
+                                    value="Pulses"
+                                >
+
+                                <label for="pulses">
+
+                                    🌱 Pulses
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="domestic"
+                                    value="Domestic Fruits"
+                                >
+
+                                <label for="domestic">
+
+                                    🍎 Domestic Fruits
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="foreign"
+                                    value="Exotic Fruits"
+                                >
+
+                                <label for="foreign">
+
+                                    🍊 Exotic Fruits
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="product-option">
+
+                                <input
+                                    type="radio"
+                                    name="product"
+                                    id="other"
+                                    value="Other"
+                                >
+
+                                <label for="other">
+
+                                    📦 Other Requirement
+
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row g-4 mt-2">
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="specificProduct"
+                                >
+
+                                    Specific Product
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="specificProduct"
+                                    placeholder="Example: Avocado, Mango, Broccoli"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="quantity"
+                                >
+
+                                    Approximate Quantity
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="quantity"
+                                    placeholder="Example: 100 kg / 50 boxes"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <hr class="my-5">
+
+
+                        <!-- =================================================
+                             DELIVERY LOCATION
+                        ================================================== -->
+
+                        <h5 class="form-section-title">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            Delivery Location
+
+                        </h5>
+
+
+                        <div class="row g-4">
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="city"
+                                >
+
+                                    City / Location
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="city"
+                                    placeholder="Example: Pune, Mumbai, Sangli"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                    for="pincode"
+                                >
+
+                                    Pincode
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="pincode"
+                                    placeholder="Enter pincode"
+                                >
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label
+                                    class="form-label"
+                                    for="address"
+                                >
+
+                                    Full Delivery Address
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <textarea
+                                    class="form-control"
+                                    id="address"
+                                    placeholder="Enter complete delivery address"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- LOCATION BUTTON -->
+
+                        <div class="location-box">
+
+                            <div class="location-icon">
+
+                                <i class="bi bi-crosshair"></i>
+
+                            </div>
+
+
+                            <div class="location-content">
+
+                                <strong>
+
+                                    Want to use your current location?
+
+                                </strong>
+
+
+                                <p>
+
+                                    We will detect your location and
+                                    try to fill the address automatically.
+
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                id="locationButton"
+                                class="location-button"
+                            >
+
+                                <i class="bi bi-crosshair me-1"></i>
+
+                                Use My Location
+
+                            </button>
+
+                        </div>
+
+
+                        <hr class="my-5">
+
+
+                        <!-- =================================================
+                             MESSAGE
+                        ================================================== -->
+
+                        <h5 class="form-section-title">
+
+                            <i class="bi bi-chat-left-text-fill"></i>
+
+                            Additional Requirement
+
+                        </h5>
+
+
+                        <textarea
+                            class="form-control mb-4"
+                            id="message"
+                            placeholder="Tell us anything else about your requirement..."
+                        ></textarea>
+
+
+                        <!-- =================================================
+                             ACTIONS
+                        ================================================== -->
+
+                        <div
+                            class="d-flex flex-wrap gap-3 justify-content-center"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn-main"
+                            >
+
+                                <i class="bi bi-send-fill me-2"></i>
+
+                                Send Enquiry
+
+                            </button>
+
+
+                            <a
+                                href="https://wa.me/917721082828"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-whatsapp"
+                            >
+
+                                <i class="fab fa-whatsapp"></i>
+
+                                WhatsApp Us
+
+                            </a>
+
+                        </div>
+
+
+                        <!-- MESSAGE -->
+
+                        <div
+                            id="formMessage"
+                            class="text-center mt-4"
+                        ></div>
+
+
+                    </form>
 
                 </div>
 
@@ -793,15 +2820,505 @@
 
         </div>
 
-        <hr>
+    </div>
 
-        <div class="text-center">
+</section>
 
-            <p>
 
-                © 2026 FreshFlow Export. All Rights Reserved.
+<!-- =========================================================
+     FAQ
+========================================================== -->
 
-            </p>
+<section class="section faq-section">
+
+    <div class="container">
+
+
+        <div
+            class="text-center mb-5 reveal"
+        >
+
+            <span class="section-badge">
+
+                <i class="bi bi-question-circle"></i>
+
+                FAQ
+
+            </span>
+
+
+            <h2 class="section-title">
+
+                Common Questions
+
+            </h2>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+
+                <div
+                    class="accordion reveal"
+                    id="faqAccordion"
+                >
+
+
+                    <!-- FAQ 1 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#faq1"
+                            >
+
+                                How can I place an order?
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="faq1"
+                            class="accordion-collapse collapse show"
+                            data-bs-parent="#faqAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                You can submit your requirement through
+                                the enquiry form above or contact us
+                                directly through WhatsApp or phone.
+                                Our team will review your requirement
+                                and contact you.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FAQ 2 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#faq2"
+                            >
+
+                                Can I request a specific quantity?
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="faq2"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                Yes. Mention your required quantity
+                                in kilograms, boxes or any other
+                                suitable unit in the enquiry form.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FAQ 3 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#faq3"
+                            >
+
+                                Can I provide my delivery location?
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="faq3"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                Yes. You can enter your city, pincode
+                                and complete delivery address. You can
+                                also use the location button to detect
+                                your current location.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FAQ 4 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#faq4"
+                            >
+
+                                Which products can I request?
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="faq4"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                DPD Agro Fresh offers Indian vegetables,
+                                exotic vegetables, pulses, domestic fruits
+                                and exotic fruits. You can also select
+                                "Other Requirement" if your requirement
+                                is not listed.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+
+            <!-- BRAND -->
+
+            <div class="col-lg-4">
+
+                <h3 class="footer-logo">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                    DPD Agro Fresh
+
+                </h3>
+
+
+                <p class="footer-text mt-3">
+
+                    Fresh vegetables, exotic vegetables,
+                    pulses and fruits supplied across
+                    multiple markets with a focus on
+                    quality and reliable supply.
+
+                </p>
+
+
+                <!-- NO LINKEDIN -->
+
+                <div class="social-icons mt-4">
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+
+                        <i class="fab fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+
+                    <a
+                        href="https://wa.me/917721082828"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                    >
+
+                        <i class="fab fa-whatsapp"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5>
+
+                    Quick Links
+
+                </h5>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="../frontend/index.html">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="about.html">
+
+                            About
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Products
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="export.html">
+
+                            Supply & Export
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="contact.html">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="admin-login.html">
+
+                            Admin
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- PRODUCTS -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5>
+
+                    Products
+
+                </h5>
+
+
+                <ul class="footer-links">
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Exotic Vegetables
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Indian Vegetables
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Pulses
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Domestic Fruits
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="products.html">
+
+                            Exotic Fruits
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-3">
+
+                <h5>
+
+                    Contact
+
+                </h5>
+
+
+                <div class="footer-contact">
+
+                    <p>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Nashik, Maharashtra, India
+
+                    </p>
+
+
+                    <p>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        +91 7721082828
+
+                    </p>
+
+
+                    <p>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        dpdagrofresh@gmail.com
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 DPD Agro Fresh.
+            All Rights Reserved.
 
         </div>
 
@@ -809,23 +3326,1140 @@
 
 </footer>
 
-<!-- ==========================================
-            WHATSAPP BUTTON
-=========================================== -->
 
-<a href="https://wa.me/919876543210"
-   class="whatsapp-float"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Chat on WhatsApp">
+<!-- =========================================================
+     FLOATING WHATSAPP
+========================================================== -->
 
-    <i class="fa-brands fa-whatsapp"></i>
+<a
+    href="https://wa.me/917721082828"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+>
+
+    <i class="fab fa-whatsapp"></i>
 
 </a>
 
-<!-- Bootstrap JS -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<!-- =========================================================
+     BACK TO TOP
+========================================================== -->
+
+<button
+    class="back-to-top"
+    id="backToTop"
+    aria-label="Back to top"
+>
+
+    <i class="bi bi-arrow-up"></i>
+
+</button>
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+    /* =========================================================
+       NAVBAR SCROLL EFFECT
+    ========================================================== */
+
+    const mainNavbar =
+        document.getElementById("mainNavbar");
+
+    const backToTop =
+        document.getElementById("backToTop");
+
+
+    function handleScroll() {
+
+        if (window.scrollY > 40) {
+
+            mainNavbar.classList.add("scrolled");
+
+            backToTop.classList.add("show");
+
+        } else {
+
+            mainNavbar.classList.remove("scrolled");
+
+            backToTop.classList.remove("show");
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        handleScroll,
+        { passive: true }
+    );
+
+
+    handleScroll();
+
+
+    /* =========================================================
+       BACK TO TOP
+    ========================================================== */
+
+    backToTop.addEventListener(
+        "click",
+        function () {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal, .reveal-left, .reveal-right, .reveal-scale"
+        );
+
+
+    const revealObserver =
+        new IntersectionObserver(
+
+            function (entries, observer) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("show");
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+                threshold: 0.12,
+
+                rootMargin:
+                    "0px 0px -50px 0px"
+            }
+
+        );
+
+
+    revealElements.forEach(
+        function (element) {
+
+            revealObserver.observe(element);
+
+        }
+    );
+
+
+    /* =========================================================
+       LOCATION DETECTION
+    ========================================================== */
+
+    const locationButton =
+        document.getElementById("locationButton");
+
+    const addressField =
+        document.getElementById("address");
+
+    const cityField =
+        document.getElementById("city");
+
+    const pincodeField =
+        document.getElementById("pincode");
+
+
+    locationButton.addEventListener(
+        "click",
+        function () {
+
+            if (!navigator.geolocation) {
+
+                alert(
+                    "Location detection is not supported by your browser.\n\n" +
+                    "Please enter your delivery address manually."
+                );
+
+                return;
+
+            }
+
+
+            locationButton.disabled = true;
+
+            locationButton.innerHTML =
+                '<i class="bi bi-hourglass-split me-1"></i> Detecting...';
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                async function (position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+                    const accuracy =
+                        position.coords.accuracy;
+
+
+                    console.log(
+                        "Latitude:",
+                        latitude
+                    );
+
+                    console.log(
+                        "Longitude:",
+                        longitude
+                    );
+
+                    console.log(
+                        "Accuracy:",
+                        accuracy,
+                        "meters"
+                    );
+
+
+                    /* -----------------------------------------
+                       ACCURACY CHECK
+                    ----------------------------------------- */
+
+                    const MAX_ALLOWED_ACCURACY = 200;
+
+
+                    if (
+                        accuracy >
+                        MAX_ALLOWED_ACCURACY
+                    ) {
+
+                        alert(
+                            "Your device could not determine an accurate location.\n\n" +
+                            "Detected accuracy: " +
+                            Math.round(accuracy) +
+                            " meters.\n\n" +
+                            "Please enter your delivery address manually."
+                        );
+
+
+                        locationButton.disabled =
+                            false;
+
+
+                        locationButton.innerHTML =
+                            '<i class="bi bi-crosshair me-1"></i> Use My Location';
+
+
+                        return;
+
+                    }
+
+
+                    /* -----------------------------------------
+                       REVERSE GEOCODING
+                    ----------------------------------------- */
+
+                    try {
+
+                        const response =
+                            await fetch(
+
+                                "https://nominatim.openstreetmap.org/reverse" +
+                                "?format=jsonv2" +
+                                "&lat=" +
+                                encodeURIComponent(latitude) +
+                                "&lon=" +
+                                encodeURIComponent(longitude) +
+                                "&zoom=18" +
+                                "&addressdetails=1"
+
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Unable to find address."
+                            );
+
+                        }
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (
+                            !data ||
+                            !data.address
+                        ) {
+
+                            throw new Error(
+                                "Address information unavailable."
+                            );
+
+                        }
+
+
+                        const addr =
+                            data.address;
+
+
+                        /* -----------------------------------------
+                           BUILD ADDRESS
+                        ----------------------------------------- */
+
+                        const addressParts = [];
+
+
+                        if (addr.house_number)
+                            addressParts.push(
+                                addr.house_number
+                            );
+
+
+                        if (addr.road)
+                            addressParts.push(
+                                addr.road
+                            );
+
+
+                        if (addr.neighbourhood)
+                            addressParts.push(
+                                addr.neighbourhood
+                            );
+
+
+                        if (addr.suburb)
+                            addressParts.push(
+                                addr.suburb
+                            );
+
+
+                        if (addr.village)
+                            addressParts.push(
+                                addr.village
+                            );
+
+
+                        if (addr.town)
+                            addressParts.push(
+                                addr.town
+                            );
+
+
+                        if (addr.city)
+                            addressParts.push(
+                                addr.city
+                            );
+
+
+                        if (addr.district)
+                            addressParts.push(
+                                addr.district
+                            );
+
+
+                        if (addr.state)
+                            addressParts.push(
+                                addr.state
+                            );
+
+
+                        if (addr.postcode)
+                            addressParts.push(
+                                addr.postcode
+                            );
+
+
+                        if (addr.country)
+                            addressParts.push(
+                                addr.country
+                            );
+
+
+                        const fullAddress =
+                            addressParts.join(", ");
+
+
+                        /* -----------------------------------------
+                           FILL ADDRESS
+                        ----------------------------------------- */
+
+                        if (addressField) {
+
+                            addressField.value =
+                                fullAddress;
+
+                        }
+
+
+                        /* -----------------------------------------
+                           FILL CITY
+                        ----------------------------------------- */
+
+                        if (cityField) {
+
+                            cityField.value =
+                                addr.city ||
+                                addr.town ||
+                                addr.village ||
+                                addr.suburb ||
+                                "";
+
+                        }
+
+
+                        /* -----------------------------------------
+                           FILL PINCODE
+                        ----------------------------------------- */
+
+                        if (
+                            pincodeField &&
+                            addr.postcode
+                        ) {
+
+                            pincodeField.value =
+                                addr.postcode;
+
+                        }
+
+
+                        /* -----------------------------------------
+                           SUCCESS
+                        ----------------------------------------- */
+
+                        locationButton.innerHTML =
+                            '<i class="bi bi-check-circle me-1"></i> Location Added';
+
+
+                        locationButton.disabled =
+                            false;
+
+
+                        alert(
+                            "Location detected successfully.\n\n" +
+                            fullAddress +
+                            "\n\nAccuracy: " +
+                            Math.round(accuracy) +
+                            " meters."
+                        );
+
+                    }
+
+
+                    catch (error) {
+
+                        console.error(
+                            "Reverse geocoding error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Your location was detected, but the address could not be determined.\n\n" +
+                            "Please enter your delivery address manually."
+                        );
+
+
+                        locationButton.disabled =
+                            false;
+
+
+                        locationButton.innerHTML =
+                            '<i class="bi bi-crosshair me-1"></i> Use My Location';
+
+                    }
+
+                },
+
+
+                function (error) {
+
+                    console.error(
+                        "Geolocation error:",
+                        error
+                    );
+
+
+                    let errorMessage =
+                        "Unable to detect your location.\n\n" +
+                        "Please enter your delivery address manually.";
+
+
+                    if (error.code === 1) {
+
+                        errorMessage =
+                            "Location permission was denied.\n\n" +
+                            "Please allow location access and try again.";
+
+                    }
+
+
+                    else if (error.code === 2) {
+
+                        errorMessage =
+                            "Your location could not be determined.\n\n" +
+                            "Please enter your address manually.";
+
+                    }
+
+
+                    else if (error.code === 3) {
+
+                        errorMessage =
+                            "Location detection timed out.\n\n" +
+                            "Please try again.";
+
+                    }
+
+
+                    alert(errorMessage);
+
+
+                    locationButton.disabled =
+                        false;
+
+
+                    locationButton.innerHTML =
+                        '<i class="bi bi-crosshair me-1"></i> Use My Location';
+
+                },
+
+
+                {
+
+                    enableHighAccuracy: true,
+
+                    timeout: 15000,
+
+                    maximumAge: 0
+
+                }
+
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       ORDER FORM
+    ========================================================== */
+
+    const orderForm =
+        document.getElementById("orderFormElement");
+
+    const formMessage =
+        document.getElementById("formMessage");
+
+
+    orderForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            /* -----------------------------------------
+               SELECTED PRODUCT
+            ----------------------------------------- */
+
+            const selectedProduct =
+                document.querySelector(
+                    'input[name="product"]:checked'
+                );
+
+
+            if (!selectedProduct) {
+
+                showMessage(
+                    "Please select a product category.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* -----------------------------------------
+               FORM VALUES
+            ----------------------------------------- */
+
+            const customerName =
+                document
+                    .getElementById("customerName")
+                    .value
+                    .trim();
+
+
+            const customerPhone =
+                document
+                    .getElementById("customerPhone")
+                    .value
+                    .trim();
+
+
+            const customerEmail =
+                document
+                    .getElementById("customerEmail")
+                    .value
+                    .trim();
+
+
+            const language =
+                document
+                    .getElementById("language")
+                    .value;
+
+
+            const specificProduct =
+                document
+                    .getElementById("specificProduct")
+                    .value
+                    .trim();
+
+
+            const quantity =
+                document
+                    .getElementById("quantity")
+                    .value
+                    .trim();
+
+
+            const city =
+                document
+                    .getElementById("city")
+                    .value
+                    .trim();
+
+
+            const pincode =
+                document
+                    .getElementById("pincode")
+                    .value
+                    .trim();
+
+
+            const address =
+                document
+                    .getElementById("address")
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById("message")
+                    .value
+                    .trim();
+
+
+            /* -----------------------------------------
+               VALIDATION
+            ----------------------------------------- */
+
+            if (!customerName) {
+
+                showMessage(
+                    "Please enter your full name.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!customerPhone) {
+
+                showMessage(
+                    "Please enter your mobile number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!city) {
+
+                showMessage(
+                    "Please enter your city or location.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!address) {
+
+                showMessage(
+                    "Please enter your delivery address.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* -----------------------------------------
+               ADDITIONAL DETAILS
+            ----------------------------------------- */
+
+            let additionalDetails = "";
+
+
+            if (specificProduct) {
+
+                additionalDetails +=
+                    "Specific Product: " +
+                    specificProduct +
+                    "\n";
+
+            }
+
+
+            if (pincode) {
+
+                additionalDetails +=
+                    "Pincode: " +
+                    pincode +
+                    "\n";
+
+            }
+
+
+            if (language) {
+
+                additionalDetails +=
+                    "Preferred Language: " +
+                    language +
+                    "\n";
+
+            }
+
+
+            if (customerEmail) {
+
+                additionalDetails +=
+                    "Email: " +
+                    customerEmail +
+                    "\n";
+
+            }
+
+
+            if (message) {
+
+                additionalDetails +=
+                    "Additional Requirement: " +
+                    message;
+
+            }
+
+
+            /* -----------------------------------------
+               ORDER OBJECT
+            ----------------------------------------- */
+
+            const orderData = {
+
+                customerName:
+                    customerName,
+
+                customerPhone:
+                    customerPhone,
+
+                productName:
+                    selectedProduct.value,
+
+                quantity:
+                    quantity,
+
+                deliveryLocation:
+                    city,
+
+                deliveryAddress:
+                    address,
+
+                additionalDetails:
+                    additionalDetails,
+
+                status:
+                    "NEW"
+
+            };
+
+
+            console.log(
+                "Sending order to backend:",
+                orderData
+            );
+
+
+            /* -----------------------------------------
+               SUBMIT BUTTON
+            ----------------------------------------- */
+
+            const submitButton =
+                orderForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+
+
+                submitButton.innerHTML =
+                    '<i class="bi bi-hourglass-split me-2"></i>' +
+                    'Sending...';
+
+            }
+
+
+            /* -----------------------------------------
+               SEND TO SPRING BOOT
+            ----------------------------------------- */
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:8080/api/orders",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    orderData
+                                )
+
+                        }
+                    );
+
+
+                /* -----------------------------------------
+                   RESPONSE CHECK
+                ----------------------------------------- */
+
+                if (!response.ok) {
+
+                    let errorText = "";
+
+                    try {
+
+                        errorText =
+                            await response.text();
+
+                    }
+
+                    catch (e) {
+
+                        errorText = "";
+
+                    }
+
+
+                    console.error(
+                        "Backend error:",
+                        response.status,
+                        errorText
+                    );
+
+
+                    throw new Error(
+                        "Server returned HTTP " +
+                        response.status
+                    );
+
+                }
+
+
+                /* -----------------------------------------
+                   SUCCESS
+                ----------------------------------------- */
+
+                const savedOrder =
+                    await response.json();
+
+
+                console.log(
+                    "Order successfully saved:",
+                    savedOrder
+                );
+
+
+                showMessage(
+                    "Your enquiry has been submitted successfully. Our team will contact you soon.",
+                    "success"
+                );
+
+
+                /* -----------------------------------------
+                   RESET FORM
+                ----------------------------------------- */
+
+                orderForm.reset();
+
+
+                /* -----------------------------------------
+                   RESET LOCATION BUTTON
+                ----------------------------------------- */
+
+                locationButton.disabled =
+                    false;
+
+
+                locationButton.innerHTML =
+                    '<i class="bi bi-crosshair me-1"></i> Use My Location';
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Order submission failed:",
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to submit your enquiry. Please try again or contact us on WhatsApp.",
+                    "error"
+                );
+
+            }
+
+
+            finally {
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+
+
+                    submitButton.innerHTML =
+                        '<i class="bi bi-send-fill me-2"></i>' +
+                        'Send Enquiry';
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       MESSAGE FUNCTION
+    ========================================================== */
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+        if (!formMessage) {
+
+            alert(message);
+
+            return;
+
+        }
+
+
+        formMessage.style.display =
+            "block";
+
+
+        formMessage.textContent =
+            message;
+
+
+        if (type === "success") {
+
+            formMessage.style.color =
+                "#198754";
+
+            formMessage.style.background =
+                "#eaf7ee";
+
+        }
+
+        else {
+
+            formMessage.style.color =
+                "#dc3545";
+
+            formMessage.style.background =
+                "#fff1f1";
+
+        }
+
+
+        formMessage.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "nearest"
+
+        });
+
+    }
+
+
+    /* =========================================================
+       CLOSE MOBILE NAVBAR AFTER CLICK
+    ========================================================== */
+
+    const navbarMenu =
+        document.getElementById(
+            "mainNavbarMenu"
+        );
+
+
+    const navbarLinks =
+        navbarMenu.querySelectorAll(
+            ".nav-link"
+        );
+
+
+    navbarLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <
+                        992
+                    ) {
+
+                        const collapse =
+                            bootstrap.Collapse
+                                .getInstance(
+                                    navbarMenu
+                                );
+
+
+                        if (collapse) {
+
+                            collapse.hide();
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+<script>
+
+    function googleTranslateElementInit() {
+
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,mr,hi,kn,gu,ta,te',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+    }
+
+</script>
+
+<script
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    if (!languageSelect) return;
+
+    languageSelect.addEventListener("change", function () {
+
+        const language = this.value;
+
+        if (!language) return;
+
+        const googleSelect =
+            document.querySelector(".goog-te-combo");
+
+        if (!googleSelect) {
+            console.log("Google Translate is still loading...");
+            return;
+        }
+
+        googleSelect.value = language;
+
+        googleSelect.dispatchEvent(
+            new Event("change")
+        );
+
+    });
+
+});
+
+</script>
 
 </body>
 
