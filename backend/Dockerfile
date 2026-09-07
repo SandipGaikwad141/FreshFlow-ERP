@@ -1,7 +1,10 @@
 # Step 1: Build the Spring Boot application using Maven
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY . .
+
+# Copy the backend folder contents specifically into /app
+COPY backend/ .
+
 RUN mvn clean package -DskipTests
 
 # Step 2: Run the built executable JAR file
