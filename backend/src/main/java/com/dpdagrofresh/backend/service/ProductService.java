@@ -23,28 +23,6 @@ public class ProductService {
     // =========================================================
     // PROJECT FRONTEND IMAGE DIRECTORY
     // =========================================================
-    //
-    // Your project structure is:
-    //
-    // FreshFlow-ERP
-    // ├── backend
-    // │   └── ...
-    // │
-    // └── frontend
-    //     ├── products.html
-    //     └── images
-    //         └── products
-    //
-    // Backend runs from:
-    //
-    // FreshFlow-ERP/backend
-    //
-    // Therefore:
-    //
-    // ../frontend/images/products
-    //
-    // points to the correct frontend image folder.
-    // =========================================================
 
     private final Path productsImageRoot =
             Paths.get(
@@ -110,68 +88,33 @@ public class ProductService {
 
         try {
 
-            // -------------------------------------------------
-            // Validate product
-            // -------------------------------------------------
-
             validateProduct(product);
 
-
-            // -------------------------------------------------
-            // Validate image
-            // -------------------------------------------------
-
             validateImage(image);
-
-
-            // -------------------------------------------------
-            // Get category folder
-            // -------------------------------------------------
 
             String folder =
                     getCategoryFolder(
                             product.getCategory()
                     );
 
-
-            // -------------------------------------------------
-            // Create folder
-            // -------------------------------------------------
-
             Path uploadDirectory =
                     productsImageRoot
                             .resolve(folder)
                             .normalize();
 
-
             Files.createDirectories(
                     uploadDirectory
             );
-
-
-            // -------------------------------------------------
-            // Generate safe unique filename
-            // -------------------------------------------------
 
             String fileName =
                     generateFileName(
                             image
                     );
 
-
-            // -------------------------------------------------
-            // Final image location
-            // -------------------------------------------------
-
             Path imagePath =
                     uploadDirectory
                             .resolve(fileName)
                             .normalize();
-
-
-            // -------------------------------------------------
-            // Make sure image remains inside products folder
-            // -------------------------------------------------
 
             if (!imagePath.startsWith(
                     uploadDirectory
@@ -182,21 +125,12 @@ public class ProductService {
                 );
             }
 
-
-            // -------------------------------------------------
-            // Save image
-            // -------------------------------------------------
-
+            // Saves raw byte stream directly to support all image formats
             Files.copy(
                     image.getInputStream(),
                     imagePath,
                     StandardCopyOption.REPLACE_EXISTING
             );
-
-
-            // -------------------------------------------------
-            // Store RELATIVE path in database
-            // -------------------------------------------------
 
             String relativeImagePath =
                     "images/products/"
@@ -204,15 +138,9 @@ public class ProductService {
                             + "/"
                             + fileName;
 
-
             product.setImageUrl(
                     relativeImagePath
             );
-
-
-            // -------------------------------------------------
-            // Save product
-            // -------------------------------------------------
 
             return productRepository.save(
                     product
@@ -230,9 +158,6 @@ public class ProductService {
 
     // =========================================================
     // UPDATE PRODUCT WITHOUT IMAGE
-    // =========================================================
-    //
-    // Existing image is NOT changed.
     // =========================================================
 
     public Product updateProduct(
@@ -258,12 +183,6 @@ public class ProductService {
                             updatedProduct.isAvailable()
                     );
 
-                    // IMPORTANT:
-                    //
-                    // Do NOT update imageUrl here.
-                    //
-                    // Existing image remains unchanged.
-
                     return productRepository.save(
                             product
                     );
@@ -284,35 +203,19 @@ public class ProductService {
 
         try {
 
-            // -------------------------------------------------
-            // Find existing product
-            // -------------------------------------------------
-
             Optional<Product> optionalProduct =
                     productRepository.findById(id);
-
 
             if (optionalProduct.isEmpty()) {
 
                 return null;
             }
 
-
             Product existingProduct =
                     optionalProduct.get();
 
-
-            // -------------------------------------------------
-            // Save old image path
-            // -------------------------------------------------
-
             String oldImagePath =
                     existingProduct.getImageUrl();
-
-
-            // -------------------------------------------------
-            // Update normal fields
-            // -------------------------------------------------
 
             existingProduct.setName(
                     updatedProduct.getName()
@@ -330,70 +233,34 @@ public class ProductService {
                     updatedProduct.isAvailable()
             );
 
-
-            // -------------------------------------------------
-            // IMAGE WAS SELECTED
-            // -------------------------------------------------
-
             if (image != null &&
                     !image.isEmpty()) {
 
-
-                // ---------------------------------------------
-                // Validate image
-                // ---------------------------------------------
-
                 validateImage(image);
-
-
-                // ---------------------------------------------
-                // Determine new category folder
-                // ---------------------------------------------
 
                 String folder =
                         getCategoryFolder(
                                 updatedProduct.getCategory()
                         );
 
-
-                // ---------------------------------------------
-                // Create new directory
-                // ---------------------------------------------
-
                 Path uploadDirectory =
                         productsImageRoot
                                 .resolve(folder)
                                 .normalize();
 
-
                 Files.createDirectories(
                         uploadDirectory
                 );
-
-
-                // ---------------------------------------------
-                // Generate new filename
-                // ---------------------------------------------
 
                 String fileName =
                         generateFileName(
                                 image
                         );
 
-
-                // ---------------------------------------------
-                // New image path
-                // ---------------------------------------------
-
                 Path newImagePath =
                         uploadDirectory
                                 .resolve(fileName)
                                 .normalize();
-
-
-                // ---------------------------------------------
-                // Security check
-                // ---------------------------------------------
 
                 if (!newImagePath.startsWith(
                         uploadDirectory
@@ -404,21 +271,11 @@ public class ProductService {
                     );
                 }
 
-
-                // ---------------------------------------------
-                // Save new image
-                // ---------------------------------------------
-
                 Files.copy(
                         image.getInputStream(),
                         newImagePath,
                         StandardCopyOption.REPLACE_EXISTING
                 );
-
-
-                // ---------------------------------------------
-                // Store new database path
-                // ---------------------------------------------
 
                 String newRelativePath =
                         "images/products/"
@@ -426,27 +283,14 @@ public class ProductService {
                                 + "/"
                                 + fileName;
 
-
                 existingProduct.setImageUrl(
                         newRelativePath
                 );
-
-
-                // ---------------------------------------------
-                // Delete old image
-                //
-                // Only after new image has successfully saved.
-                // ---------------------------------------------
 
                 deleteImageFile(
                         oldImagePath
                 );
             }
-
-
-            // -------------------------------------------------
-            // Save updated product
-            // -------------------------------------------------
 
             return productRepository.save(
                     existingProduct
@@ -472,62 +316,47 @@ public class ProductService {
         Optional<Product> optionalProduct =
                 productRepository.findById(id);
 
-
         if (optionalProduct.isEmpty()) {
 
             return false;
         }
 
-
         Product product =
                 optionalProduct.get();
-
-
-        // -------------------------------------------------
-        // Delete image from frontend
-        // -------------------------------------------------
 
         deleteImageFile(
                 product.getImageUrl()
         );
 
-
-        // -------------------------------------------------
-        // Delete database record
-        // -------------------------------------------------
-
         productRepository.delete(
                 product
         );
-
 
         return true;
     }
 
 
-   // =========================================================
-// CATEGORY FOLDER
-// =========================================================
+    // =========================================================
+    // CATEGORY FOLDER
+    // =========================================================
 
-private String getCategoryFolder(String category) {
+    private String getCategoryFolder(String category) {
 
     if (category == null || category.isBlank()) {
-
         throw new IllegalArgumentException(
                 "Product category is required"
         );
     }
 
-    return switch (category) {
+    // Convert to lowercase and trim spaces/hyphens for robust matching
+    String cleanCategory = category.trim().toLowerCase().replaceAll("[\\s_]+", "-");
 
-        // =====================================================
-        // OLD CATEGORIES
-        // =====================================================
+    return switch (cleanCategory) {
 
-        case "exotic-vegetables" ->
+        case "exotic-vegetables", "exotic" ->
                 "exotic";
 
-        case "vegetables" ->
+        case "indian-vegetables", "vegetables" ->
                 "vegetables";
 
         case "pulses" ->
@@ -539,49 +368,34 @@ private String getCategoryFolder(String category) {
         case "exotic-fruits" ->
                 "fruits/exotic";
 
-
-        // =====================================================
-        // NEW CATEGORIES
-        // =====================================================
-
-        case "leafy-vegetables" ->
+        case "leafy-vegetables", "leafy" ->
                 "leafy";
 
         case "chillies" ->
                 "chillies";
 
-        case "cabbage-cruciferous" ->
+        case "cabbage-cruciferous", "cabbage-cruciferous-vegetables" ->
                 "cabbage-cruciferous";
 
-        case "beans-peas" ->
+        case "beans-peas", "beans-&-peas" ->
                 "beans-peas";
 
-        case "root-vegetables" ->
+        case "root-vegetables", "root-vegetables-/-others" ->
                 "root-vegetables";
 
         case "other-vegetables" ->
                 "other-vegetables";
 
-
-        // =====================================================
-        // BACKWARD COMPATIBILITY
-        // =====================================================
-
         case "root-vegetables-others" ->
                 "root-vegetables-others";
 
-
-        // =====================================================
-        // INVALID CATEGORY
-        // =====================================================
-
         default ->
                 throw new IllegalArgumentException(
-                        "Invalid product category: "
-                                + category
+                        "Invalid product category: " + category
                 );
     };
 }
+
 
     // =========================================================
     // IMAGE VALIDATION
@@ -598,10 +412,8 @@ private String getCategoryFolder(String category) {
             );
         }
 
-
         String contentType =
                 image.getContentType();
-
 
         if (contentType == null ||
                 !contentType.startsWith("image/")) {
@@ -616,27 +428,12 @@ private String getCategoryFolder(String category) {
     // =========================================================
     // GENERATE SAFE IMAGE FILE NAME
     // =========================================================
-    //
-    // We do NOT trust the original filename.
-    //
-    // Example:
-    //
-    // mango.jpg
-    //
-    // becomes:
-    //
-    // mango-1724321234567.jpg
-    //
-    // This prevents two products with the same image name
-    // from overwriting each other.
-    // =========================================================
 
     private String generateFileName(
             MultipartFile image) {
 
         String originalFileName =
                 image.getOriginalFilename();
-
 
         if (originalFileName == null ||
                 originalFileName.isBlank()) {
@@ -646,7 +443,6 @@ private String getCategoryFolder(String category) {
             );
         }
 
-
         String cleanName =
                 Paths.get(
                         originalFileName
@@ -654,13 +450,10 @@ private String getCategoryFolder(String category) {
                 .getFileName()
                 .toString();
 
-
         String extension = "";
-
 
         int dotIndex =
                 cleanName.lastIndexOf(".");
-
 
         if (dotIndex >= 0) {
 
@@ -671,27 +464,23 @@ private String getCategoryFolder(String category) {
                     .toLowerCase();
         }
 
-
-        // -------------------------------------------------
-        // Allow only common image extensions
-        // -------------------------------------------------
-
+        // Expanded list of allowed image extensions including .avif and .heic
         if (!extension.equals(".jpg") &&
                 !extension.equals(".jpeg") &&
                 !extension.equals(".png") &&
                 !extension.equals(".webp") &&
-                !extension.equals(".gif")) {
+                !extension.equals(".gif") &&
+                !extension.equals(".avif") &&
+                !extension.equals(".heic") &&
+                !extension.equals(".bmp") &&
+                !extension.equals(".tiff") &&
+                !extension.equals(".svg")) {
 
             throw new IllegalArgumentException(
-                    "Unsupported image format. "
-                            + "Use JPG, JPEG, PNG, WEBP or GIF."
+                    "Unsupported image format: " + extension
+                            + ". Use JPG, JPEG, PNG, WEBP, GIF, AVIF, HEIC, BMP, TIFF, or SVG."
             );
         }
-
-
-        // -------------------------------------------------
-        // Clean base filename
-        // -------------------------------------------------
 
         String baseName =
                 dotIndex >= 0
@@ -701,7 +490,6 @@ private String getCategoryFolder(String category) {
                         )
                         : cleanName;
 
-
         baseName =
                 baseName
                         .replaceAll(
@@ -709,16 +497,10 @@ private String getCategoryFolder(String category) {
                                 "-"
                         );
 
-
         if (baseName.isBlank()) {
 
             baseName = "product";
         }
-
-
-        // -------------------------------------------------
-        // Add timestamp
-        // -------------------------------------------------
 
         return baseName
                 + "-"
@@ -740,24 +522,13 @@ private String getCategoryFolder(String category) {
             return;
         }
 
-
         try {
-
-            // -------------------------------------------------
-            // Database stores:
-            //
-            // images/products/vegetables/tomato-123.jpg
-            //
-            // Remove "images/products/"
-            // -------------------------------------------------
 
             String relativePath =
                     imageUrl;
 
-
             String prefix =
                     "images/products/";
-
 
             if (relativePath.startsWith(prefix)) {
 
@@ -767,20 +538,10 @@ private String getCategoryFolder(String category) {
                         );
             }
 
-
-            // -------------------------------------------------
-            // Resolve inside products folder
-            // -------------------------------------------------
-
             Path imagePath =
                     productsImageRoot
                             .resolve(relativePath)
                             .normalize();
-
-
-            // -------------------------------------------------
-            // Security check
-            // -------------------------------------------------
 
             if (!imagePath.startsWith(
                     productsImageRoot
@@ -789,21 +550,12 @@ private String getCategoryFolder(String category) {
                 return;
             }
 
-
-            // -------------------------------------------------
-            // Delete if exists
-            // -------------------------------------------------
-
             Files.deleteIfExists(
                     imagePath
             );
 
         } catch (IOException e) {
 
-            // Do not stop database deletion just because
-            // an old image could not be deleted.
-            //
-            // Log the problem.
             System.err.println(
                     "Could not delete image: "
                             + imageUrl
@@ -828,7 +580,6 @@ private String getCategoryFolder(String category) {
             );
         }
 
-
         if (product.getName() == null ||
                 product.getName().isBlank()) {
 
@@ -836,7 +587,6 @@ private String getCategoryFolder(String category) {
                     "Product name is required"
             );
         }
-
 
         if (product.getCategory() == null ||
                 product.getCategory().isBlank()) {
@@ -846,8 +596,6 @@ private String getCategoryFolder(String category) {
             );
         }
 
-
-        // Validate category
         getCategoryFolder(
                 product.getCategory()
         );

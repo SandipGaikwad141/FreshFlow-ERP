@@ -1276,7 +1276,39 @@
 
                                 </div>
 
+<div class="row g-3 mb-4">
+  <!-- Search Input -->
+  <div class="col-md-5">
+    <input type="text" id="productSearchInput" class="form-control" placeholder="Search by product name or ID...">
+  </div>
 
+  <!-- Category Filter -->
+  <div class="col-md-3">
+    <select id="productCategoryFilter" class="form-select">
+      <option value="ALL">All Categories</option>
+      <option value="exotic-vegetables">Exotic Vegetables</option>
+      <option value="vegetables">Indian Vegetables</option>
+      <option value="pulses">Pulses</option>
+      <option value="domestic-fruits">Domestic Fruits</option>
+      <option value="exotic-fruits">Exotic Fruits</option>
+      <option value="leafy-vegetables">Leafy Vegetables</option>
+      <option value="chillies">Chillies</option>
+      <option value="cabbage-cruciferous">Cabbage / Cruciferous Vegetables</option>
+      <option value="beans-peas">Beans & Peas</option>
+      <option value="root-vegetables">Root Vegetables</option>
+      <option value="other-vegetables">Other Vegetables</option>
+    </select>
+  </div>
+
+  <!-- Stock Filter -->
+  <div class="col-md-4">
+    <select id="productStockFilter" class="form-select">
+      <option value="ALL">All Stock Levels</option>
+      <option value="IN_STOCK">In Stock (Available)</option>
+      <option value="OUT_OF_STOCK">Out of Stock (Not Available)</option>
+    </select>
+  </div>
+</div>
                                 <div class="table-responsive">
 
                                     <table class="table">
@@ -1331,7 +1363,7 @@
                                 </div>
 
                             </div>
-
+                            
                         </section>
 
 
@@ -1493,11 +1525,8 @@
 
                                             </label>
 
-                                            <input
-                                                type="file"
-                                                id="productImage"
-                                                class="form-control"
-                                                accept="image/*">
+                                            <input type="file" id="productImage" class="form-control" accept="image/*"
+                                            required>>
 
 
                                             <small
@@ -1824,6 +1853,43 @@
                     <script>
 
 
+
+// EVENT LISTENERS FOR SEARCH & FILTER
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("adminSearchInput");
+    const categorySelect = document.getElementById("adminCategorySelect");
+    const resetButton = document.getElementById("resetAdminFilters");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", filterAdminProducts);
+    }
+
+    if (categorySelect) {
+        categorySelect.addEventListener("change", filterAdminProducts);
+    }
+
+    if (resetButton) {
+        resetButton.addEventListener("click", function () {
+            searchInput.value = "";
+            categorySelect.value = "all";
+            filterAdminProducts();
+        });
+    }
+});
+
+// UPDATE YOUR FETCH PRODUCTS FUNCTION
+async function fetchAdminProducts() {
+    try {
+        const response = await fetch("http://localhost:8080/api/products");
+        if (!response.ok) throw new Error("API Offline");
+        const data = await response.json();
+        
+        allAdminProducts = data; // Store full list globally
+        filterAdminProducts();   // Render initially
+    } catch (err) {
+        console.error("Error fetching products:", err);
+    }
+}
                         /* =========================================================
                         API
                         ========================================================== */
@@ -2726,106 +2792,153 @@ const OFFERS_API =
                         }
 
 
-                        /* =========================================================
-                        LOAD PRODUCTS
-                        ========================================================== */
+                    // GLOBAL REFERENCE FOR ALL ADMIN PRODUCTS
+let allAdminProducts = [];
 
-                        async function loadProducts() {
+// UNIFIED FILTER FUNCTION
+function filterAdminProducts() {
+    const searchVal = document.getElementById("productSearchInput")?.value.toLowerCase().trim() || "";
+    const selectedCategory = document.getElementById("productCategoryFilter")?.value || "ALL";
+    const selectedStock = document.getElementById("productStockFilter")?.value || "ALL";
 
-                            productsTableBody.innerHTML = `
+    const masterList = allAdminProducts.length ? allAdminProducts : products;
 
-                                <tr>
+    const filtered = masterList.filter(product => {
+        const productName = (product.name || "").toLowerCase();
+        const productId = String(product.id || "").toLowerCase();
+        const productCategory = (product.category || "").trim();
 
-                                    <td
-                                        colspan="5"
-                                        class="loading">
+        // 1. Search Filter (by Name or ID)
+        const matchesSearch = !searchVal || productName.includes(searchVal) || productId.includes(searchVal);
 
-                                        <div
-                                            class="spinner-border"
-                                            role="status">
-                                        </div>
+        // 2. Category Filter
+        const matchesCategory = (selectedCategory === "ALL") || (productCategory === selectedCategory);
 
-                                        <div class="mt-2">
-                                            Loading products...
-                                        </div>
+        // 3. Stock Level Filter
+        let matchesStock = true;
+        if (selectedStock === "IN_STOCK") {
+            matchesStock = product.available === true;
+        } else if (selectedStock === "OUT_OF_STOCK") {
+            matchesStock = product.available === false;
+        }
 
-                                    </td>
+        return matchesSearch && matchesCategory && matchesStock;
+    });
 
-                                </tr>
+    renderProductList(filtered);
+}
 
-                            `;
+// EVENT LISTENERS FOR SEARCH & FILTERS
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("productSearchInput");
+    const categorySelect = document.getElementById("productCategoryFilter");
+    const stockSelect = document.getElementById("productStockFilter");
 
+    if (searchInput) searchInput.addEventListener("input", filterAdminProducts);
+    if (categorySelect) categorySelect.addEventListener("change", filterAdminProducts);
+    if (stockSelect) stockSelect.addEventListener("change", filterAdminProducts);
+});
 
-                            try {
+// RENDER PRODUCTS TO TABLE
+function renderProductList(itemsToRender) {
+    const productsTableBody = document.getElementById("productsTableBody");
+    if (!productsTableBody) return;
 
-                                const response =
-                                    await fetch(PRODUCTS_API);
+    if (!itemsToRender || !itemsToRender.length) {
+        productsTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty-state text-center py-4">
+                    <i class="bi bi-box fs-1 text-muted"></i>
+                    <div class="mt-2 text-muted">No matching products found.</div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
 
+    productsTableBody.innerHTML = "";
 
-                                if (!response.ok) {
+    itemsToRender.forEach(product => {
+        const row = document.createElement("tr");
+        const imagePath = getImagePath(product.imageUrl);
 
-                                    throw new Error(
-                                        `HTTP ${response.status}`
-                                    );
+        row.innerHTML = `
+            <td>
+                ${
+                    imagePath
+                        ? `<img src="${imagePath}" class="product-table-image" alt="${escapeHtml(product.name)}" onerror="this.style.display='none';">`
+                        : `<div class="product-table-image d-flex align-items-center justify-content-center">
+                             <i class="bi bi-image text-muted"></i>
+                           </div>`
+                }
+            </td>
+            <td>
+                <strong>${escapeHtml(product.name)}</strong>
+                <br>
+                <small class="text-muted">ID: ${product.id}</small>
+            </td>
+            <td>
+                <span class="badge-category">
+                    ${escapeHtml(getCategoryName(product.category))}
+                </span>
+            </td>
+            <td>
+                ${
+                    product.available !== false
+                        ? `<span class="badge bg-success">In Stock</span>`
+                        : `<span class="badge bg-secondary">Out of Stock</span>`
+                }
+            </td>
+            <td>
+                <button class="action-btn edit-btn" title="Edit" onclick="editProduct(${product.id})">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="action-btn delete-btn" title="Delete" onclick="openDeleteProductModal(${product.id}, '${escapeJs(product.name)}')">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        `;
 
-                                }
+        productsTableBody.appendChild(row);
+    });
+}
 
+// UPDATE FETCH PRODUCTS
+async function loadProducts() {
+    const productsTableBody = document.getElementById("productsTableBody");
+    productsTableBody.innerHTML = `
+        <tr>
+            <td colspan="5" class="loading text-center py-4">
+                <div class="spinner-border text-success" role="status"></div>
+                <div class="mt-2 text-muted">Loading products...</div>
+            </td>
+        </tr>
+    `;
 
-                                products =
-                                    await response.json();
+    try {
+        const response = await fetch(PRODUCTS_API);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
+        const data = await response.json();
+        products = data;
+        allAdminProducts = data; // Keep a synchronized master copy
 
-                                renderProducts();
+        filterAdminProducts(); // Trigger filter calculation and display
 
-
-                                document
-                                    .getElementById(
-                                        "dashboardProductCount"
-                                    )
-                                    .textContent =
-                                    products.length;
-
-
-                            }
-                            catch (error) {
-
-                                console.error(
-                                    "Error loading products:",
-                                    error
-                                );
-
-
-                                productsTableBody.innerHTML = `
-
-                                    <tr>
-
-                                        <td
-                                            colspan="5"
-                                            class="text-center text-danger py-5">
-
-                                            <i class="bi bi-exclamation-triangle"></i>
-
-                                            <br>
-
-                                            Failed to fetch products.
-
-                                            <br>
-
-                                            <small>
-                                                Make sure Spring Boot is running on port 8080.
-                                            </small>
-
-                                        </td>
-
-                                    </tr>
-
-                                `;
-
-                            }
-
-                        }
-
-
+        const countElem = document.getElementById("dashboardProductCount");
+        if (countElem) countElem.textContent = products.length;
+    } catch (error) {
+        console.error("Error loading products:", error);
+        productsTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-danger py-4">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <div>Failed to fetch products. Check backend execution.</div>
+                </td>
+            </tr>
+        `;
+    }
+}
                         /* =========================================================
                         IMAGE PATH
                         ========================================================== */
@@ -2911,173 +3024,92 @@ function getCategoryName(category) {
                         ========================================================== */
 
                         function renderProducts() {
-
-                            if (!products.length) {
-
-                                productsTableBody.innerHTML = `
-
-                                    <tr>
-
-                                        <td
-                                            colspan="5"
-                                            class="empty-state">
-
-                                            <i class="bi bi-box"></i>
-
-                                            <div>
-                                                No products found.
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                `;
-
-                                return;
-
-                            }
-
-
-                            productsTableBody.innerHTML = "";
-
-
-                            products.forEach(product => {
-
-                                const row =
-                                    document.createElement("tr");
-
-
-                                const imagePath =
-                                    getImagePath(
-                                        product.imageUrl
-                                    );
-
-
-                                row.innerHTML = `
-
-                                    <td>
-
-                                        ${
-                                            imagePath
-                                            ?
-
-                                            `
-                                            <img
-                                                src="${imagePath}"
-                                                class="product-table-image"
-                                                alt="${escapeHtml(product.name)}"
-                                                onerror="this.style.display='none';">
-                                            `
-
-                                            :
-
-                                            `
-                                            <div
-                                                class="product-table-image d-flex align-items-center justify-content-center">
-
-                                                <i class="bi bi-image text-muted"></i>
-
-                                            </div>
-                                            `
-                                        }
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <strong>
-                                            ${escapeHtml(product.name)}
-                                        </strong>
-
-                                        <br>
-
-                                        <small class="text-muted">
-
-                                            ID:
-                                            ${product.id}
-
-                                        </small>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <span class="badge-category">
-
-                                            ${escapeHtml(
-                                                getCategoryName(
-                                                    product.category
-                                                )
-                                            )}
-
-                                        </span>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        ${
-                                            product.available
-
-                                            ?
-
-                                            `
-                                            <span class="badge bg-success">
-                                                Available
-                                            </span>
-                                            `
-
-                                            :
-
-                                            `
-                                            <span class="badge bg-secondary">
-                                                Not Available
-                                            </span>
-                                            `
-                                        }
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <button
-                                            class="action-btn edit-btn"
-                                            title="Edit"
-                                            onclick="editProduct(${product.id})">
-
-                                            <i class="bi bi-pencil"></i>
-
-                                        </button>
-
-
-                                        <button
-                                            class="action-btn delete-btn"
-                                            title="Delete"
-                                            onclick="openDeleteProductModal(
-                                                ${product.id},
-                                                '${escapeJs(product.name)}'
-                                            )">
-
-                                            <i class="bi bi-trash"></i>
-
-                                        </button>
-
-                                    </td>
-
-                                `;
-
-
-                                productsTableBody.appendChild(row);
-
-                            });
-
-                        }
-
+    const productsTableBody = document.getElementById("productsTableBody"); // Ensure correct ID
+    
+    // 1. Get current values from filter inputs
+    const searchInput = document.getElementById("productSearchInput");
+    const categorySelect = document.getElementById("productCategoryFilter");
+
+    const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
+    const selectedCategory = categorySelect ? categorySelect.value : "ALL";
+
+    // 2. Filter the main products array (assuming allAdminProducts or products holds master data)
+    const masterList = window.allAdminProducts || products; // Uses master copy if available
+
+    const filteredProducts = masterList.filter(product => {
+        // Search filter (matches Product Name or ID)
+        const productName = product.name ? product.name.toLowerCase() : "";
+        const productId = product.id ? product.id.toString() : "";
+        const matchesSearch = productName.includes(searchQuery) || productId.includes(searchQuery);
+
+        // Category filter
+        const productCat = product.category || "";
+        const matchesCategory = selectedCategory === "ALL" || productCat === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    // 3. Handle Empty State
+    if (!filteredProducts.length) {
+        productsTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty-state text-center py-4">
+                    <i class="bi bi-box fs-1 text-muted"></i>
+                    <div class="mt-2 text-muted">No matching products found.</div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    // 4. Render Filtered Products
+    productsTableBody.innerHTML = "";
+
+    filteredProducts.forEach(product => {
+        const row = document.createElement("tr");
+
+        const imagePath = getImagePath(product.imageUrl);
+
+        row.innerHTML = `
+            <td>
+                ${
+                    imagePath
+                        ? `<img src="${imagePath}" class="product-table-image" alt="${escapeHtml(product.name)}" onerror="this.style.display='none';">`
+                        : `<div class="product-table-image d-flex align-items-center justify-content-center">
+                             <i class="bi bi-image text-muted"></i>
+                           </div>`
+                }
+            </td>
+            <td>
+                <strong>${escapeHtml(product.name)}</strong>
+                <br>
+                <small class="text-muted">ID: ${product.id}</small>
+            </td>
+            <td>
+                <span class="badge-category">
+                    ${escapeHtml(getCategoryName(product.category))}
+                </span>
+            </td>
+            <td>
+                ${
+                    product.available
+                        ? `<span class="badge bg-success">Available</span>`
+                        : `<span class="badge bg-secondary">Not Available</span>`
+                }
+            </td>
+            <td>
+                <button class="action-btn edit-btn" title="Edit" onclick="editProduct(${product.id})">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="action-btn delete-btn" title="Delete" onclick="openDeleteProductModal(${product.id}, '${escapeJs(product.name)}')">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        `;
+
+        productsTableBody.appendChild(row);
+    });
+}
 
                         /* =========================================================
                         ESCAPE HTML
@@ -4653,8 +4685,95 @@ function getCategoryName(category) {
                         initializeAdmin();
 
                     </script>
+                    <script>
 
+function renderProducts() {
+    const productsTableBody = document.getElementById("productsTableBody");
+    
+    // Get filter input values
+    const searchInput = document.getElementById("productSearchInput");
+    const categorySelect = document.getElementById("productCategoryFilter");
+    const stockSelect = document.getElementById("productStockFilter");
 
+    const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
+    const selectedCategory = categorySelect ? categorySelect.value : "ALL";
+    const selectedStock = stockSelect ? stockSelect.value : "ALL";
+
+    // Always filter against the full original dataset
+    const masterList = window.allAdminProducts || products;
+
+    const filteredProducts = masterList.filter(product => {
+        // 1. Search Query Filter (Name or ID)
+        const nameMatch = product.name && product.name.toLowerCase().includes(searchQuery);
+        const idMatch = product.id && product.id.toString().includes(searchQuery);
+        const matchesSearch = nameMatch || idMatch;
+
+        // 2. Category Filter (Matches exact or formatted name)
+        const prodCategory = getCategoryName(product.category) || product.category || "";
+        const matchesCategory = selectedCategory === "ALL" || 
+            prodCategory.trim().toLowerCase() === selectedCategory.trim().toLowerCase();
+
+        // 3. Stock/Availability Filter
+        let matchesStock = true;
+        if (selectedStock === "AVAILABLE") matchesStock = product.available === true;
+        if (selectedStock === "UNAVAILABLE") matchesStock = product.available === false;
+
+        return matchesSearch && matchesCategory && matchesStock;
+    });
+
+    // Handle Empty State
+    if (!filteredProducts.length) {
+        productsTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center py-4 text-muted">
+                    <i class="bi bi-box fs-2"></i>
+                    <div class="mt-2">No products found matching the criteria.</div>
+                </td>
+            </tr>`;
+        return;
+    }
+
+    // Render Table Rows
+    productsTableBody.innerHTML = "";
+    filteredProducts.forEach(product => {
+        const row = document.createElement("tr");
+        const imagePath = getImagePath(product.imageUrl);
+
+        row.innerHTML = `
+            <td>
+                ${imagePath 
+                    ? `<img src="${imagePath}" class="product-table-image" alt="${escapeHtml(product.name)}" onerror="this.style.display='none';">`
+                    : `<div class="product-table-image d-flex align-items-center justify-content-center"><i class="bi bi-image text-muted"></i></div>`
+                }
+            </td>
+            <td>
+                <strong>${escapeHtml(product.name)}</strong><br>
+                <small class="text-muted">ID: ${product.id}</small>
+            </td>
+            <td>
+                <span class="badge-category">${escapeHtml(getCategoryName(product.category))}</span>
+            </td>
+            <td>
+                ${product.available 
+                    ? `<span class="badge bg-success">Available</span>` 
+                    : `<span class="badge bg-secondary">Not Available</span>`
+                }
+            </td>
+            <td>
+                <button class="action-btn edit-btn" onclick="editProduct(${product.id})"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete-btn" onclick="openDeleteProductModal(${product.id}, '${escapeJs(product.name)}')"><i class="bi bi-trash"></i></button>
+            </td>
+        `;
+
+        productsTableBody.appendChild(row);
+    });
+}
+
+// Attach Event Listeners
+document.getElementById("productSearchInput").addEventListener("input", renderProducts);
+document.getElementById("productCategoryFilter").addEventListener("change", renderProducts);
+document.getElementById("productStockFilter").addEventListener("change", renderProducts);
+</script>
                 </body>
 
                 </html>

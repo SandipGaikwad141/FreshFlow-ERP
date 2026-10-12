@@ -11,6 +11,7 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -39,10 +40,6 @@ public class AdminService {
             String password
     ) {
 
-        // --------------------------------------------------------
-        // Check username
-        // --------------------------------------------------------
-
         if (username == null || username.trim().isEmpty()) {
 
             throw new RuntimeException(
@@ -50,10 +47,6 @@ public class AdminService {
             );
         }
 
-
-        // --------------------------------------------------------
-        // Check password
-        // --------------------------------------------------------
 
         if (password == null || password.trim().isEmpty()) {
 
@@ -63,10 +56,6 @@ public class AdminService {
         }
 
 
-        // --------------------------------------------------------
-        // Check duplicate username
-        // --------------------------------------------------------
-
         if (adminRepository.existsByUsername(username)) {
 
             throw new RuntimeException(
@@ -75,23 +64,12 @@ public class AdminService {
         }
 
 
-        // --------------------------------------------------------
-        // Create admin
-        // --------------------------------------------------------
-
         Admin admin = new Admin();
 
         admin.setUsername(username);
 
-        // IMPORTANT:
-        // Never store the password as plain text.
-
         admin.setPassword(hashPassword(password));
 
-
-        // --------------------------------------------------------
-        // Save admin
-        // --------------------------------------------------------
 
         return adminRepository.save(admin);
     }
@@ -115,10 +93,6 @@ public class AdminService {
         }
 
 
-        // --------------------------------------------------------
-        // Find admin
-        // --------------------------------------------------------
-
         Admin admin =
                 adminRepository
                         .findByUsername(username)
@@ -131,40 +105,64 @@ public class AdminService {
         }
 
 
-        // --------------------------------------------------------
-        // Compare password with BCrypt hash
-        // --------------------------------------------------------
-
-                return matchesPassword(password, admin.getPassword());
+        return matchesPassword(password, admin.getPassword());
     }
 
-        private String hashPassword(String password) {
-                byte[] salt = new byte[16];
-                new SecureRandom().nextBytes(salt);
-                byte[] hash = deriveKey(password, salt);
-                return Base64.getEncoder().encodeToString(salt) + ":"
-                                + Base64.getEncoder().encodeToString(hash);
+
+    // ============================================================
+    // RESET PASSWORD (ADDED)
+    // ============================================================
+
+    public boolean resetPassword(String username, String newPassword) {
+        if (username == null || newPassword == null || newPassword.trim().isEmpty()) {
+            return false;
         }
 
-        private boolean matchesPassword(String password, String storedPassword) {
-                try {
-                        String[] parts = storedPassword.split(":", 2);
-                        byte[] salt = Base64.getDecoder().decode(parts[0]);
-                        byte[] expected = Base64.getDecoder().decode(parts[1]);
-                        return MessageDigest.isEqual(expected, deriveKey(password, salt));
-                } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) {
-                        return false;
-                }
+        Optional<Admin> adminOptional = adminRepository.findByUsername(username);
+
+        if (adminOptional.isPresent()) {
+            Admin admin = adminOptional.get();
+            // Hash the new password using PBKDF2 scheme
+            admin.setPassword(hashPassword(newPassword));
+            adminRepository.save(admin);
+            return true;
         }
 
-        private byte[] deriveKey(String password, byte[] salt) {
-                try {
-                        PBEKeySpec spec = new PBEKeySpec(
-                                        password.toCharArray(), salt, 120_000, 256);
-                        return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
-                                        .generateSecret(spec).getEncoded();
-                } catch (GeneralSecurityException ex) {
-                        throw new IllegalStateException("Unable to hash password", ex);
-                }
+        return false;
+    }
+
+
+    // ============================================================
+    // PASSWORD HASHING HELPERS
+    // ============================================================
+
+    private String hashPassword(String password) {
+        byte[] salt = new byte[16];
+        new SecureRandom().nextBytes(salt);
+        byte[] hash = deriveKey(password, salt);
+        return Base64.getEncoder().encodeToString(salt) + ":"
+                + Base64.getEncoder().encodeToString(hash);
+    }
+
+    private boolean matchesPassword(String password, String storedPassword) {
+        try {
+            String[] parts = storedPassword.split(":", 2);
+            byte[] salt = Base64.getDecoder().decode(parts[0]);
+            byte[] expected = Base64.getDecoder().decode(parts[1]);
+            return MessageDigest.isEqual(expected, deriveKey(password, salt));
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) {
+            return false;
         }
+    }
+
+    private byte[] deriveKey(String password, byte[] salt) {
+        try {
+            PBEKeySpec spec = new PBEKeySpec(
+                    password.toCharArray(), salt, 120_000, 256);
+            return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+                    .generateSecret(spec).getEncoded();
+        } catch (GeneralSecurityException ex) {
+            throw new IllegalStateException("Unable to hash password", ex);
+        }
+    }
 }

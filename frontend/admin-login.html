@@ -200,6 +200,35 @@
 
 
         /* ====================================================
+           FORGOT PASSWORD LINK
+        ==================================================== */
+
+        .forgot-password-link {
+
+            color: #2e7d32;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+        }
+
+        .forgot-password-link:hover {
+
+            color: #1b5e20;
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ====================================================
            LOGIN BUTTON
         ==================================================== */
 
@@ -247,25 +276,10 @@
 
 
         /* ====================================================
-           ERROR MESSAGE
+           ALERTS
         ==================================================== */
 
-        #loginError {
-
-            display: none;
-
-            border-radius: 10px;
-
-            font-size: 14px;
-
-        }
-
-
-        /* ====================================================
-           SUCCESS MESSAGE
-        ==================================================== */
-
-        #loginSuccess {
+        #loginError, #loginSuccess, #resetModalAlert {
 
             display: none;
 
@@ -324,7 +338,7 @@
 
         <!-- ====================================================
              LOGO
-        ===================================================== -->
+        ==================================================== -->
 
         <div class="logo">
 
@@ -335,7 +349,7 @@
 
         <!-- ====================================================
              TITLE
-        ===================================================== -->
+        ==================================================== -->
 
         <h2 class="login-title">
 
@@ -353,7 +367,7 @@
 
         <!-- ====================================================
              ERROR MESSAGE
-        ===================================================== -->
+        ==================================================== -->
 
         <div
             id="loginError"
@@ -366,7 +380,7 @@
 
         <!-- ====================================================
              SUCCESS MESSAGE
-        ===================================================== -->
+        ==================================================== -->
 
         <div
             id="loginSuccess"
@@ -379,7 +393,7 @@
 
         <!-- ====================================================
              LOGIN FORM
-        ===================================================== -->
+        ==================================================== -->
 
         <form id="loginForm">
 
@@ -425,7 +439,7 @@
                  PASSWORD
             ================================================== -->
 
-            <div class="mb-4">
+            <div class="mb-2">
 
                 <label
                     for="password"
@@ -459,6 +473,24 @@
 
 
             <!-- =================================================
+                 FORGOT PASSWORD LINK (OPENS POPUP MODAL)
+            ================================================== -->
+
+            <div class="text-end mb-4">
+
+                <a
+                    class="forgot-password-link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#forgotPasswordModal">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
                  LOGIN BUTTON
             ================================================== -->
 
@@ -479,7 +511,7 @@
 
         <!-- ====================================================
              FOOTER
-        ===================================================== -->
+        ==================================================== -->
 
         <div class="login-footer">
 
@@ -489,6 +521,141 @@
 
 
     </div>
+
+
+    <!-- ========================================================
+         RESET PASSWORD POPUP MODAL
+    ========================================================= -->
+
+    <div
+        class="modal fade"
+        id="forgotPasswordModal"
+        tabindex="-1"
+        aria-labelledby="forgotPasswordModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div
+                class="modal-content"
+                style="border-radius: 18px;">
+
+                <div
+                    class="modal-header"
+                    style="border-bottom: none; padding-bottom: 0;">
+
+                    <h5
+                        class="modal-title"
+                        id="forgotPasswordModalLabel"
+                        style="font-weight: 700;">
+
+                        Reset Admin Password
+
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+
+                </div>
+
+                <div
+                    class="modal-body"
+                    style="padding: 25px;">
+
+                    <div
+                        id="resetModalAlert"
+                        class="alert">
+                    </div>
+
+                    <form id="resetPasswordForm">
+
+                        <div class="mb-3">
+
+                            <label
+                                for="resetUsername"
+                                class="form-label">
+
+                                Admin Username
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="resetUsername"
+                                class="form-control"
+                                placeholder="Enter your username"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label
+                                for="newPassword"
+                                class="form-label">
+
+                                New Password
+
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                class="form-control"
+                                placeholder="Enter new password"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label
+                                for="confirmPassword"
+                                class="form-label">
+
+                                Confirm New Password
+
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                class="form-control"
+                                placeholder="Confirm new password"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            id="btnSavePassword"
+                            class="login-btn"
+                            style="height: 46px;">
+
+                            Update Password
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         BOOTSTRAP JS BUNDLE (REQUIRED FOR MODAL POPUP)
+    ========================================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- ========================================================
@@ -529,10 +696,6 @@
                 event.preventDefault();
 
 
-                // =================================================
-                // GET USERNAME
-                // =================================================
-
                 const username =
                     document
                         .getElementById("username")
@@ -540,19 +703,11 @@
                         .trim();
 
 
-                // =================================================
-                // GET PASSWORD
-                // =================================================
-
                 const password =
                     document
                         .getElementById("password")
                         .value;
 
-
-                // =================================================
-                // HIDE OLD MESSAGES
-                // =================================================
 
                 loginError.style.display =
                     "none";
@@ -560,10 +715,6 @@
                 loginSuccess.style.display =
                     "none";
 
-
-                // =================================================
-                // VALIDATION
-                // =================================================
 
                 if (!username || !password) {
 
@@ -577,10 +728,6 @@
 
                 }
 
-
-                // =================================================
-                // DISABLE LOGIN BUTTON
-                // =================================================
 
                 loginButton.disabled = true;
 
@@ -596,20 +743,6 @@
 
 
                 try {
-
-
-                    // =================================================
-                    // CREATE FORM DATA
-                    //
-                    // IMPORTANT:
-                    //
-                    // AdminController uses:
-                    //
-                    // @RequestParam String username
-                    // @RequestParam String password
-                    //
-                    // Therefore we send form-urlencoded data.
-                    // =================================================
 
                     const formData =
                         new URLSearchParams();
@@ -627,10 +760,7 @@
                     );
 
 
-                    // =================================================
-                    // CALL SPRING BOOT LOGIN API
-                    // =================================================
-
+                    // FETCH LOCAL SPRING BOOT SERVER
                     const response =
                         await fetch(
                             "http://localhost:8080/api/admin/login",
@@ -651,17 +781,6 @@
                         );
 
 
-                    // =================================================
-                    // BACKEND RETURNS PLAIN TEXT
-                    //
-                    // Example:
-                    //
-                    // Login successful
-                    //
-                    // Therefore use response.text()
-                    // NOT response.json()
-                    // =================================================
-
                     const result =
                         await response.text();
 
@@ -678,16 +797,7 @@
                     );
 
 
-                    // =================================================
-                    // SUCCESS
-                    // =================================================
-
                     if (response.ok) {
-
-
-                        // ---------------------------------------------
-                        // SAVE LOGIN SESSION FLAG
-                        // ---------------------------------------------
 
                         sessionStorage.setItem(
                             "dpdAdminLoggedIn",
@@ -701,20 +811,12 @@
                         );
 
 
-                        // ---------------------------------------------
-                        // SHOW SUCCESS
-                        // ---------------------------------------------
-
                         loginSuccess.textContent =
                             "Login successful. Redirecting...";
 
                         loginSuccess.style.display =
                             "block";
 
-
-                        // ---------------------------------------------
-                        // REDIRECT TO ADMIN PANEL
-                        // ---------------------------------------------
 
                         setTimeout(
                             function() {
@@ -732,10 +834,6 @@
                     }
 
 
-                    // =================================================
-                    // LOGIN FAILED
-                    // =================================================
-
                     loginError.textContent =
                         result ||
                         "Invalid username or password.";
@@ -746,11 +844,6 @@
 
                 } catch (error) {
 
-
-                    // =================================================
-                    // NETWORK / SERVER ERROR
-                    // =================================================
-
                     console.error(
                         "Admin login error:",
                         error
@@ -758,17 +851,13 @@
 
 
                     loginError.textContent =
-                        "Unable to connect to the server. Make sure Spring Boot is running.";
+                        "Unable to connect to the server. Make sure backend is running.";
 
                     loginError.style.display =
                         "block";
 
                 }
 
-
-                // =================================================
-                // RESTORE LOGIN BUTTON
-                // =================================================
 
                 loginButton.disabled = false;
 
@@ -782,6 +871,141 @@
 
             }
         );
+
+
+        // ========================================================
+        // RESET PASSWORD POPUP FORM SUBMIT
+        // ========================================================
+
+        document
+            .getElementById("resetPasswordForm")
+            .addEventListener(
+                "submit",
+                async function(e) {
+
+                    e.preventDefault();
+
+
+                    const username =
+                        document
+                            .getElementById("resetUsername")
+                            .value
+                            .trim();
+
+
+                    const newPassword =
+                        document
+                            .getElementById("newPassword")
+                            .value;
+
+
+                    const confirmPassword =
+                        document
+                            .getElementById("confirmPassword")
+                            .value;
+
+
+                    const alertBox =
+                        document
+                            .getElementById("resetModalAlert");
+
+
+                    alertBox.style.display =
+                        "none";
+
+
+                    if (newPassword !== confirmPassword) {
+
+                        alertBox.className =
+                            "alert alert-danger";
+
+                        alertBox.textContent =
+                            "Passwords do not match!";
+
+                        alertBox.style.display =
+                            "block";
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        // FETCH LOCAL SPRING BOOT RESET ENDPOINT
+                        const response =
+                            await fetch(
+                                "http://localhost:8080/api/admin/reset-password",
+                                {
+
+                                    method: "POST",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json"
+
+                                    },
+
+                                    body: JSON.stringify({
+
+                                        username: username,
+
+                                        newPassword: newPassword
+
+                                    })
+
+                                }
+                            );
+
+
+                        if (response.ok) {
+
+                            alertBox.className =
+                                "alert alert-success";
+
+                            alertBox.textContent =
+                                "Password updated successfully! You can now log in.";
+
+                            alertBox.style.display =
+                                "block";
+
+                            document
+                                .getElementById("resetPasswordForm")
+                                .reset();
+
+                        } else {
+
+                            const data =
+                                await response.text();
+
+                            alertBox.className =
+                                "alert alert-danger";
+
+                            alertBox.textContent =
+                                data ||
+                                "Failed to reset password.";
+
+                            alertBox.style.display =
+                                "block";
+
+                        }
+
+                    } catch (err) {
+
+                        alertBox.className =
+                            "alert alert-danger";
+
+                        alertBox.textContent =
+                            "Server error. Try again later.";
+
+                        alertBox.style.display =
+                            "block";
+
+                    }
+
+                }
+            );
 
     </script>
 

@@ -1,25 +1,15 @@
-# Step 1: Build stage (Java 21)
-FROM maven:3.9-eclipse-temurin-21 AS build
+# Stage 1: Build Java App
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY backend/pom.xml .
+COPY backend/src ./src
+RUN mvn clean package -DskipTests
 
-# Copy pom.xml first to enable Docker layer caching
-COPY pom.xml .
-
-# Pre-download dependencies
-RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline -B -T 1C
-
-# Copy source code after downloading dependencies
-COPY src ./src
-
-# Build the JAR file skipping tests
-RUN --mount=type=cache,target=/root/.m2 mvn clean package -DskipTests -T 1C
-
-# Step 2: Runtime stage (Java 21)
-FROM eclipse-temurin:21-jre
+# Stage 2: Run Application
+FROM eclipse-temurin:17-jre
 WORKDIR /app
-
-# Copy the built jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
+ENV JAVA_OPTS="-Xms256m -Xmx384m"
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
