@@ -1880,7 +1880,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // UPDATE YOUR FETCH PRODUCTS FUNCTION
 async function fetchAdminProducts() {
     try {
-        const response = await fetch("http://localhost:8080/api/products");
+        const response = await fetch("https://freshflow-erp.onrender.com/api/products");
         if (!response.ok) throw new Error("API Offline");
         const data = await response.json();
         
@@ -1898,7 +1898,7 @@ async function fetchAdminProducts() {
    API
 ========================================================== */
 const API_BASE_URL =
-    "http://localhost:8080/api";
+    "https://freshflow-erp.onrender.com/api";
 const PRODUCTS_API =
     `${API_BASE_URL}/products`;
 const ORDERS_API =
