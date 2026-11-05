@@ -7,10 +7,10 @@ const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
     
-    // 1. Remove leading slashes or redundant frontend folder prefixes
+    // 1. Remove leading slashes, dot-dots, and 'frontend/' prefixes returned from DB
     let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
     
-    // 2. Ensure the path correctly points to the images directory
+    // 2. Ensure path begins cleanly with 'images/'
     if (!clean.startsWith('images/')) {
         clean = `images/${clean}`;
     }
@@ -49,7 +49,7 @@ async function fetchProducts() {
 
         const products = await response.json();
 
-        // Update product count header
+        // Update product count header dynamically
         if (productCountLabel) {
             productCountLabel.textContent = `Displaying ${products.length} products`;
         }
