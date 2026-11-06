@@ -1,13 +1,15 @@
 [build]
   publish = "frontend"
 
+# Route API requests to Render backend
 [[redirects]]
   from = "/api/*"
   to = "https://freshflow-erp.onrender.com/api/:splat"
   status = 200
   force = true
 
+# Route pages cleanly to frontend HTML files
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/products"
+  to = "/products.html"
   status = 200
