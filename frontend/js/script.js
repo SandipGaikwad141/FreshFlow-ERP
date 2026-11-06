@@ -7,8 +7,10 @@ const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
     
-    // 1. Remove leading slashes, dot-dots, and 'frontend/' prefixes returned from DB
-    let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
+    // 1. Remove all instances of leading slashes, dot-dots, and 'frontend/' prefixes
+    let clean = url.replace(/^(\.\.\/)*frontend\//, '')
+                   .replace(/frontend\//g, '')
+                   .replace(/^\/+/, '');
     
     // 2. Ensure path begins cleanly with 'images/'
     if (!clean.startsWith('images/')) {
