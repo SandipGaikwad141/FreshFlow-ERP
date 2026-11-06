@@ -7,19 +7,18 @@ const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
     
-    // 1. Strip leading dots, slashes, and any 'frontend/' prefixes
+    // Completely remove all instances of 'frontend/' and leading slashes/dots
     let clean = url.replace(/^(\.\.\/)*frontend\//, '')
                    .replace(/frontend\//g, '')
                    .replace(/^\/+/, '');
     
-    // 2. Ensure the path begins cleanly with 'images/products/'
+    // Ensure path starts cleanly with 'images/'
     if (!clean.startsWith('images/')) {
         clean = clean.startsWith('products/') ? `images/${clean}` : `images/products/${clean}`;
     }
     
     return clean;
 }
-
 // Helper function to generate short teaser (5 words max)
 function getShortDescription(desc) {
     if (!desc) return '';

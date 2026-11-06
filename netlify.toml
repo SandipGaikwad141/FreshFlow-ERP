@@ -1,6 +1,13 @@
-publish = "frontend"
+[build]
+  publish = "frontend"
 
 [[redirects]]
-from = "/api/*"
-to = "https://freshflow-erp.onrender.com/api/:splat"
-status = 200
+  from = "/api/*"
+  to = "https://freshflow-erp.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
