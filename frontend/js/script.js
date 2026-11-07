@@ -4,24 +4,88 @@
 const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 
 // Helper function to sanitize image paths for Netlify hosting
+// ==========================================
+// API & APP CONFIGURATION
+// ==========================================
+
+
+// Helper function to sanitize image paths for both static assets and Render dynamic uploads
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
 
-    // If it's a full URL (e.g. cloud storage or absolute backend URL), keep it intact
+    // 1. If it's already a full HTTP/HTTPS URL, keep it intact
     if (url.startsWith('http://') || url.startsWith('https://')) {
         return url;
     }
 
-    // Strip out leading slashes and 'frontend/' prefix
-    let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
+    // 2. If it's a dynamic upload from admin or starts with 'uploads/', route to Render backend
+    if (url.includes('Alphonso-Mango-') || url.startsWith('uploads/')) {
+        const fileName = url.replace(/^uploads\//, '');
+        return `https://freshflow-erp.onrender.com/uploads/${fileName}`;
+    }
 
-    // Handle relative uploads vs default static images
+    // 3. Fallback for static default images hosted on Netlify
+    let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
     if (!clean.startsWith('images/')) {
         clean = clean.startsWith('products/') ? `images/${clean}` : `images/products/${clean}`;
     }
 
     return clean;
 }
+
+// ==========================================
+// PRODUCTS CATALOG DISPLAY LOGIC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const productCatalog = document.getElementById('productCatalog');
+    const productCountElement = document.getElementById('productCount');
+
+    if (!productCatalog) return; // Exit if not on products catalog page
+
+    async function fetchProducts() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/products`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const products = await response.json();
+            renderProducts(products);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            productCatalog.innerHTML = `<div class="col-12 text-center text-danger"><p>Failed to load products from server. Please check backend.</p></div>`;
+        }
+    }
+
+    function renderProducts(products) {
+        if (productCountElement) {
+            productCountElement.textContent = `Displaying ${products.length} products`;
+        }
+
+        productCatalog.innerHTML = products.map(product => {
+            const imagePath = cleanImagePath(product.imageUrl || product.image);
+            return `
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 product-card shadow-sm">
+                        <img src="${imagePath}" 
+                             class="card-img-top p-3" 
+                             alt="${product.name}"
+                             onerror="this.onerror=null; this.src='images/products/placeholder.jpg';">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-light text-success align-self-start mb-2">${product.category || 'Fresh Produce'}</span>
+                            <h5 class="card-title fw-bold">${product.name}</h5>
+                            <p class="card-text text-muted flex-grow-1">${product.description || ''}</p>
+                            <div class="d-flex gap-2 mt-3">
+                                <button class="btn btn-outline-success w-50">Details</button>
+                                <button class="btn btn-success w-50">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    fetchProducts();
+});
 // Helper function to generate short teaser (5 words max)
 function getShortDescription(desc) {
     if (!desc) return '';
