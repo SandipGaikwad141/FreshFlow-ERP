@@ -2942,14 +2942,23 @@ async function loadProducts() {
                         /* =========================================================
                         IMAGE PATH
                         ========================================================== */
+/* =========================================================
+   IMAGE PATH FIX
+========================================================== */
+function getImagePath(imageUrl) {
+    if (!imageUrl) {
+        return ""; 
+    }
 
-                        function getImagePath(imageUrl) {
+    // 1. If the image is already a full web link (Cloudinary), use it directly.
+    if (imageUrl.startsWith("http") || imageUrl.startsWith("https")) {
+        return imageUrl;
+    }
 
-                            if (!imageUrl) {
-
-                                return "";
-
-                            }
+    // 2. If it's an old local path from before the fix, try to support it (optional fallback)
+    // This handles old data like "images/products/..."
+    return "./" + imageUrl; 
+}
 
 
                             /*
@@ -2966,10 +2975,7 @@ async function loadProducts() {
                             * ./images/products/...
                             */
 
-                            return "./" + imageUrl;
-
-                        }
-
+                          
 
                         /* =========================================================
                         CATEGORY NAME
