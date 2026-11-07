@@ -9,8 +9,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Expose local uploads folder as static resource
+        // Expose local uploads folder
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:uploads/");
+
+        // Expose frontend product images folder
+        registry.addResourceHandler("/frontend/images/**")
+                .addResourceLocations("file:frontend/images/", "classpath:/static/frontend/images/");
     }
 }

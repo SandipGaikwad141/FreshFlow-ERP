@@ -2200,8 +2200,19 @@
         }
 
         function getImagePath(imageUrl) {
-            return imageUrl ? "./" + imageUrl : "";
-        }
+    if (!imageUrl) return "";
+    
+    // If it's already a full URL (http:// or https://), use it directly
+    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
+        return imageUrl;
+    }
+    
+    // Clean leading slashes
+    const cleanPath = imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl;
+    
+    // Point to your Render backend API
+    return `${API_BASE_URL}/${cleanPath}`;
+}
 
         function getCategoryName(category) {
             switch (category) {
