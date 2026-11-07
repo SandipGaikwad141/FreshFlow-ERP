@@ -2553,6 +2553,87 @@
         }
 
     </script>
+    <!-- Place this right above the </body> tag -->
+    <script>
+        // Replace this with your active, live Render application URL link
+const BACKEND_URL = "https://freshflow-erp.onrender.com"; 
+
+// 1. Identify and bind all layout DOM elements exactly matching your UI text fields
+const nameField        = document.querySelector('input[placeholder="Product Name"]');
+const categoryField    = document.querySelector('select');
+const descriptionField = document.querySelector('textarea') || document.querySelector('input[placeholder="Description"]');
+const fileField        = document.querySelector('input[type="file"]');
+const availableCheck   = document.querySelector('input[type="checkbox"]');
+const saveButton       = document.querySelector('button[type="submit"]') || document.evaluate("//button[contains(., 'Save Product')]", document, null, XPathResult.ANY_TYPE, null).iterateNext();
+
+// 2. Fallback selection logic in case element definitions vary
+const priceField       = document.querySelector('input[placeholder="Price"]') || document.querySelector('input[type="number"]');
+
+// 3. Attach click event listener to the "Save Product" button execution pipeline
+if (saveButton) {
+    saveButton.addEventListener('click', async (e) => {
+        e.preventDefault(); // Stop default action events
+
+        if (!fileField || !fileField.files || fileField.files.length === 0) {
+            alert("Please choose a product image file before saving.");
+            return;
+        }
+
+        // 4. Construct the product object matching the structure expected by @RequestPart
+        const productData = {
+            name: nameField ? nameField.value : "",
+            category: categoryField ? categoryField.value : "",
+            description: descriptionField ? descriptionField.value : "",
+            price: priceField ? parseFloat(priceField.value) : 0.0,
+            available: availableCheck ? availableCheck.checked : true
+        };
+
+        // 5. Package as multipart data to successfully transmit file blobs
+        const formData = new FormData();
+        
+        // Append text parameters as an application/json blob part
+        formData.append("product", new Blob([JSON.stringify(productData)], {
+            type: "application/json"
+        }));
+        
+        // Append binary image file structure mapping to @RequestPart("image")
+        formData.append("image", fileField.files[0]);
+
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/products/with-image`, {
+                method: "POST",
+                body: formData
+                // Note: Keep headers empty so the browser formats multipart boundaries automatically
+            });
+
+            if (response.ok) {
+                alert("Success! Product has been stored safely in Aiven DB.");
+                
+                // Clear all input UI fields
+                if (nameField) nameField.value = "";
+                if (categoryField) categoryField.selectedIndex = 0;
+                if (descriptionField) descriptionField.value = "";
+                if (priceField) priceField.value = "";
+                if (fileField) fileField.value = "";
+                
+                // Reset checkbox state back to default active status
+                if (availableCheck) availableCheck.checked = true;
+                
+                // Force a page refresh to reload data in the product list grid table layout instantly
+                location.reload();
+            } else {
+                const errorMsg = await response.text();
+                alert("Backend processing issue encountered: " + errorMsg);
+            }
+        } catch (networkError) {
+            console.error("Communication issue linking Render backend nodes:", networkError);
+            alert("Unable to establish remote socket connections safely.");
+        }
+    });
+}
+
+    </script>
+
 
 </body>
 
