@@ -6,17 +6,20 @@ const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 // Helper function to sanitize image paths for Netlify hosting
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
-    
-    // Completely remove all instances of 'frontend/' and leading slashes/dots
-    let clean = url.replace(/^(\.\.\/)*frontend\//, '')
-                   .replace(/frontend\//g, '')
-                   .replace(/^\/+/, '');
-    
-    // Ensure path starts cleanly with 'images/'
+
+    // If it's a full URL (e.g. cloud storage or absolute backend URL), keep it intact
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
+    }
+
+    // Strip out leading slashes and 'frontend/' prefix
+    let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
+
+    // Handle relative uploads vs default static images
     if (!clean.startsWith('images/')) {
         clean = clean.startsWith('products/') ? `images/${clean}` : `images/products/${clean}`;
     }
-    
+
     return clean;
 }
 // Helper function to generate short teaser (5 words max)
