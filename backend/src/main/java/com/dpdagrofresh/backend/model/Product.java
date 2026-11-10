@@ -82,3 +82,19 @@ public class Product {
         this.available = available;
     }
 }
+    // ... inside Product class ...
+
+    // 1. Default Constructor (Keep this one)
+    public Product() {
+    }
+
+    // 2. ADD THIS NEW Constructor to fix the error
+    public Product(String name, String category, double price, String imageUrl) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.available = true; // Default to true
+    }
+
+    // ... Getters and Setters ...
