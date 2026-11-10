@@ -5,34 +5,43 @@ const API_BASE_URL = 'https://freshflow-erp.onrender.com/api';
 const RENDER_ORIGIN = 'https://freshflow-erp.onrender.com';
 
 // Helper function to sanitize image paths for both static assets and Render dynamic uploads
+// Helper function to sanitize image paths
 function cleanImagePath(url) {
     if (!url) return 'images/products/placeholder.jpg';
 
-    // 1. Full HTTP/HTTPS URLs keep intact
+    // 1. Full HTTP/HTTPS URLs keep intact (e.g. Cloudinary)
     if (url.startsWith('http://') || url.startsWith('https://')) {
         return url;
     }
 
     // 2. Dynamic uploads in uploads/ folder -> Point to Render
     if (url.startsWith('uploads/') || url.includes('Alphonso-Mango-')) {
-        const fileName = url.replace(/^uploads\//, '');
-        return `${RENDER_ORIGIN}/uploads/${fileName}`;
+        // Remove leading slash if present
+        const cleanUrl = url.replace(/^\//, ''); 
+        return `${RENDER_ORIGIN}/${cleanUrl}`;
     }
 
-    // 3. Backend static images (frontend/images/...) -> Point to Render
-    if (url.includes('frontend/images/')) {
-        const cleanPath = url.substring(url.indexOf('frontend/images/'));
-        return `${RENDER_ORIGIN}/${cleanPath}`;
-    }
+    // 3. FIX: Static images -> Strip "frontend/" and load from Netlify
+    // This regex replaces "frontend/" or "/frontend/" with an empty string
+    let clean = url.replace(/^\/?frontend\//, ''); 
+    
+    // Remove any remaining leading slashes
+    clean = clean.replace(/^\/+/, '');
 
-    // 4. Netlify local static assets fallback
-    let clean = url.replace(/^(\.\.\/)*frontend\//, '').replace(/^\/+/, '');
+    // 4. Ensure path starts with "images/"
     if (!clean.startsWith('images/')) {
-        clean = clean.startsWith('products/') ? `images/${clean}` : `images/products/${clean}`;
+        // If it looks like "products/exotic/...", add "images/"
+        clean = `images/${clean}`;
+    }
+
+    // Safety check to prevent "images/images/..."
+    if (clean.startsWith('images/images/')) {
+        clean = clean.replace('images/images/', 'images/');
     }
 
     return clean;
 }
+
 
 // Helper function to generate short teaser (5 words max)
 function getShortDescription(desc) {
