@@ -10,28 +10,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private String category;
-
+    
+    @Column(length = 1000)
     private String description;
-
+    
+    private double price;
     private String imageUrl;
+    private boolean available;
 
-    private boolean available = true;
-
+    // Default Constructor
     public Product() {
     }
 
-    public Product(String name, String category, String description, String imageUrl) {
-        this.name = name;
-        this.category = category;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.available = true;
-    }
+    // --- GETTERS AND SETTERS ---
 
     public Long getId() {
         return id;
@@ -63,6 +56,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getImageUrl() {
