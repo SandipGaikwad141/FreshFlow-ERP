@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://dpdagrofresh.netlify.app/sitemap.xml

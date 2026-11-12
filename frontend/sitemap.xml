@@ -1,0 +1,25 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://dpdagrofresh.netlify.app/</loc>
+    </url>
+
+    <url>
+        <loc>https://dpdagrofresh.netlify.app/about.html</loc>
+    </url>
+
+    <url>
+        <loc>https://dpdagrofresh.netlify.app/products.html</loc>
+    </url>
+
+    <url>
+        <loc>https://dpdagrofresh.netlify.app/export.html</loc>
+    </url>
+
+    <url>
+        <loc>https://dpdagrofresh.netlify.app/contact.html</loc>
+    </url>
+
+</urlset>
